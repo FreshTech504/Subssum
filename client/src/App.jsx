@@ -41,6 +41,7 @@ import QuickBuyAirtime from './Pages/QuickBuy/QuickBuyAirtime'
 import QuickBuyData from './Pages/QuickBuy/QuickBuyData'
 import QuickBuyElectricity from './Pages/QuickBuy/QuickBuyElectricity'
 import QuickBuyCableTv from './Pages/QuickBuy/QuickBuyCableTv'
+import Transalate from './Components/Helpers/Transalate'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -145,89 +146,94 @@ function App() {
   };
 
     return (
-    <div className='app'>
-      {
-        selectedCard && (
-          <>
-            <div className='popup-overlay z-40 fixed flex items-center justify-center top-0 left-0 w-[100vw] h-[100vh] bg-gray-100-opa '>
-              <div className={`z-50 w-[432px] phone:w-[90%] h-auto m-auto rounded-[12px] border-[1px] p-[24px] flex flex-col gap-6 ${popupBg ? 'bg-gray-10' : 'bg-white'} border-gray-30`}>
-                <div className='w-full'>
-                    {renderPopup()}
+      <>
+        <div className='app'>
+          <div className='absolute top-20 phone:top-8 right-8 cursor-pointer z-[99999]'>
+            <Transalate />
+          </div>
+          {
+            selectedCard && (
+              <>
+                <div className='popup-overlay z-40 fixed flex items-center justify-center top-0 left-0 w-[100vw] h-[100vh] bg-gray-100-opa '>
+                  <div className={`z-50 w-[432px] phone:w-[90%] h-auto m-auto rounded-[12px] border-[1px] p-[24px] flex flex-col gap-6 ${popupBg ? 'bg-gray-10' : 'bg-white'} border-gray-30`}>
+                    <div className='w-full'>
+                        {renderPopup()}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </>
-        )
-      }
-      <Toaster position='top-center'></Toaster>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<LandingPage />} />
-          <Route path='/contact' element={<ContactUs />} />
-          <Route path='/faq' element={<FAQ />} />
-          <Route path='/blogs' element={<Blogs />} /> 
-          <Route path='/blog/:id' element={<BlogPage />} /> 
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPasword />} />
-          <Route path='/signup-successful' element={<SignupSuccessful />} />
-          <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
-          <Route path='/reset-email-sent' element={<ResetEmailSent />} />
-          <Route path='/:id/verify/:token' element={<VerifyUser />} />
-          <Route path='/login' element={<Login />} />
+              </>
+            )
+          }
+          <Toaster position='top-center'></Toaster>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<LandingPage />} />
+              <Route path='/contact' element={<ContactUs />} />
+              <Route path='/faq' element={<FAQ />} />
+              <Route path='/blogs' element={<Blogs />} /> 
+              <Route path='/blog/:id' element={<BlogPage />} /> 
+              <Route path='/register' element={<Register />} />
+              <Route path='/forgot-password' element={<ForgotPasword />} />
+              <Route path='/signup-successful' element={<SignupSuccessful />} />
+              <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
+              <Route path='/reset-email-sent' element={<ResetEmailSent />} />
+              <Route path='/:id/verify/:token' element={<VerifyUser />} />
+              <Route path='/login' element={<Login />} />
 
-          //QUICK BUY OPTIONS
-          <Route path='/quickbuy-airtime' element={<QuickBuyAirtime setSelectedCard={setSelectedCard} />} />
-          <Route path='/quickbuy-data' element={<QuickBuyData setSelectedCard={setSelectedCard} />} />
-          <Route path='/quickbuy-electric' element={<QuickBuyElectricity setSelectedCard={setSelectedCard} />} />
-          <Route path='/quickbuy-tv' element={<QuickBuyCableTv setSelectedCard={setSelectedCard} />} />
+              //QUICK BUY OPTIONS
+              <Route path='/quickbuy-airtime' element={<QuickBuyAirtime setSelectedCard={setSelectedCard} />} />
+              <Route path='/quickbuy-data' element={<QuickBuyData setSelectedCard={setSelectedCard} />} />
+              <Route path='/quickbuy-electric' element={<QuickBuyElectricity setSelectedCard={setSelectedCard} />} />
+              <Route path='/quickbuy-tv' element={<QuickBuyCableTv setSelectedCard={setSelectedCard} />} />
 
 
 
 
-          <Route element={<AuthorizeUser />} >
-            <Route path='create-pin' element={<CreatePin />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/pin-created' element={<PinCreated />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/join-whatsapp-community' element={<JoinWhatsappCommunity />} />
-          </Route>
-          
-          <Route element={<AuthorizeUser />} >
-            <Route path='/buy-airtime' element={<BuyAirtime toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/buy-data' element={<BuyData toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/tv-subscription' element={<TvSubscription toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} /> 
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/pay-electric-bill' element={<PayElectricBill toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} /> 
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/dashboard' element={<Dashboard shortText={truncateText} setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/support' element={<Support toggleMenu={toggleMenu} showMenu={showMenu} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/airtime-to-cash' element={<AirtimeToCash toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/profile' element={<Profile setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} shortText={truncateText} formData={formData} setFormData={setFormData} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/transaction-histroy' element={<TranscationHistroy setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
-          </Route>
-          <Route element={<AuthorizeUser />} >
-            <Route path='/transaction/:id' element={<TransactionDetailPage setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
-          </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='create-pin' element={<CreatePin />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/pin-created' element={<PinCreated />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/join-whatsapp-community' element={<JoinWhatsappCommunity />} />
+              </Route>
+              
+              <Route element={<AuthorizeUser />} >
+                <Route path='/buy-airtime' element={<BuyAirtime toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/buy-data' element={<BuyData toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/tv-subscription' element={<TvSubscription toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} /> 
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/pay-electric-bill' element={<PayElectricBill toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} /> 
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/dashboard' element={<Dashboard shortText={truncateText} setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/support' element={<Support toggleMenu={toggleMenu} showMenu={showMenu} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/airtime-to-cash' element={<AirtimeToCash toggleMenu={toggleMenu} showMenu={showMenu} setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/profile' element={<Profile setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} shortText={truncateText} formData={formData} setFormData={setFormData} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/transaction-histroy' element={<TranscationHistroy setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
+              </Route>
+              <Route element={<AuthorizeUser />} >
+                <Route path='/transaction/:id' element={<TransactionDetailPage setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
+              </Route>
 
-        </Routes>
-      </BrowserRouter>
-    </div>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </>
   )
 }
 

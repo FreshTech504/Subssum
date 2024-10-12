@@ -13,6 +13,7 @@ import { IoIosArrowUp } from "react-icons/io";
 
 function LandingPage() {
     const [isVisible, setIsVisible] = useState(true);
+    const [isGoogleTranslateReady, setIsGoogleTranslateReady] = useState(false);
 
     useEffect(() => {
         // Scroll to the top of the page when the component mounts
@@ -42,6 +43,20 @@ function LandingPage() {
             behavior: "smooth",
         });
     };
+
+    useEffect(() => {
+        // Check if Google Translate is loaded
+        const checkGoogleTranslate = () => {
+            if (window.google && window.google.translate) {
+                setIsGoogleTranslateReady(true);
+            }
+        };
+
+        checkGoogleTranslate();
+        const intervalId = setInterval(checkGoogleTranslate, 100);
+        
+        return () => clearInterval(intervalId);
+    }, []);
 
     return (
         <div className="flex min-h-[100vh] flex-col relative">

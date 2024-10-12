@@ -23,7 +23,7 @@ function Hero() {
             <div className='text-[32px] tablet:text-[24px] phone:text-[19px] font-bold flex flex-col'>
                 <h2>The <span className="text-second-color">BEST</span> place to subscribe / buy</h2>
                 <h2 className="text-second-color">
-                    {text}
+                    {text || 'Airtime, Data, Electricity, Cable Tv'}
                     <Cursor cursorColor='#2DAE32' className='text-success' cursorStyle='|' />
                 </h2>
             </div>
@@ -35,43 +35,43 @@ function Hero() {
 
                 <div className="flex gap-4 flex-col">
                     <div className="flex items-center gap-4 phone:gap-[10px]">
-                        <Link to='/quickbuy-airtime' className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-airtime' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={AirtimeImg} alt="Airtime" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Airtime</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Airtime</p>
                             </div>
                         </Link>
-                        <Link to='/quickbuy-data' className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-data' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={DataImg} alt="Data" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Data</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Data</p>
                             </div>
                         </Link>
-                        <Link to='/quickbuy-electric' className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-electric' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={ElectricityImg} alt="Electricity" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Electricity</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Electricity</p>
                             </div>
                         </Link>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Link to='/quickbuy-tv' className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-tv' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={CableTv} alt="Cable TV" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Cable TV</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Cable TV</p>
                             </div>
                         </Link>
-                        <div className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <div className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={EducationImg} alt="Education" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Education</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Education</p>
                             </div>
                         </div>
-                        <div className="flex items-center justify-center bg-gray-20 h-[158.6px] w-[158.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <div className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={OthersImg} alt="Others" />
-                                <p className="text-[20px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Others</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Others</p>
                             </div>
                         </div>
                     </div>
