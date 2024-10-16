@@ -4,6 +4,7 @@ import All from "../Components/Blogs/All";
 import Recent from "../Components/Blogs/Recent";
 import Navbar from "../Components/Helpers/Navbar";
 import { IoIosArrowUp } from "react-icons/io";
+import Transalate from "../Components/Helpers/Transalate";
 
 function Blogs() {
     const [isVisible, setIsVisible] = useState(true);
@@ -66,7 +67,12 @@ function Blogs() {
                 </div>
             )}
 
-            <div className="flex flex-col gap-[64px] medium-pc:pad6 pad4 w-full mt-[8rem] items-center justify-center">
+            <div className="flex items-center justify-center mt-[6rem] gap-6 bg-gray-30">
+                <p className="text-[18px] font-semibold text-primary-color">Choose Language</p>
+                <Transalate style='flex' />
+            </div>
+
+            <div className="flex flex-col gap-[64px] medium-pc:pad6 pad4 w-full items-center justify-center">
                 <div className="flex flex-col gap-6 items-center justify-center">
                     <h2 className="font-bold text-[48px] phone:text-[24px] text-gray-90 text-center">BLOG & UPDATES</h2>
 

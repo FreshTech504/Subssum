@@ -4,6 +4,7 @@ import Navbar from "../Components/Helpers/Navbar"
 import { accountandloginfaqs, faqOptions, generalfaq, paymentandbillingfaqs, supportandcontactfaqs, technicalissuesfaq } from "../Data/faq"
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import Transalate from "../Components/Helpers/Transalate";
 
 
 function FAQ() {
@@ -82,7 +83,12 @@ function FAQ() {
             </div>
         )}
 
-        <div className="mt-20 flex flex-col">
+        <div className="flex items-center justify-center mt-[5rem] gap-6 bg-gray-30">
+                <p className="text-[18px] font-semibold text-primary-color">Choose Language</p>
+                <Transalate style='flex' />
+            </div>
+
+        <div className="mt-4 flex flex-col">
             <div className="bg-gradient-to-r from-blue-700 to-blue-900 w-full items-center justify-center">
                 <div className="flex flex-col gap-6 h-[40vh] p-12">
                     <h1 className="text-center text-[48px] phone:text-[24px] tablet:text-[32px] font-bold text-white">

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
+//axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
+axios.defaults.baseURL = 'http://localhost:9000/api/web'
 //axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
 
 //FETCH ALL DATA PLANS

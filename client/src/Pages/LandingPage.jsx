@@ -10,10 +10,10 @@ import IntergrateApi from "../Components/IntergrateApi";
 import OurServices from "../Components/OurServices";
 import WhyChoseUs from "../Components/WhyChoseUs";
 import { IoIosArrowUp } from "react-icons/io";
+import Transalate from "../Components/Helpers/Transalate";
 
 function LandingPage() {
     const [isVisible, setIsVisible] = useState(true);
-    const [isGoogleTranslateReady, setIsGoogleTranslateReady] = useState(false);
 
     useEffect(() => {
         // Scroll to the top of the page when the component mounts
@@ -44,23 +44,14 @@ function LandingPage() {
         });
     };
 
-    useEffect(() => {
-        // Check if Google Translate is loaded
-        const checkGoogleTranslate = () => {
-            if (window.google && window.google.translate) {
-                setIsGoogleTranslateReady(true);
-            }
-        };
-
-        checkGoogleTranslate();
-        const intervalId = setInterval(checkGoogleTranslate, 100);
-        
-        return () => clearInterval(intervalId);
-    }, []);
-
     return (
         <div className="flex min-h-[100vh] flex-col relative">
             <Navbar showBtn={true} />
+
+            <div className="flex items-center justify-center mt-[6rem] gap-6 bg-gray-30">
+                <p className="text-[18px] font-semibold text-primary-color">Choose Language</p>
+                <Transalate style='flex' />
+            </div>
 
             {isVisible && (
                 <div
@@ -71,7 +62,7 @@ function LandingPage() {
                 </div>
             )}
 
-            <div className='small-pc:pad6 pad4 w-full mt-[8rem]'>
+            <div className='small-pc:pad6 pad4 w-full'>
                 <Hero />
             </div>
 

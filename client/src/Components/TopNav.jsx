@@ -5,6 +5,7 @@ import LogoImg from '../assets/logo.png'
 import { AiOutlineMenu } from "react-icons/ai";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
+import Transalate from "./Helpers/Transalate";
 
 function TopNav({toggleMenu, showMenu, title}) {
     const { currentUser } = useSelector((state) => state.subSubUser);
@@ -42,6 +43,10 @@ function TopNav({toggleMenu, showMenu, title}) {
                     <MdOutlinePersonOutline className="text-second-color" />
                 </Link>
             </div>  
+        </div>
+        <div className="flex w-fit p-2 rounded-[10px] items-center justify-center gap-6 bg-gray-20">
+            <p className="text-[18px] phone:text-[16px] font-semibold text-primary-color">Choose Language</p>
+            <Transalate style='flex' />
         </div>
     </div>
   )

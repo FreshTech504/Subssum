@@ -6,7 +6,6 @@ import { IoCloseSharp } from "react-icons/io5";
 import { useState } from 'react';
 import { quickLinks, services } from '../../Data/menu';
 
-
 function Navbar({showBtn}) {
   const location = useLocation();
   const [ isOpen, setIsOpen ] = useState(false)

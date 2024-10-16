@@ -98,7 +98,10 @@ function FundWallet ({ setPopupBg, formData, setFormData,setSelectedCard }) {
                 formData?.amount && (
                     <div className="flex w-full gap-2 flex-col mt-3">
                         <ButtonTwo onClick={handlePayWithPaystack} text={'Pay With Paystack'}/>
+                        {/**
+                         * 
                         <ButtonTwo onClick={handlePayWithMonnify} text={'Pay with Monnify'} />
+                         */}
                     </div>
                 )
             }
