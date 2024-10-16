@@ -1,8 +1,8 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-//axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
-axios.defaults.baseURL = 'http://localhost:9000/api/web'
+axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
+//axios.defaults.baseURL = 'http://localhost:9000/api/web'
 //axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
 
 export async function registerUser(formData){
