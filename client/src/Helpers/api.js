@@ -1,9 +1,9 @@
 import axios from 'axios'
 import toast from 'react-hot-toast'
 
-axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
+//axios.defaults.baseURL = 'https://subssum-api-1bhd.onrender.com/api/web'
 //axios.defaults.baseURL = 'http://localhost:9000/api/web'
-//axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL
 
 export async function registerUser(formData){
     try {
@@ -460,5 +460,47 @@ export async function quickBuyElectricity(formData){
         toast.error(res.data.data)
         //console.log('BUY DATA', error)
         return res
+    }
+}
+
+//ADMIN
+export async function adminPasswordLogin(formData){
+    try {
+        const res = await axios.post('/admin/login', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to Login User'
+        //toast.error(errorMsg)
+        //console.log('LOGIN ERROR', error)
+        const res = error.response || 'Unable to login user'
+        return res
+    }
+}
+
+//Validate passcode
+export async function adminPasscodeLogin(formData){
+    try {
+        const res = await axios.post('/admin/validatePasscode', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to Login User'
+        //toast.error(errorMsg)
+        //console.log('LOGIN ERROR', error)
+        const res = error.response || 'Unable to login user'
+        return res
+    }
+}
+
+export async function signoutAdmin(){
+    try {
+        const res = await axios.post(`/admin/signout`, {withCredentials: true})
+        //console.log('signout',res)
+        if(res.data){
+            return res.data
+        }
+    } catch (error) {
+        const errorMsg = error.response.data.data || 'Unable to Proccess signout request'
+        toast.error(errorMsg)
+        //console.log('SIGNOUT REQUEST', error)
     }
 }

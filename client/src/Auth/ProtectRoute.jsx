@@ -35,10 +35,10 @@ function AuthorizeUser() {
   }
 
   function AuthorizeAdmin() {
-    const { currentUser } = useSelector((state) => state.braveSubUser);
+    const { currentUser } = useSelector((state) => state.subSubAdmin);
     const admin = currentUser?.data;
 
-    const token = localStorage.getItem('subsumAtoken');
+    const token = localStorage.getItem('subsumauthtoken');
     const tokenExist = !!token;
     const navigate = useNavigate()
     
@@ -47,6 +47,10 @@ function AuthorizeUser() {
         console.log('NO USER');
         toast.error('PLEASE LOGIN');
       } else {
+        if(!token){
+          navigate('/admin-login')
+          return
+        }
         const decodedToken = jwtDecode(token);
         
         // Check if the token is expired

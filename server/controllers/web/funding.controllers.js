@@ -193,6 +193,8 @@ export async function verifyPaymentTransactions(req, res){
             console.log('TRANSACTIONS EXPIRED')
             return res.end()
           }
+
+          console.log('PENDING TRANSACTION', pendingFundingExist)
         
         const transactionExist = await TransctionHistroyModel.findOne({ transactionId: paymentReference })
             
@@ -231,8 +233,8 @@ export async function verifyPaymentTransactions(req, res){
 
     
               if (user) {
-                const value = amount / 100; // Convert from kobo to naira
-                user.acctBalance += value;
+                const value = Number(amount) / 100; // Convert from kobo to naira
+                user.acctBalance += Number(value);
                 await user.save();
                 console.log('Account funded for user:', email);
                 const transactionRef = reference || 'no transaction refrence';

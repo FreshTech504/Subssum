@@ -14,5 +14,7 @@ router.post('/updateUserProfilePicture', Protect, controllers.updateUserProfileP
 
 
 //PUT ROUTES
+router.get('/getAllUsers', controllers.getAllUsers)
+
 
 export default router

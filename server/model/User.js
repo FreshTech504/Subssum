@@ -110,7 +110,7 @@ UserSchema.methods.matchPin = async function(pin){
 }
 
 UserSchema.methods.getSignedToken = function(){
-    return jsonwebtoken.sign({ id: this._id, isAdmin: this.isAdmin}, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
+    return jsonwebtoken.sign({ id: this._id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
 }
 
 UserSchema.methods.getResetPasswordToken = function(){

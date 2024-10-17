@@ -29,7 +29,7 @@ import TvSubscription from './Pages/TvSubscription'
 import PayElectricBill from './Pages/PayElectricBill'
 import TransactionDetailPage from './Pages/TransactionDetailPage'
 import WithdrawalCashOut from './Components/Modals/WithdrawalCashOut'
-import { AuthorizeUser } from './Auth/ProtectRoute'
+import { AuthorizeAdmin, AuthorizeUser } from './Auth/ProtectRoute'
 import LandingPage from './Pages/LandingPage'
 import ContactUs from './Pages/ContactUs'
 import FAQ from './Pages/FAQ'
@@ -41,6 +41,19 @@ import QuickBuyAirtime from './Pages/QuickBuy/QuickBuyAirtime'
 import QuickBuyData from './Pages/QuickBuy/QuickBuyData'
 import QuickBuyElectricity from './Pages/QuickBuy/QuickBuyElectricity'
 import QuickBuyCableTv from './Pages/QuickBuy/QuickBuyCableTv'
+import AdminLogin from './Admin/Pages/AdminLogin'
+import AdminDashboad from './Admin/Pages/AdminDashboad'
+import AllTransactions from './Admin/Pages/AllTransactions'
+import AllUsers from './Admin/Pages/AllUsers'
+import Services from './Admin/Pages/Services'
+import Payout from './Admin/Pages/Payout'
+import SalesAnalysis from './Admin/Pages/SalesAnalysis'
+import SiteSettings from './Admin/Pages/SiteSettings'
+import Notifications from './Admin/Pages/Notifications'
+import AdminUsers from './Admin/Pages/AdminUsers'
+import HelpAndSupport from './Admin/Pages/HelpAndSupport'
+import AdminProfile from './Admin/Pages/AdminProfile'
+import ViewBlogs from './Admin/Pages/ViewBlogs'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -231,6 +244,49 @@ function App() {
                 </Route>
                 <Route element={<AuthorizeUser />} >
                   <Route path='/transaction/:id' element={<TransactionDetailPage setSelectedCard={setSelectedCard} toggleMenu={toggleMenu} showMenu={showMenu} />} />
+                </Route>
+
+
+                //ADMIN Routes
+                <Route>
+                  <Route path='/admin-login' element={<AdminLogin />} />
+                </Route>
+
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-dashboard' element={<AdminDashboad />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/all-transactions' element={<AllTransactions />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/all-users' element={<AllUsers />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/services' element={<Services />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/payout-request' element={<Payout />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/sales-analysis' element={<SalesAnalysis />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/site-settings' element={<SiteSettings />} />
+                </Route>                
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/notifications' element={<Notifications />} />
+                </Route>                
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-control' element={<AdminUsers />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/help-and-support' element={<HelpAndSupport />} />
+                </Route>                
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/view-blogs' element={<ViewBlogs />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-profile' element={<AdminProfile />} />
                 </Route>
 
               </Routes>

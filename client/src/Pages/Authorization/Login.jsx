@@ -81,7 +81,7 @@ function Login() {
       else{  
 
         
-       localStorage.setItem('subsumtoken', res?.token)
+        localStorage.setItem('subsumtoken', res?.token)
         dispatch(signInSuccess(res?.data))
         setFormData({})
         navigate('/dashboard')

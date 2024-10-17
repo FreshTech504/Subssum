@@ -33,6 +33,8 @@ export default {
         'color-3': '#A9BADA',
         'color-4': '#6882B6',
 
+        'black-1': "#1C1C1C1A",
+
         'custom-gradient': 'linear-gradient(to bottom, rgba(215, 225, 244, 0) 0%, #D7E1F4 100%)',
         'gradient-2': 'linear-gradient(to right, #4169E1 100%, #000080 100%)',
       },
