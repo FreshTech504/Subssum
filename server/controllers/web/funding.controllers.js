@@ -25,10 +25,13 @@ export async function payWithPaystack(req, res) {
         if(!isANumber){
             return res.status(406).json({ success: false, data: 'Invalid Amount'})
         }
-
+        /**
+         * 
         if(makeNumber < 500){
             return res.status(400).json({ success: false, data: 'Minimium Amount is 500'})
         }
+         */
+
 
         const fullAmount = makeNumber * 100
         const response = await axios.post(
