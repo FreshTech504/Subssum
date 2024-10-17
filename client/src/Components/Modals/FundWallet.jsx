@@ -24,13 +24,11 @@ function FundWallet ({ setPopupBg, formData, setFormData,setSelectedCard }) {
             toast.error('Enter Amount')
             return
         }
-        {/**
-            if(formData?.amount < 500){
-                toast.error('Minimium Amount is 500')
-                return
-            }
-            
-        */}
+        if(formData?.amount < 500){
+            toast.error('Minimium Amount is 500')
+            return
+        }
+
         try {
             setIsLoading(true)
             const res = await payWithPaystack(formData) 
