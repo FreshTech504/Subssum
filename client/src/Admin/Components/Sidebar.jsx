@@ -40,7 +40,7 @@ function Sidebar() {
     <div className="pad5 w-[276px] phone:w-[90%] h-[100vh] bg-gray-20 flex flex-col">
         <img src={LogoImg} alt='subsum logo' className='w-[162px] h-[31px]' />
 
-        <div className='flex flex-col gap-[10px] w-full h-full phone:h-[80vh] small-phone:h-[70vh] overflow-y-auto mt-12 scrollbar-thin'>
+        <div className='flex flex-col gap-[10px] w-full h-[80vh] small-phone:h-[70vh] overflow-y-auto mt-12 scrollbar-thin'>
             {
                 adminSidebarMenu.map((item, idx) => {
                     const Icon = item.icon;

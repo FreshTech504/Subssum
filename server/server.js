@@ -15,6 +15,8 @@ import cabletvRoutes from './routes/web/cabletv.routes.js'
 import electricRoutes from './routes/web/electricity.routes.js'
 import quickbuyRoutes from './routes/web/quickbuy.routes.js'
 import adminRoutes from './routes/web/admin.routes.js'
+import statisticsRoutes from './routes/web/websitesStatistics.routes.js'
+
 
 
 
@@ -79,6 +81,8 @@ app.use('/api/web/cabletv', cabletvRoutes)
 app.use('/api/web/electric', electricRoutes)
 app.use('/api/web/quickbuy', quickbuyRoutes)
 app.use('/api/web/admin', adminRoutes)
+app.use('/api/web/statistics', statisticsRoutes)
+
 
 
 // Start server

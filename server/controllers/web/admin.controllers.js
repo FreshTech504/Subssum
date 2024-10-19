@@ -1,7 +1,7 @@
 import { registerMail } from "../../middleware/mailer.js";
+import ActivitiesModel from "../../model/Activities.js";
 import adminModel from "../../model/Admin.js"
 import OtpModel from "../../model/AdminOtp.js";
-import NotificationsModel from "../../model/Notifications.js"
 import UserModel from "../../model/User.js"
 
 function convertToNumber(str) {
@@ -55,7 +55,7 @@ export async function makeAdmin(req, res){
             role: role
         })
 
-        const newNotification = await NotificationsModel.create({
+        const newNotification = await ActivitiesModel.create({
             note: 'New Admin memeber added'
         })
 
