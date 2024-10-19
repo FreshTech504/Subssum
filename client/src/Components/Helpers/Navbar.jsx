@@ -20,11 +20,11 @@ function Navbar({showBtn}) {
 
   return (
     <div className="small-pc:pad6 pad4 bg-gray-10 w-full fixed top-0 left-0 flex justify-between border-b-[1px] border-b-gray-30 z-[999999]">
-        <Link to='/' className='z-[999999]' >
+        <Link to='/' className='z-[999999] pointer-events-auto' >
             <img src={LogoImg} alt='subsum logo' className='w-[162px] phone:w-[108px] phone:h-[25px]' />
         </Link>
 
-        <div className='flex items-center gap-[32px] z-[999999]'>
+        <div className='flex items-center gap-[32px] z-[999999] pointer-events-auto'>
           {
             showBtn ? (
             <div>
@@ -43,13 +43,13 @@ function Navbar({showBtn}) {
         </div>
 
         {/**DROP DOWN */}
-        <div className={`fixed flex items-center justify-center m-auto flex-col top-0 left-0 w-[100vw] h-[100vh] z-[9999999] opacity-0 transition-opacity duration-400 ease-in-out bg-gray-30 ${ isOpen ? 'opacity-100 top-0' : 'opacity-0 top-[-100%]'} `}>
+        <div className={`fixed flex items-center justify-center m-auto flex-col top-0 left-0 w-[100vw] h-[100vh] z-[9999999] opacity-0 transition-opacity duration-400 ease-in-out bg-gray-30 ${ isOpen ? 'opacity-100 top-0 pointer-events-auto' : 'opacity-0 top-[-100%] pointer-events-none'} `}>
           <div onClick={toggle} className='absolute top-6 right-12 text-[32px] font-semibold cursor-pointer' >
             <IoCloseSharp className='text-primary-color' />
           </div>
 
           <div className='flex items-center mt-auto mb-auto gap-[84px] justify-between w-[856px] flex-wrap tablet:flex-col tablet:gap-[24px] z-20 '>
-            <div className='flex flex-col gap-[19px]'>
+            <div className='flex flex-col gap-[19px] small-phone:mt-8'>
               <h3 className='font-bold text-[20px] text-gray-90'>Buy Services</h3>
 
               <div className='flex flex-col gap-3' >
@@ -57,7 +57,7 @@ function Navbar({showBtn}) {
                   services.map((item, idx) => {
                     const Icon = item.icon
                     return (
-                    <Link onClick={toggle} key={idx} to={`/${item.link}`} className={`text-gray-60 text-[16px] flex items-center gap-1 hover:text-gray-80 ${isActive(`/${item.link}`) ? 'text-gray-80 font-semibold' : ''}`}>
+                    <Link onClick={toggle} key={idx} to={`${item.link}`} className={`text-gray-60 text-[16px] flex items-center gap-1 hover:text-gray-80 ${isActive(`/${item.link}`) ? 'text-gray-80 font-semibold' : ''}`}>
                       <Icon />
                       {item.name}
                     </Link>

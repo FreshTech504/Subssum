@@ -1,3 +1,4 @@
+import { AiOutlineHome } from "react-icons/ai";
 import { LuPhone } from "react-icons/lu";
 import { IoWifiOutline } from "react-icons/io5";
 import { MdTv } from "react-icons/md";
@@ -9,26 +10,31 @@ import { IoNewspaperOutline } from "react-icons/io5";
 
 export const services = [
     {
+        name: 'Home',
+        link: '/',
+        icon: AiOutlineHome
+    },
+    {
         name: 'Buy Airtime',
-        link: 'quickbuy-airtime',
+        link: '/quickbuy-airtime',
         icon: LuPhone
     }
     ,
     {
         name: 'Buy Data',
-        link: 'quickbuy-data',
+        link: '/quickbuy-data',
         icon: IoWifiOutline
     }
     ,
     {
         name: 'Buy Electricity',
-        link: 'quickbuy-electric',
+        link: '/quickbuy-electric',
         icon: MdTv
     }
     ,
     {
         name: 'Pay Cable TV',
-        link: 'quickbuy-tv',
+        link: '/quickbuy-tv',
         icon: RxLightningBolt
 
     }
