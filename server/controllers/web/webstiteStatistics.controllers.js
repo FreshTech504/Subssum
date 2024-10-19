@@ -1,5 +1,5 @@
 import TransctionHistroyModel from '../../model/TransactionHistroy.js';
-import UserModel from './models/User.js';
+import UserModel from '../../models/User.js';
 
 export async function websiteStatistics(req, res) {
     try {
