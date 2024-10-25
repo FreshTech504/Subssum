@@ -14,6 +14,7 @@ function Transalate({style}) {
             { pageLanguage: 'en' },
             'google_translate_element'
           );
+          console.log('Google Translate Element initialized:', translateElement);
     
           // Hide the "Powered by Google" text after the element is created
           const hideGoogleBranding = () => {
