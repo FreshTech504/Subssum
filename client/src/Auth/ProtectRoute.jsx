@@ -13,8 +13,6 @@ function AuthorizeUser() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('TOKEN', token);
-
     // Redirect if no token and no user
     if (!tokenExist && !user) {
       toast.error('PLEASE LOGIN');

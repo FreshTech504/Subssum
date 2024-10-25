@@ -64,26 +64,28 @@ export async function forgotPassword(formData){
         const res = await axios.post('/auth/forgotPassword', formData, {withCredentials: true})
         //console.log('forgot password',res)
         if(res.data){
-            return res.data
+            return res
         }
     } catch (error) {
         const errorMsg = error.response.data.data || 'Unable to Proccess forgot password request'
-        toast.error(errorMsg)
+        //toast.error(errorMsg)
         //console.log('FORGOT PASSWORD', error)
+        const res = error.response || 'Unable to login user'
+        return res
     }
 }
 
 export async function resetPassword(formData){
     try {
         const res = await axios.post(`/auth/resetPassword/${formData.resetToken}`, formData, {withCredentials: true})
-        //console.log('reset password',res)
-        if(res.data){
-            return res.data
-        }
+        console.log('reset password',res)
+        return res
     } catch (error) {
         const errorMsg = error.response.data.data || 'Unable to Proccess forgot password request'
-        toast.error(errorMsg)
-        //console.log('RESET PASSWORD', error)
+        //toast.error(errorMsg)
+        console.log('RESET PASSWORD', error)
+        const res = error.response || 'Unable to reset password'
+        return res
     }
 }
 

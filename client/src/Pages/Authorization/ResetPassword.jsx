@@ -13,11 +13,12 @@ function ResetPassword() {
     const location = useLocation();
     const path = location.pathname.split("/")[2];
     const resetToken = path;
-    const [ formData, setformData ] = useState({ resetToken: resetToken }) 
+    const [ formData, setformData ] = useState({ resetToken: resetToken })
     const [ passwordVisible, setPasswordVisible ] = useState(false)
     const [ confirmPasswordVisible, setConfirmPasswordVisible ] = useState(false)
     const [ isLoading, setIsLoading ] = useState(false)
-
+    const [ errorResponse, setErrorResponse ] = useState()
+    
   const seePassword = () => {
     setPasswordVisible((prev) => !prev)
 }
@@ -33,38 +34,59 @@ const seeConfirmPassword = () => {
   const handleResetPassword = async (e) => {
       e.preventDefault()
       if(!formData.password){
-          toast.error('Enter Password')
+        setErrorResponse('Enter password');
+        setTimeout(() => {
+            setErrorResponse();
+        }, 2000);
           return
       }
       if(!formData.confirmPassword){
-          toast.error('Enter Confirm Password')
+          setErrorResponse('Enter Confirm Password');
+          setTimeout(() => {
+              setErrorResponse();
+          }, 2000);
           return
       }
 
       const specialChars = /[!@#$%^&*()_+{}[\]\\|;:'",.<>?]/
       if(!specialChars.test(formData.password)){
-          toast.error('Password must contain at least one special character')
+          setErrorResponse('Password must contain at least one special character');
+          setTimeout(() => {
+              setErrorResponse();
+          }, 2000);
           return
       }
 
       if(formData.password.length < 6){
-          toast.error('Password must be 6 characters long')
+        setErrorResponse('Password must be 6 characters long');
+        setTimeout(() => {
+            setErrorResponse();
+        }, 2000);
           return
       }
 
       if(formData.password !== formData.confirmPassword){
-          toast.error('Password do not match')
+        setErrorResponse('Password do not match');
+        setTimeout(() => {
+            setErrorResponse();
+        }, 2000);  
           return
       }
 
       try {
           setIsLoading(true)
           const res = await resetPassword(formData)
-          //const res = {success: true}
-          if(res.success){
-              toast.success(res?.data)
-              navigate("/login");
+          //console.log('RESS', res)
+          if(res?.data.success === false){
+              setErrorResponse(res.data.data);
+              setTimeout(() => {
+                  setErrorResponse();
+              }, 2000);
           }
+          if(res?.data.success){
+              toast.success(res?.data?.data)
+              navigate("/login");
+        }
       } catch (error) {
           
       } finally{
@@ -114,6 +136,10 @@ const seeConfirmPassword = () => {
                                         }
                                     </div>
                         </div>
+
+                        {/**ERROR RESPONSE */}
+                        <p className="text-center text-error font-semibold">{errorResponse}</p>
+
                     </div>
                     {
                         isLoading ? (

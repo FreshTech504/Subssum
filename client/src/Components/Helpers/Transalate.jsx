@@ -24,7 +24,7 @@ function Transalate({style}) {
           };
     
           // Set a timeout to allow the Google Translate element to render before hiding branding
-          setTimeout(hideGoogleBranding, 1000);
+          setTimeout(hideGoogleBranding, 3000);
         };
     
         // Cleanup the script on unmount

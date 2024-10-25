@@ -60,7 +60,7 @@ function Login() {
     try {
       setIsLoading(true)
       const res = await loginUser(formData)
-      console.log('RES', res)
+      //console.log('RES', res)
       if(res.data.success === false){
         setErrorResponse(res.data.data);
         setTimeout(() => {

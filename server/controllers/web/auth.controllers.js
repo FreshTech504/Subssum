@@ -312,9 +312,8 @@ export async function forgotPassword (req, res, next){
         const resetToken = user.getResetPasswordToken()
 
         await user.save()
-        const number = user.whatsappNumber
         const resetUrl = `${process.env.MAIL_WEBSITE_LINK}/reset-password/${resetToken}`
-        
+        console.log('reset url', resetUrl)
         try {
             // send mail
             const emailContent = {
