@@ -312,6 +312,21 @@ export async function downloadReciept({id}){
     }
 }
 
+export async function reportTransaction(formData){
+    try {
+        const res = await axios.post(`/transactions/reportTransaction`, formData, {withCredentials: true})
+        //console.log('report transactions',res)
+        if(res.data){
+            return res
+        }
+    } catch (error) {
+        const res = error.response || 'Unable to report transaction'
+        //toast.error(res.data.data)
+        //console.log('REPORT TRANSACTIONS', error)
+        return res
+    }
+}
+
 
 //CABLE TV
 //buy cable Tv Plan

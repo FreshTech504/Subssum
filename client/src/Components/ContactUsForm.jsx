@@ -1,38 +1,46 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import ButtonTwo from "./Helpers/ButtonTwo"
 import toast from "react-hot-toast"
 import emailjs from '@emailjs/browser';
+import LoadingBtn from "./Helpers/LoadingBtn";
 
 function ContactUsForm() {
-    const [ formData, setFormData ] = useState({})
-    const [ sending, setSending ] = useState(false)
+    const [ formData, setFormData ] = useState({});
+    const [ sending, setSending ] = useState(false);
+    const [ errorResponse, setErrorResponse ] = useState();
+    const [ successResponse, setSuccessResponse ] = useState()
     
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value })
-    }
+        setFormData({ ...formData, [e.target.id]: e.target.value });
+    };
+    const form = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(!formData.name){
-            toast.error('Please enter your name')
-            return
+        if (!formData.name) {
+            setErrorResponse('Please enter your name');
+            setTimeout(() => setErrorResponse(), 2000);
+            return;
         }
-        if(!formData.email){
-            toast.error('Please enter your email address')
-            return
+        if (!formData.email) {
+            setErrorResponse('Please enter your email address');
+            setTimeout(() => setErrorResponse(), 2000);
+            return;
         }
-        if(!formData.phoneNumebr){
-            toast.error('Please enter your phone number')
-            return
+        if (!formData.phoneNumebr) {
+            setErrorResponse('Please enter your phone number');
+            setTimeout(() => setErrorResponse(), 2000);
+            return;
         }
-        if(!formData.message){
-            toast.error('Please enter your name')
-            return
+        if (!formData.message) {
+            setErrorResponse('Please enter your message');
+            setTimeout(() => setErrorResponse(), 2000);
+            return;
         }
-        try {
-            setSending(true)
-    
-            emailjs
+        
+        setSending(true);
+
+        emailjs
             .sendForm(
                 `${import.meta.env.VITE_SERVICE_ID}`,
                 `${import.meta.env.VITE_TEMPLATE_ID}`,
@@ -41,27 +49,27 @@ function ContactUsForm() {
             )
             .then(
                 (result) => {
-                console.log(result.text);
-                e.target.reset();
-                toast.success("Message Sent Successful");
+                    console.log(result.text);
+                    toast.success("Message Sent Successfully");
+                    setSuccessResponse('Message Sent Successfully');
+                    setTimeout(() => setSuccessResponse(), 2000);
+                    form.current.reset(); 
+                    return;
                 },
                 (error) => {
-                console.log(error.text);
-                toast.error("Unable to send Messages");
+                    console.log('Unable to send message', error.text);
+                    toast.error("Unable to send message");
                 }
-            );
-            
-        } catch (error) {
-            console.log('ERROR SEND TICKET', error)
-        } finally {
-            setSending(false)
-        }
-    }
+            )
+            .finally(() => {
+                setSending(false);
+            });
+    };
 
   return (
     <div className="flex flex-col w-[432px] phone:w-[94%] rounded-[12px] border-[1px] p-6 border-gray-30 bg-white gap-3">
         <h2 className="font-bold text-[20px] text-gray-70">SEND US A MESSAGE</h2>
-        <form className="flex flex-col gap-8" onSubmit={handleSubmit} >
+        <form className="flex flex-col gap-8" onSubmit={handleSubmit} ref={form} >
             <div className="flex flex-col gap-3 w-full">
                 <div className="flex flex-col">
                     <label className="label">Name</label>
@@ -79,9 +87,20 @@ function ContactUsForm() {
                     <label className="label">Message</label>
                     <textarea onChange={handleChange} type="text" id="message" name="message" className="input textarea h-[120px]" ></textarea>
                 </div>
+                {/**ERROR RESPONSE */}
+                <p className="text-center text-error font-semibold">{errorResponse}</p>
+                {/**SUCCESS RESPONSE */}
+                <p className="text-center text-success font-semibold">{errorResponse}</p>
+
             </div>
 
-            <ButtonTwo text={'Submit'} onClick={handleSubmit} />
+            {
+                sending ? (
+                    <LoadingBtn />
+                ) : (
+                    <ButtonTwo text={'Submit'} onClick={handleSubmit} />
+                )
+            }
 
         </form>
     </div>

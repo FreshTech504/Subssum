@@ -27,7 +27,7 @@ export const help = [
     },
     {
         id: 3,
-        link: 'https://whatsapp.com/channel/0029Vamiyx99xVJfJQDVhg0b',
+        link: 'https://wa.me/2347038540723?text=Hello',
         title: 'Whatsapp',
         text: 'Drop a Message',
         img: BsWhatsapp,
@@ -45,7 +45,7 @@ export const help = [
     },
     {
         id: 5,
-        link: 'https://whatsapp.com/channel/0029Vamiyx99xVJfJQDVhg0b',
+        link: 'https://wa.me/2347038540723?text=Hello',
         title: 'Report Our Support',
         text: 'Not Satisfied?',
         img: BiErrorCircle,

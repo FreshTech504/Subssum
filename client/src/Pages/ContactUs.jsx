@@ -9,6 +9,7 @@ import { FaInstagram } from "react-icons/fa";
 import { LiaTelegramPlane } from "react-icons/lia";
 import { CiLinkedin } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa6";
 import { useEffect } from "react";
 
 function ContactUs() {
@@ -42,6 +43,11 @@ function ContactUs() {
             text: 'Telegram',
             icon: LiaTelegramPlane,
             link: '',
+        },
+        {
+            text: 'Whatsapp',
+            icon: FaWhatsapp,
+            link: 'https://wa.me/2347038540723?text=Hello',
         }
     ];
     useEffect(() =>{
@@ -52,7 +58,10 @@ function ContactUs() {
             behavior : "smooth", //optional: can be changed to "auto" for instant scroll
         });
     },[]); //This effect runs only once when the component mouts
-  return (
+    
+    //EMAIL JS
+  
+    return (
     <div className="flex flex-col min-h-[100vh]">
         <Navbar showBtn={true} />
 

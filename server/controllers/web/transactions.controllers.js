@@ -4,6 +4,7 @@ import fs from 'fs';
 import UserModel from "../../model/User.js";
 import path from 'path'
 import { fileURLToPath } from 'url'
+import ReportTransactionModel from "../../model/ReportTransaction.js";
 
 const getOrdinalSuffix = (day) => {
     if (day > 3 && day < 21) return 'th'; // Special case for 11-13
@@ -187,3 +188,27 @@ export async function downloadReciept(req, res) {
 }
 
 //UPDTAE USER TRANSACTIONS
+
+
+//REPORT TRANSACTIONS
+export async function reportTransaction(req, res){
+    const { name, email, description, imgUrl } = req.body
+    try {
+        if(!description){
+           return res.status(400).json({ success: false, data: 'Please provide a problem description'})
+        }
+        if(!name){
+           return res.status(400).json({ success: false, data: 'Please provide a name or email'})
+        }
+        const newReport = await ReportTransactionModel.create({
+            name, email, description, image: imgUrl
+        })
+
+        console.log('NEW TRANSACTIONS REPORT', newReport)
+
+        res.status(201).json({ success: true, data: `Transaction report problem submitted succesfuly` })
+    } catch (error) {
+        console.log('UNABLE TO REPORT TRANSACTIONS', error)
+        res.status(500).json({ success: false, data: 'Unable to report transactions' })
+    }
+}

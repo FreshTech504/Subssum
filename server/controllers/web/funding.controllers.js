@@ -53,7 +53,7 @@ export async function payWithPaystack(req, res) {
           const newPendingFunding = await PendingFundingModel.create({
             source: 'paystack', transactionRef: reference, monnifyRef: reference
             })
-          
+          console.log('pending transactions', newPendingFunding)
           res.send({ authorizationUrl: authorization_url });
 
     } catch (error) {
@@ -187,17 +187,20 @@ export async function verifyPaymentTransactions(req, res){
         }
 
         const pendingFundingExist = await PendingFundingModel.findOne({ transactionRef: paymentReference })
+        
+        const transactionExist = await TransctionHistroyModel.findOne({ transactionId: paymentReference })
+
         if(pendingFundingExist){
             console.log('TRANSACVTION FOUND', pendingFundingExist)
         }
-        if(!pendingFundingExist){
+        if(!pendingFundingExist && transactionExist){
             console.log('TRANSACTIONS EXPIRED')
             return res.end()
-          }
+        }
 
           console.log('PENDING TRANSACTION', pendingFundingExist)
         
-        const transactionExist = await TransctionHistroyModel.findOne({ transactionId: paymentReference })
+
             
         if(transactionExist){
           console.log('TRANSACTIONS ALREADY VERIFIED')
