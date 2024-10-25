@@ -4,9 +4,10 @@ import EnvelopImg from '../../assets/envelop.png'
 
 function ResetEmailSent() {
     const location = useLocation();
-    const msg = location.state ? location.state.resMsg :  'We have sent an email with password reset information to you' ;
-    //const msg = 'We have sent an email with password reset information to you' ;
-
+    //const msg = location.state ? location.state.resMsg :  'We have sent an email with password reset information to you' ;
+    const msg = 'We have sent an email with password reset information to' ;
+    const email = location?.state
+    console.log('EMAIL', email)
     return (
       <div className='page1 w-full h-[100vh]'>
           <Navbar />
@@ -15,7 +16,7 @@ function ResetEmailSent() {
           <div className="pad3 mt-[20px] w-[500px] phone:w-[90%] bg-white rounded-[12px] flex flex-col gap-[24px] border-[1px] border-gray-30">
               <div className="flex items-center w-full gap-[24px]">
                   <div>
-                    <img src={EnvelopImg} alt="envelop" className='w-[200px] h-[113.5px]' />
+                    <img src={EnvelopImg} alt="envelop" className='w-[150px] small-phone:w-[120px]' />
                   </div>
   
                   <div className="flex flex-col gap-[16px]">
@@ -25,6 +26,10 @@ function ResetEmailSent() {
   
                     <p className="text-gray-80 text-[16px]">
                         {msg}
+                        <br />
+                        <span className="font-semibold text-gray-70">
+                          {email?.resMsg}
+                        </span>
                     </p>
                   </div>
               </div>

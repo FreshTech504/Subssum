@@ -48,8 +48,8 @@ function LandingPage() {
         <div className="flex min-h-[100vh] flex-col relative">
             <Navbar showBtn={true} />
 
-            <div className="flex items-center justify-center mt-[6rem] gap-6 bg-gray-30">
-                <p className="text-[18px] font-semibold text-primary-color">Choose Language</p>
+            <div className="flex items-center justify-center mt-[6rem] gap-6 bg-gray-10">
+                <p className="text-[18px] font-semibold text-gray-70">Choose Language</p>
                 <Transalate style='flex' />
             </div>
 

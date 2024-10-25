@@ -60,6 +60,7 @@ function Login() {
     try {
       setIsLoading(true)
       const res = await loginUser(formData)
+      console.log('RES', res)
       if(res.data.success === false){
         setErrorResponse(res.data.data);
         setTimeout(() => {
@@ -78,13 +79,16 @@ function Login() {
         setFormData({})
         navigate('/create-pin')
       }
-      else{  
+      else if(res.pinSet === true && res.isVerified === true){  
 
         
         localStorage.setItem('subsumtoken', res?.token)
         dispatch(signInSuccess(res?.data))
         setFormData({})
         navigate('/dashboard')
+      } 
+      else {
+        return
       }
     } catch (error) {
       

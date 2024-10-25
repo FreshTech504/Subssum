@@ -26,8 +26,8 @@ export async function payWithPaystack(req, res) {
             return res.status(406).json({ success: false, data: 'Invalid Amount'})
         }
 
-        if(makeNumber < 500){
-            return res.status(400).json({ success: false, data: 'Minimium Amount is 500'})
+        if(makeNumber < 100){
+            return res.status(400).json({ success: false, data: 'Minimium Amount is NGN100'})
         }
 
 

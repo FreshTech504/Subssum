@@ -24,8 +24,8 @@ function FundWallet ({ setPopupBg, formData, setFormData,setSelectedCard }) {
             toast.error('Enter Amount')
             return
         }
-        if(formData?.amount < 500){
-            toast.error('Minimium Amount is 500')
+        if(formData?.amount < 100){
+            toast.error('Minimium Amount is NGN100')
             return
         }
 
@@ -48,8 +48,8 @@ function FundWallet ({ setPopupBg, formData, setFormData,setSelectedCard }) {
             toast.error('Enter Amount')
             return
         }
-        if(formData?.amount < 500){
-            toast.error('Minimium Amount is 500')
+        if(formData?.amount < 100){
+            toast.error('Minimium Amount is NGN100')
             return
         }
         try {
@@ -89,16 +89,19 @@ function FundWallet ({ setPopupBg, formData, setFormData,setSelectedCard }) {
                     )
                 }
             </div>
-
+            
+            {/**
+             * 
             <div className="w-full bg-white cursor-pointer flex items-center gap-2 border-[1px] border-l-gray-30 p-2 rounded-[10px]">
                 <img src={BankingImg} alt="Fund With Bank Transfer" className="w-[34px] h-[34px]" />
                 <p className="text-[16px] font-semibold text-second-color">Fund With Card</p>
             </div>
+             */}
 
             {
                 formData?.amount && (
                     <div className="flex w-full gap-2 flex-col mt-3">
-                        <ButtonTwo onClick={handlePayWithPaystack} text={'Pay With Paystack'}/>
+                        <ButtonTwo onClick={handlePayWithPaystack} text={'Pay'}/>
                         {/**
                          * 
                         <ButtonTwo onClick={handlePayWithMonnify} text={'Pay with Monnify'} />
