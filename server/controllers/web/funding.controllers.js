@@ -185,31 +185,8 @@ export async function verifyPaymentTransactions(req, res){
             console.log('Invalid Payment refrence')
             return res.end()
         }
-
-        let pendingFundingExist
-
-        const pendingFunding = await PendingFundingModel.findOne({ transactionRef: paymentReference })
-        
-        pendingFundingExist = pendingFunding
-        const pendingUserFundingExist = await PendingFundingModel.findOne({ userId: _id })
-
-        if(pendingUserFundingExist.transactionRef === paymentReference){
-            pendingFundingExist = pendingUserFundingExist
-        }
         
         const transactionExist = await TransctionHistroyModel.findOne({ transactionId: paymentReference })
-
-        if(pendingFundingExist){
-            console.log('TRANSACVTION FOUND', pendingFundingExist)
-        }
-        if(!pendingFundingExist && transactionExist){
-            console.log('TRANSACTIONS EXPIRED')
-            return res.end()
-        }
-
-          console.log('PENDING TRANSACTION', pendingFundingExist)
-        
-
             
         if(transactionExist){
           console.log('TRANSACTIONS ALREADY VERIFIED')
@@ -217,66 +194,73 @@ export async function verifyPaymentTransactions(req, res){
         }
 
         //VERIFY FOR PAYSTACK
-        if(pendingFundingExist?.source === 'paystack' ){
-            const response = await axios.get(
-                `${process.env.PAYSTACK_VERIFY_URL}/${paymentReference}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${process.env.PAYSTACK_TEST_SK}`,
-                    'Content-Type': 'application/json'
-                  }
-                }
-              );
-          
-              console.log('PAYSTACK VERIFY DATA>>',response.data);
-              const data = response.data.data
-              if(data.status !== 'success' && data.gateway_response !== 'Successful'){
-                return res.status(403).json({ success: false, data: 'Invalid'})
+        const response = await axios.get(
+            `${process.env.PAYSTACK_VERIFY_URL}/${paymentReference}`,
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.PAYSTACK_TEST_SK}`,
+                'Content-Type': 'application/json'
               }
-    
-              const amount = data.amount
-              const email = data.customer.email
-              const reference = data.reference
-              const channel = data.channel
-    
-              const user = await UserModel.findOne({ email });
-              if(!user){
-                console.log('USER NOT FOUND', email)
-              }
-
-    
-              if (user) {
-                const value = Number(amount) / 100; // Convert from kobo to naira
-                user.acctBalance += Number(value);
-                await user.save();
-                console.log('Account funded for user:', email);
-                const transactionRef = reference || 'no transaction refrence';
-              
-                // Saving the transaction
-                const transactionData = {
-                    userId: user._id,
-                    email: user.email,
-                    service: 'Account Funding',
-                    number: transactionRef,
-                    amount: parseFloat(value),
-                    platform: 'Paystack',
-                    totalAmount: parseFloat(value),
-                    status: 'Successful',
-                    paymentMethod: channel,
-                    transactionId: transactionRef,
-                    credit: true,
-                    isUserLogin: true,
-                    slug: 'Funding'
-                };
-                const createdTransaction = await TransctionHistroyModel.create(transactionData);
-                //console.log('Transaction>>', createdTransaction)
-                const deleteRef = await PendingFundingModel.findOneAndDelete({ transactionRef: paymentReference })
             }
-    
-            const { resetPasswordToken, resetPasswordExpire, password, pin, ...userData } = user._doc
-            return res.status(200).json({ success: true, data: userData })
+          );
+      
+          console.log('PAYSTACK VERIFY DATA>>',response.data);
+          const data = response.data.data
+          if(data.status !== 'success' && data.gateway_response !== 'Successful'){
+            return res.status(403).json({ success: false, data: 'Invalid Transaction'})
+          }
+
+          const amount = data.amount
+          const email = data.customer.email
+          const reference = data.reference
+          const channel = data.channel
+
+          const user = await UserModel.findOne({ email });
+          if(!user){
+            console.log('USER NOT FOUND', email)
+          }
+
+
+          if (user) {
+            const value = Number(amount) / 100; // Convert from kobo to naira
+            user.acctBalance += Number(value);
+            await user.save();
+            console.log('Account funded for user:', email);
+            const transactionRef = reference || 'no transaction refrence';
+          
+            // Saving the transaction
+            const transactionData = {
+                userId: user._id,
+                email: user.email,
+                service: 'Account Funding',
+                number: transactionRef,
+                amount: parseFloat(value),
+                platform: 'Paystack',
+                totalAmount: parseFloat(value),
+                status: 'Successful',
+                paymentMethod: channel,
+                transactionId: transactionRef,
+                credit: true,
+                isUserLogin: true,
+                slug: 'Funding'
+            };
+            const createdTransaction = await TransctionHistroyModel.create(transactionData);
+            //console.log('Transaction>>', createdTransaction)
+            const updateTransaction = await PendingFundingModel.findOne({ transactionRef: paymentReference })
+            if(updateTransaction){
+                updateTransaction.verified = true
+                await updateTransaction.save()
+            }
         }
 
+        const { resetPasswordToken, resetPasswordExpire, password, pin, ...userData } = user._doc
+        return res.status(200).json({ success: true, data: userData })
+        
+        
+        /**
+         if(pendingFundingExist?.source === 'paystack' ){
+         }
+         * 
         //VERIFY FOR MONNIFY
         if(pendingFundingExist.source === 'monnify'){
             const tokenDoc = await MonnifyModel.findOne();
@@ -336,6 +320,7 @@ export async function verifyPaymentTransactions(req, res){
             const { resetPasswordToken, resetPasswordExpire, password, pin, ...userData } = findUser._doc
             return res.status(200).json({ success: true, data: userData })
         }
+         */
 
     } catch (error) {
         console.log('UNABLE TO VERIFY PAYSTACK FUNDING', error)
