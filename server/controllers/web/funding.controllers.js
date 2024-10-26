@@ -51,7 +51,7 @@ export async function payWithPaystack(req, res) {
           const { authorization_url, reference } = response.data.data;
           console.log('refrence',reference)
           const newPendingFunding = await PendingFundingModel.create({
-            source: 'paystack', transactionRef: reference, monnifyRef: reference
+            source: 'paystack', transactionRef: reference, monnifyRef: reference, userId: _id
             })
           console.log('pending transactions', newPendingFunding)
           res.send({ authorizationUrl: authorization_url });
@@ -186,7 +186,16 @@ export async function verifyPaymentTransactions(req, res){
             return res.end()
         }
 
-        const pendingFundingExist = await PendingFundingModel.findOne({ transactionRef: paymentReference })
+        let pendingFundingExist
+
+        const pendingFunding = await PendingFundingModel.findOne({ transactionRef: paymentReference })
+        
+        pendingFundingExist = pendingFunding
+        const pendingUserFundingExist = await PendingFundingModel.findOne({ userId: _id })
+
+        if(pendingUserFundingExist.transactionRef === paymentReference){
+            pendingFundingExist = pendingUserFundingExist
+        }
         
         const transactionExist = await TransctionHistroyModel.findOne({ transactionId: paymentReference })
 

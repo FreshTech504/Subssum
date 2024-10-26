@@ -14,6 +14,9 @@ const PendingFundingSchema = new mongoose.Schema({
         type: String,
         unique: [true, 'monnifyRef refrence already exist']
     },
+    userId: {
+        type: String
+    },
     createdAt:{
         type: Date,
         default: Date.now(),
