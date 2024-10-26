@@ -208,7 +208,7 @@ export async function verifyPaymentTransactions(req, res){
         }
 
         //VERIFY FOR PAYSTACK
-        if(pendingFundingExist.source === 'paystack' ){
+        if(pendingFundingExist?.source === 'paystack' ){
             const response = await axios.get(
                 `${process.env.PAYSTACK_VERIFY_URL}/${paymentReference}`,
                 {
