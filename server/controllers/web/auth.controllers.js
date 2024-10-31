@@ -74,7 +74,7 @@ export async function register(req, res) {
         }).save();
 
         const verifyUrl = `${process.env.MAIL_WEBSITE_LINK}/${user._id}/verify/${token.token}`;
-         
+         console.log('USER VERIFICATION URL', verifyUrl)
         try {
             await registerMail({
                 username: `${user.firstName} ${user.lastName}`,
@@ -128,9 +128,11 @@ export async function verifyNewUser(req, res, next){
         //await UserModel.updateOne({ _id: user._id, verified: true})
         user.verified = true;
         await user.save()
+        console.log('USER VERIFIED')
         const deleteToken = await TokenModel.findByIdAndDelete({ _id: findToken._id })
         
-        sendToken(user, 200, res)
+        //sendToken(user, 200, res)
+        res.status(200).json({ success: true, data: 'Account Verified' })
 
 
     } catch (error) {
