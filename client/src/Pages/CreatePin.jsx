@@ -25,8 +25,8 @@ function CreatePin() {
         setPinInput([
           ...pinInput.map((data, indx) => (indx === index? e.target.value:data))
         ])
-    
-        if(e.target.value && e.target.nextSibling){
+     
+        if(e.target.value && e.target.nextSibling){      
           e.target.nextSibling.focus()
         }
       }

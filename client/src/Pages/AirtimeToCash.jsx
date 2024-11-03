@@ -20,7 +20,7 @@ function AirtimeToCash({toggleMenu, showMenu, formData, setFormData, setSelected
       setSelectedCard('airtimeToCashInfo')
     }, []); 
 
-    const handleCardOne = () => {
+    const handleCardOne = () => {     
         setCardTwo(false)
         setCardThree(false)
         setActiveCard('cardOne')
