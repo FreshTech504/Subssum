@@ -5,11 +5,9 @@ function UpdateTransactionStatus() {
     const loc = window.location;
     const pathName = loc.pathname.split("/")[3];
 
-    co
-
     const handleUpdateTransaction = async () => {
         try {
-            const res = await ''
+            //const res = await 
         } catch (error) {
             
         } finally {
