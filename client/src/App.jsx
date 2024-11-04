@@ -54,6 +54,8 @@ import AdminUsers from './Admin/Pages/AdminUsers'
 import HelpAndSupport from './Admin/Pages/HelpAndSupport'
 import AdminProfile from './Admin/Pages/AdminProfile'
 import ViewBlogs from './Admin/Pages/ViewBlogs'
+import ViewTransaction from './Admin/Pages/ViewTransaction'
+import UpdateTransactionStatus from './Components/Modals/UpdateTransactionStatus'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -136,6 +138,12 @@ function App() {
             <AirtimeToCashInfo setSelectedCard={setSelectedCard} />
           </div>
         )  
+      case `updateTransactionStatus`:
+        return (
+          <div>
+            <UpdateTransactionStatus />
+          </div>
+        )
     }
   }
 
@@ -257,6 +265,9 @@ function App() {
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/all-transactions' element={<AllTransactions />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin/transaction/:id' element={<ViewTransaction setSelectedCard={setSelectedCard} />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/all-users' element={<AllUsers />} />

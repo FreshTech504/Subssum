@@ -76,3 +76,27 @@ export function useFetchCableTvPlans(query){
 
     return cabletvplan
 }
+
+//FETCH ALL TRANSACTION 
+export function useFetchTransaction(query){
+    const [ transactionData, setTransactionData ] = useState({ isFetchingTransction: true, transaction: null, TransactionStatus: null, TransactionServerError: null, })
+    useEffect(() => {
+        const fetchTransaction = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/transactions/fetchAllTransactions`, {withCredentials: true}) : await axios.get(`/transactions/fetchATransaction/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setTransactionData({ isFetchingTransction: false, transaction: data, TransactionStatus: status, TransactionServerError: null})
+                } else{
+                    setTransactionData({ isFetchingTransction: false, transaction: null, TransactionStatus: status, TransactionServerError: null})
+                }
+            } catch (error) {
+                setTransactionData({ isFetchingTransction: false, transaction: null, TransactionStatus: null, TransactionServerError: error})
+            }
+        }
+        fetchTransaction()
+    }, [query])
+
+    return transactionData
+}

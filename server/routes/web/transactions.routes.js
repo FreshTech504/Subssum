@@ -1,6 +1,6 @@
 import express from 'express'
 import * as controllers from '../../controllers/web/transactions.controllers.js'
-import { Protect } from '../../middleware/auth.js'
+import { AdminProtect, AdminRole, Protect } from '../../middleware/auth.js'
 
 const router = express.Router()
 
@@ -13,6 +13,10 @@ router.post('/reportTransaction', Protect, controllers.reportTransaction)
 //GET ROUTES
 router.get('/fetchAllUserTransactions', Protect, controllers.fetchAllUserTransactions)
 router.get('/fetchAUserTransaction/:id', Protect, controllers.fetchAUserTransaction )
+
+router.get('/fetchAllTransactions', AdminProtect, AdminRole(['Staff', 'Manager', 'Admin']), controllers.fetchAllTransactions)
+router.get('/fetchATransaction/:id', AdminProtect, AdminRole(['Staff', 'Manager', 'Admin']), controllers.fetchATransaction)
+
 
 
 

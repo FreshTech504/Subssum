@@ -1,6 +1,6 @@
 import { registerMail } from "../../middleware/mailer.js";
 import ActivitiesModel from "../../model/Activities.js";
-import adminModel from "../../model/Admin.js"
+import AdminModel from "../../model/Admin.js"
 import OtpModel from "../../model/AdminOtp.js";
 import UserModel from "../../model/User.js"
 
@@ -39,12 +39,12 @@ export async function makeAdmin(req, res){
             return res.status(404).json({ success: false, data: 'User with this Id not found' })
         }
 
-        const adminExist = await adminModel.findOne({ userId: id })
+        const adminExist = await AdminModel.findOne({ userId: id })
         if(adminExist){
             return res.status(403).json({ success: false, data: 'User already exist as an admin' })
         }
 
-        const newAdmin = await adminModel.create({
+        const newAdmin = await AdminModel.create({
             userId: id,
             email: getUser?.email,
             password: password,
@@ -73,7 +73,7 @@ export async function login(req, res) {
             return res.status(400).json({ success: false, data: 'All Feilds are required'})
         }
 
-        const getUser = await adminModel.findOne({ email })
+        const getUser = await AdminModel.findOne({ email })
         if(!getUser){
             return res.status(404).json({ success: false, data: 'User does not exist' })
         }
@@ -137,7 +137,7 @@ export async function verifyPasscode(req, res) {
             return res.status(403).json({ success: false, data: 'Invalid Passcode' })
         }
 
-        const getUser = await adminModel.findOne({ email })
+        const getUser = await AdminModel.findOne({ email })
         
         //delete passcode
         const deleteOtp = await OtpModel.findByIdAndDelete({ _id: getOtp._id })

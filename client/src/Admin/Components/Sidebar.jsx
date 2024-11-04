@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signoutAdmin } from '../../Helpers/api';
 import { signOut } from '../../Redux/admin/adminSlice';
-import { adminSidebarMenu, allServices } from '../../Data/adminSidebarMenu';
+import { adminSidebarMenu } from '../../Data/adminSidebarMenu';
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 function Sidebar() {
@@ -61,7 +61,7 @@ function Sidebar() {
                                 <div className='flex items-center gap-2'>
                                     <div className='flex flex-col pl-3 items-start gap-3'>
                                         {
-                                            allServices.map((item, idx) => {
+                                            item.allServices.map((item, idx) => {
                                                 const Icon = item.icon
                                                 return (
                                                     <Link key={idx} to={item.link ? `/${item.link}` : ''} className={`w-full h-[46px] p-3 flex items-center gap-[14px] rounded-[12px] text-[16px] ${isActive(`/${item.link}`) ? 'bg-second-color text-white' : 'text-second-color'}`}>

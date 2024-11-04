@@ -1,6 +1,7 @@
 import jsonwebtoken from 'jsonwebtoken'
 import UserModel from '../model/User.js';
 import axios from 'axios'
+import AdminModel from '../model/Admin.js';
 //authorize user routes
 export const Protect = async (req, res, next) => {
     const token = req.cookies.subsumtoken;
@@ -133,3 +134,57 @@ export const ValidateQuickBuyPayment = async (req, res, next) => {
 };
 
 //validates Admin User
+export const AdminProtect = async (req, res, next) => {
+  const token = req.cookies.subsumauthtoken;
+  //console.log('PROTECT TOKEN>>', token)
+
+  if (!token) {
+    return res.status(401).json({ success: false, data: 'Not Allowed Please Login' });
+  }
+
+  try {
+    const admin = await new Promise((resolve, reject) => {
+      jsonwebtoken.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(decoded);
+      });
+    });
+
+    req.admin = admin;
+
+    const { id } = admin;
+    const isAdmin = await AdminModel.findById(id);
+    if (!isAdmin) {
+      return res.status(404).json({ success: false, data: 'Invalid Account' });
+    }
+    if (isAdmin.blocked === true) {
+      return res.status(404).json({ success: false, data: 'User Account has been blocked' });
+    }
+
+    req.admin = isAdmin
+
+    //console.log('user', isAdmin)
+    next();
+  } catch (err) {
+    if (err.name === 'TokenExpiredError') {
+      return res.status(403).json({ success: false, data: 'Token expired, please login again' });
+    } else {
+      return res.status(403).json({ success: false, data: 'User Forbidden Please Login' });
+    }
+  }
+};
+
+//Allowed admin roles:
+export const AdminRole = (allowedRoles) => {
+  return (req, res, next) => {
+    const { admin } = req;
+
+    if (!admin || !admin.role || !allowedRoles.includes(admin.role)) {
+      return res.status(403).json({ success: false, data: 'Access Denied: Insufficient Permissions' });
+    }
+
+    next();
+  };
+};

@@ -187,9 +187,6 @@ export async function downloadReciept(req, res) {
     }
 }
 
-//UPDTAE USER TRANSACTIONS
-
-
 //REPORT TRANSACTIONS
 export async function reportTransaction(req, res){
     const { name, email, description, imgUrl } = req.body
@@ -212,3 +209,32 @@ export async function reportTransaction(req, res){
         res.status(500).json({ success: false, data: 'Unable to report transactions' })
     }
 }
+
+//FETCH ALL TRANSACTIONS
+export async function fetchAllTransactions(req, res){
+    try {
+        const getAllTransctions = await TransctionHistroyModel.find()
+
+        res.status(200).json({ success: true, data: getAllTransctions })
+    }  catch (error) {
+        console.log('UANBLE TO FETCH ALL TRANSACTIONS', error)
+        res.status(500).json({ success: false, data: 'Unable to get all transactions'})
+    }
+}
+
+//FETCH A TRANSACTIONS
+export async function fetchATransaction(req, res){
+    const { id } = req.params
+
+    try {
+        const getTransction = await TransctionHistroyModel.findById(id)
+
+        res.status(200).json({ success: true, data: getTransction })
+    }  catch (error) {
+        console.log('UANBLE TO FETCH TRANSACTIONS', error)
+        res.status(500).json({ success: false, data: 'Unable to get all transactions'})
+    }
+}
+
+//UPDTAE USER TRANSACTIONS
+

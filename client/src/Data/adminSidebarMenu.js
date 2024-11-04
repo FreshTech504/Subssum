@@ -39,7 +39,24 @@ export const adminSidebarMenu = [
         name: 'Services',
         link: 'services',
         icon: CiStar,
-        moreLinks: true
+        moreLinks: true,
+        allServices: [
+            {
+                name: 'Airtime',
+                link: 'admin-airtime',
+                icon: FaHeadset
+            },
+            {
+                name: 'Data',
+                link: 'admin-data',
+                icon: FaHeadset
+            },
+            {
+                name: 'Help and Support',
+                link: 'support',
+                icon: FaHeadset
+            }
+        ]
     },
     {
         name: 'Payout',
@@ -80,23 +97,5 @@ export const adminSidebarMenu = [
         name: 'My Profile',
         link: 'admin-profile',
         icon: CgProfile
-    }
-]
-
-export const allServices = [
-    {
-        name: 'Help and Support',
-        link: 'support',
-        icon: FaHeadset
-    },
-    {
-        name: 'Help and Support',
-        link: 'support',
-        icon: FaHeadset
-    },
-    {
-        name: 'Help and Support',
-        link: 'support',
-        icon: FaHeadset
     }
 ]

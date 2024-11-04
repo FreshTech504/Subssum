@@ -3,7 +3,7 @@ import crypto from 'crypto'
 import bcryptjs from 'bcryptjs'
 import jsonwebtoken from 'jsonwebtoken'
 
-const adminSchema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
     userId: {
         type: String,
         required: [true, "please Provide a valid Id"],
@@ -58,7 +58,7 @@ const adminSchema = new mongoose.Schema({
 { timestamps: true}
 )
 
-adminSchema.pre('save', async function(next){
+AdminSchema.pre('save', async function(next){
     if(!this.isModified('password')) {
         return next();
     };
@@ -72,13 +72,13 @@ adminSchema.pre('save', async function(next){
     }
 })
 
-adminSchema.methods.matchPasswords = async function(password){
+AdminSchema.methods.matchPasswords = async function(password){
     return await bcryptjs.compare(password, this.password)
 }
 
-adminSchema.methods.getSignedToken = function(){
+AdminSchema.methods.getSignedToken = function(){
     return jsonwebtoken.sign({ id: this._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
 }
 
-const adminModel =  mongoose.model('adminUser', adminSchema);
-export default adminModel
+const AdminModel =  mongoose.model('adminUser', AdminSchema);
+export default AdminModel

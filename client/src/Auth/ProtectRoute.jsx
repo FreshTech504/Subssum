@@ -114,7 +114,7 @@ function AuthorizeAdmin() {
     }
   }, [currentUser, tokenExist]);
 
-  return tokenExist && user ? <Outlet /> : <Navigate to={'/'} />;
+  return tokenExist && admin ? <Outlet /> : <Navigate to={'/'} />;
 }
 
 
