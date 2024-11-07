@@ -1,13 +1,16 @@
 import mongoose from "mongoose";
 
 export const MobileNetworkSchema = new mongoose.Schema({
-    network: {
+    name: {
         type: String
     },
-    networkCode: {
+    code: {
         type: String,
         required: true
     },
+    icon: {
+        type: String
+    }
 })
 
 const MobileNetworkModel =  mongoose.model('mobileNetwork', MobileNetworkSchema);

@@ -17,6 +17,9 @@ const TransctionHistroySchema = new mongoose.Schema({
         type: String,
         required: [true, 'Platform is required']
     },
+    address: {
+        type: String,
+    },
     number: {
         type: String,
     },

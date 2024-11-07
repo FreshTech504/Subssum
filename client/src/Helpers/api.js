@@ -521,3 +521,121 @@ export async function signoutAdmin(){
         //console.log('SIGNOUT REQUEST', error)
     }
 }
+
+export async function updateTracStatus({ id, status }){
+    try {
+        const res = await axios.post(`/transactions/updateTracStatus`, { id, status }, {withCredentials: true})
+        console.log('update transactions',res)
+        if(res.data.success){
+            toast.success(res.data.dat)
+            return res.data
+        }
+    } catch (error) {
+        const errorMsg = error.response.data.data || 'Unable to Proccess signout request'
+        const res = error.response || 'error'
+        toast.error(errorMsg)
+        //console.log('update transaction status REQUEST', error)
+    }
+}
+
+//Admin update user
+export async function adminUpdateUser(formData){
+    try {
+        const res = await axios.post('/user/adminUpdateUser', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to Login User'
+        //toast.error(errorMsg)
+        //console.log('UPADATE USER ERROR', error)
+        const res = error.response || 'Unable to update user'
+        return res.data
+    }
+}
+
+// ADMIN toggle block user
+export async function blockUser({ id }){
+    try {
+        const res = await axios.post('/user/blockUser', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to toggle user'
+        //toast.error(errorMsg)
+        //console.log('UPADATE USER ERROR', error)
+        const res = error.response || 'Unable to block/unblock user'
+        return res.data
+    }
+}
+
+// ADMIN 
+export async function makeAdmin(formData){
+    try {
+        const res = await axios.post('/admin/makeAdmin', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to make admin'
+        //toast.error(errorMsg)
+        //console.log('UPADATE USER ERROR', error)
+        const res = error.response || 'Unable to make admin'
+        return res.data
+    }
+}
+
+// NEW NETWORK 
+export async function newNetwork(formData){
+    try {
+        const res = await axios.post('/network/createNetwork', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW NETWORK',error)
+        const res = error.response || 'Unable to add new network'
+        return res.data
+    }
+}
+
+// UPDATE NETWORK 
+export async function updateNetwork(formData){
+    try {
+        const res = await axios.post('/network/updateNetwork', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('UPDATE NETWORK',error)
+        const res = error.response || 'Unable to update network'
+        return res.data
+    }
+}
+
+// CREATE DATA PLAN  
+export async function createDataPlans(formData){
+    try {
+        const res = await axios.post('/data/createDataPlans', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('CREATE DATA PLAN',error)
+        const res = error.response || 'Unable to create data plam'
+        return res.data
+    }
+}
+
+// UPDATE DATA PLAN 
+export async function updateDataPlans(formData){
+    try {
+        const res = await axios.post('/data/updateDataPlans', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('UPDATE DATA PLAN',error)
+        const res = error.response || 'Unable to update data plan'
+        return res.data
+    }
+}
+
+// DELETE DATA PLAN 
+export async function deleteDataPlan({ id }){
+    try {
+        const res = await axios.post('/data/deleteDataPlan', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('DELETE DATA PLAN',error)
+        const res = error.response || 'Unable to delete data plan'
+        return res.data
+    }
+}

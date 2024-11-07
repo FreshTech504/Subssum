@@ -56,6 +56,14 @@ import AdminProfile from './Admin/Pages/AdminProfile'
 import ViewBlogs from './Admin/Pages/ViewBlogs'
 import ViewTransaction from './Admin/Pages/ViewTransaction'
 import UpdateTransactionStatus from './Components/Modals/UpdateTransactionStatus'
+import UserDetails from './Admin/Pages/UserDetails'
+import BlockUser from './Components/Modals/BlockUser'
+import MakeAdmin from './Components/Modals/MakeAdmin'
+import AdminData from './Admin/Pages/Services/AdminData'
+import NewDataPlan from './Admin/Pages/Services/NewDataPlan'
+import NewNetwork from './Admin/Pages/Services/NewNetwork'
+import AdminAirtime from './Admin/Pages/Services/AdminAirtime'
+import AdminTvSubscription from './Admin/Pages/Services/AdminTvSubscription'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -142,6 +150,18 @@ function App() {
         return (
           <div>
             <UpdateTransactionStatus />
+          </div>
+        )
+      case `blockUser`:
+        return (
+          <div>
+            <BlockUser setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case `MakeAdmin`: 
+        return (
+          <div>
+            <MakeAdmin setSelectedCard={setSelectedCard} />
           </div>
         )
     }
@@ -273,6 +293,9 @@ function App() {
                   <Route path='/all-users' element={<AllUsers />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
+                  <Route path='/user-details/:id' element={<UserDetails setSelectedCard={setSelectedCard} />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
                   <Route path='/services' element={<Services />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
@@ -298,6 +321,37 @@ function App() {
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/admin-profile' element={<AdminProfile />} />
+                </Route>
+
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-profile' element={<AdminProfile />} />
+                </Route>
+
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-profile' element={<AdminProfile />} />
+                </Route>
+
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-data' element={<AdminData />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-airtime' element={<AdminAirtime />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-tv-subscription' element={<AdminTvSubscription />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-electricity-bill' element={<AdminProfile />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-convert-to-cash' element={<AdminProfile />} />
+                </Route>
+
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/new-data-plan/:id' element={<NewDataPlan />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/new-network/:id' element={<NewNetwork />} />
                 </Route>
 
               </Routes>

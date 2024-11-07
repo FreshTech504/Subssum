@@ -64,7 +64,7 @@ export async function buyAirtime(req, res) {
                 number: airtimeResponse.mobile_number,
                 amount: airtimeResponse.paid_amount,
                 totalAmount: airtimeResponse.amount,
-                status: airtimeResponse.Status,
+                status: `Successful`,
                 paymentMethod: 'Wallet',
                 transactionId: transactionId,
                 serviceId: airtimeResponse.id,

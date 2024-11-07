@@ -25,6 +25,9 @@ export async function makeAdmin(req, res){
         if(!password){
             return res.status(400).json({ success: false, data: 'provide a password' })
         }
+        if(!role){
+            return res.status(400).json({ success: false, data: 'provide a admin role' })
+        }
 
         const numPin = convertToNumber(password)
 
@@ -86,11 +89,12 @@ export async function login(req, res) {
 
         const otpExist = await OtpModel.findOne({ email })
         if(otpExist){
+            console.log('code exist', otpExist?.otp)
             return res.status(200).json({ success: true, data: 'Check email for passcode sent', email: email })
         }
 
         try {
-            const code = generateRandomSixDigitNumber()
+            const code = await generateRandomSixDigitNumber()
             const newOtp = await OtpModel.create({
                 userId: getUser._id,
                 email: getUser.email,

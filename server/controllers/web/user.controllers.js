@@ -109,18 +109,33 @@ export async function updatePassword(req, res) {
 //GET ALL USERS FOR ADMIN
 export async function getAllUsers(req, res){
     try {
-        const allUsers = await UserModel.find().select('-password');
-
+        const allUsers = await UserModel.find().select('-password -pin');
         res.status(200).json({ success: true, data: allUsers})
     } catch (error) {
         console.log('UNABLE TO GET ALL USERS', error)
         res.status(500).json({ success: false, data: error.message || 'Uanble to get all users' })
     }
 }
+
+//GET A USER FOR ADMIN
+export async function getUser(req, res){
+    const { id } = req.params
+    try {
+        const userData = await UserModel.findById(id).select('-password -pin');
+
+        res.status(200).json({ success: true, data: userData})
+    } catch (error) {
+        console.log('UNABLE TO GET USER', error)
+        res.status(500).json({ success: false, data: error.message || 'Uanble to get user' })
+    }
+}
   
 //ADMIN UPDATE USER
 export async function adminUpdateUser(req, res){
-    const { blocked, _id, username, firstName, lastName, mobile, email, acctBalance, referralLink, transactionTotal } = req.body
+    const { blocked, _id, username, firstName, lastName, mobile, email, acctBalance, walletBonus, referralLink, transactionTotal } = req.body
+    if(req.body.password){
+        return res.status(403).json({ success: false, data: 'Not allowed to update password' })
+    }
     try {
         const findUser = await UserModel.findById({ _id: _id });
         if(!findUser){
@@ -138,6 +153,7 @@ export async function adminUpdateUser(req, res){
                     lastName,
                     mobile,
                     acctBalance,
+                    walletBonus,
                     referralLink,
                     transactionTotal, 
                 }
@@ -273,6 +289,25 @@ export async function getAllUserReferrees(req, res){
     }
 }
 
+//ADMIN BLOCK A USER ACCOUNT
+export async function blockUser(req, res) {
+    const { id } = req.body
+    try {
+        const getUser = await UserModel.findById({ _id: id})
+        if(!getUser){
+            return res.status(404).json({ success: false, data: 'User with this id not found'})
+        }
+        const blockAUser = await UserModel.findById({ _id: id})
+        blockAUser.blocked = !blockAUser.blocked
+        await blockAUser.save()
+        console.log('object', blockAUser.blocked)
+
+        res.status(201).json({ success: true, data: `User ${ blockAUser.blocked ? 'Blocked' : 'Unblock'} Successful` })
+    } catch (error) {
+        console.log('UNABLE TO BLOCK USER>>', error)
+        res.status(500).json({ success: false, data: error.message || 'unable to perform blocking operation on user'})
+    }
+}
 
 //DANGER
 export async function deleteUser(req, res) {

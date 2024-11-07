@@ -105,7 +105,7 @@ function AuthorizeAdmin() {
       // Check if the token is expired
       if (decodedToken.exp * 1000 < Date.now()) {
         toast.error('Session expired, Please login');
-        navigate('/login');
+        navigate('/admin-login');
       }
     } catch (error) {
       console.error('Error decoding token:', error);

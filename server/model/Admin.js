@@ -21,7 +21,7 @@ const AdminSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'Staff',
-        eunm: ['Staff', 'Manger', 'Admin']
+        eunm: ['Staff', 'Manager', 'Admin']
     },
     blocked: {
         type: Boolean,
@@ -77,7 +77,7 @@ AdminSchema.methods.matchPasswords = async function(password){
 }
 
 AdminSchema.methods.getSignedToken = function(){
-    return jsonwebtoken.sign({ id: this._id, isAdmin: true }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
+    return jsonwebtoken.sign({ id: this._id, isAdmin: true, role: this.role }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRE})
 }
 
 const AdminModel =  mongoose.model('adminUser', AdminSchema);

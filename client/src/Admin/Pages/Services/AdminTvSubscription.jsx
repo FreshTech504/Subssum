@@ -1,8 +1,8 @@
-import Sidebar from '../Components/Sidebar'
-import TopNav from '../Components/TopNav'
-import Aside from '../Components/Aside'
+import Aside from "../../Components/Aside"
+import Sidebar from "../../Components/Sidebar"
+import TopNav from "../../Components/TopNav"
 
-function AdminUsers() {
+function AdminTvSubscription() {
   return (
     <div className="relative w-full overflow-x-hidden flex">
 
@@ -10,11 +10,11 @@ function AdminUsers() {
         <Sidebar />
       </div>
 
-      <div className="relative w-full ml-[276px]">
+      <div className="relative w-full ml-[276px] ">
         <TopNav />
 
         <div className="mt-[100px] px-12">
-          AdminUser
+          Tv Subscription
         </div>
         
       </div>
@@ -28,4 +28,4 @@ function AdminUsers() {
   )
 }
 
-export default AdminUsers
+export default AdminTvSubscription

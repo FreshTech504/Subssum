@@ -1,6 +1,6 @@
 import express from 'express'
 import * as controllers from '../../controllers/web/data.controllers.js'
-import { Protect, ValidateTransactionPin } from '../../middleware/auth.js'
+import { AdminProtect, Protect, ValidateTransactionPin } from '../../middleware/auth.js'
 
 const router = express.Router()
 
@@ -8,15 +8,17 @@ const router = express.Router()
 router.post('/buyData', Protect, ValidateTransactionPin, controllers.buyData)
 
 //add
-router.post('/createDataPlans', controllers.createDataPlans)
-router.post('/updateDataPlans',  controllers.updateDataPlans)
-router.post('/deleteDataPlan',  controllers.deleteDataPlan)
+router.post('/createDataPlans', AdminProtect, controllers.createDataPlans)
+router.post('/updateDataPlans', AdminProtect, controllers.updateDataPlans)
+router.post('/deleteDataPlan', AdminProtect, controllers.deleteDataPlan)
 
 
 
 //GET ROUTES
 router.get('/fetAllDataPlans',  controllers.fetAllDataPlans)
-router.get('/adminFetAllDataPlans',  controllers.adminFetAllDataPlans)
+router.get('/adminFetchAllDataPlans', AdminProtect,  controllers.adminFetAllDataPlans)
+router.get('/adminFetchDataPlans/:id', AdminProtect,  controllers.adminFetchDataPlans)
+
 
 
 

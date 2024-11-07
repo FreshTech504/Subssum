@@ -37,25 +37,36 @@ export const adminSidebarMenu = [
     },
     {
         name: 'Services',
-        link: 'services',
+        link: 'admin-data',
+        linkSlug: true,
         icon: CiStar,
         moreLinks: true,
         allServices: [
-            {
-                name: 'Airtime',
-                link: 'admin-airtime',
-                icon: FaHeadset
-            },
             {
                 name: 'Data',
                 link: 'admin-data',
                 icon: FaHeadset
             },
             {
-                name: 'Help and Support',
-                link: 'support',
+                name: 'Airtime',
+                link: 'admin-airtime',
                 icon: FaHeadset
-            }
+            },
+            {
+                name: 'TV Subscription',
+                link: 'admin-tv-subscription',
+                icon: FaHeadset
+            },
+            {
+                name: 'Electricity Bills',
+                link: 'admin-electricity-bill',
+                icon: FaHeadset
+            },
+            {
+                name: 'Airtime To Cash',
+                link: 'admin-convert-to-cash',
+                icon: FaHeadset
+            },
         ]
     },
     {

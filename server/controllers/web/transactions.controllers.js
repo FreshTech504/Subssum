@@ -236,5 +236,23 @@ export async function fetchATransaction(req, res){
     }
 }
 
+//UPDATE TRANSACTION STATUS
+export async function updateTracStatus(req, res) {
+    const { id, status } = req.body
+    
+    try {
+        const getTransction = await TransctionHistroyModel.findById(id)
+
+        getTransction.status = status
+        await getTransction.save()
+        
+        res.status(201).json({ success: true, data: `Staus updated to ${getTransction.status}` })
+    } catch (error) {
+        console.log('UNBALE TO UPDATE TRANSACTION STATUS')
+        res.status(500).json({ success: false, data: 'Unable to update transaction' })
+    }
+}
+
 //UPDTAE USER TRANSACTIONS
 
+ 

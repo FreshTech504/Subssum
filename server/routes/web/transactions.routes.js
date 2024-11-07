@@ -7,6 +7,7 @@ const router = express.Router()
 //POST ROUTES
 router.post('/downloadReciept', Protect, controllers.downloadReciept)
 router.post('/reportTransaction', Protect, controllers.reportTransaction)
+router.post('/updateTracStatus', AdminProtect, AdminRole(['Manager', 'Admin']), controllers.reportTransaction)
 
 
 

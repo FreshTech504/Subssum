@@ -70,7 +70,7 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
             </div>
         </div>
 
-        <div className='relative flex min-h-full w-[80.5%] medium-pc:w-full justify-center ml-auto '>
+        <div className='relative flex min-h-full w-[80.5%] medium-pc:w-full justify-center ml-auto mb-[12rem]'>
             <div className="w-[96%] phone:w-[96%]">
                 <div className="mt-6">
                     <TopNav toggleMenu={toggleMenu} showMenu={showMenu} title={`Welcome, ${user.firstName ? user.firstName : ''} ${user.lastName ? user.lastName : ''}`} />

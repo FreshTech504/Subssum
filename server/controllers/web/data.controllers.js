@@ -55,7 +55,7 @@ export async function buyData(req, res){
                 number: dataResponse.mobile_number,
                 amount: dataResponse.plan_amount,
                 totalAmount: dataPlan.price,
-                status: dataResponse.Status,
+                status: 'Successful',
                 paymentMethod: 'Wallet',
                 transactionId: transactionId,
                 serviceId: dataResponse.id,
@@ -102,7 +102,7 @@ export async function createDataPlans(req, res) {
         }
 
         const newDataPlan = await DataPlansModel.create({
-            networkCode, networkName, dataCode, slug, planName, price, validity, costPrice
+            networkCode, networkName, dataCode, slug: slug ? slug : dataCode, planName, price, validity, costPrice
         });
         console.log(newDataPlan);
         return res.status(201).json({ success: true, data: `New data plan created for ${networkName}` });
@@ -145,15 +145,14 @@ export async function updateDataPlans(req, res) {
         return res.status(500).json({ success: false, data: error.message || 'Unable to create new data plan' });
     }
 }
- 
-
 
 export async function deleteDataPlan(req, res){
     const { id } = req.body
+    console.log('DELETE EDN', id)
     try {
         const deletDataPlan = await DataPlansModel.findByIdAndDelete({ _id: id })
         
-        res.status(201).json({ success: false, data: 'Data Plan deleted successful '})
+        res.status(201).json({ success: true, data: 'Data Plan deleted successful '})
     } catch (error) {
         console.log('UNABLE TO DELETE DATA PLAN', error)
         res.status(500).json({ success: false, data: error.message || 'Unable to delete data plan'})
@@ -179,6 +178,20 @@ export async function adminFetAllDataPlans(req, res){
     } catch (error) {
         console.log('UNABLE TO FETCH ALL DATA PLANS FROM DB')
         res.status(500).json({ success: false, data: error.message || 'Unable to fetch data plans'})
+    }
+}
+
+export async function adminFetchDataPlans(req, res){
+    const { id } = req.params
+    try {
+        const fetchDataPlan = await DataPlansModel.findById(id)
+        if(!fetchDataPlan){
+            return res.status(404).json({ success: false, data: 'Not Data Plan Found With this ID' })
+        }
+        res.status(200).json({ success: true, data: fetchDataPlan })
+    } catch (error) {
+        console.log('UNABLE TO FETCH DATA PLAN FROM DB')
+        res.status(500).json({ success: false, data: error.message || 'Unable to fetch data plan'})
     }
 }
 

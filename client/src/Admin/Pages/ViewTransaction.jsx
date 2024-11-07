@@ -57,11 +57,11 @@ function ViewTransaction({ setSelectedCard }) {
 
   return (
     <div className="relative w-full overflow-x-hidden flex">
-      <div className="h-[100vh]">
+      <div className="h-[100vh] w-[276px] fixed left-0 top-0">
         <Sidebar />
       </div>
 
-      <div className="relative w-full flex flex-col justify-center items-center">
+      <div className="relative w-full ml-[276px] flex flex-col justify-center items-center">
         <TopNav />
 
         <div className="flex mt-8 items-center">
@@ -72,7 +72,7 @@ function ViewTransaction({ setSelectedCard }) {
             ) : (
                 <div className="flex items-center justify-center flex-col gap-8 w-[500px] phone:w-[94%] mt-8">
 
-                    <div className="p-6 w-full rounded-[12px] border-[1px] border-gray-10 bg-gray-30 flex flex-col gap-6">
+                    <div className="p-6 w-full rounded-[12px] border-[1px] border-gray-10 p-8 flex flex-col gap-6">
                         <h2 className="font-semibold text-[20px] text-gray-60">
                         Transaction Details
                         </h2>
@@ -142,7 +142,7 @@ function ViewTransaction({ setSelectedCard }) {
 
     </div>
 
-    <div className="ml-auto">
+    <div className="ml-auto w-[215px]">
         <Aside />
       </div>
     </div>

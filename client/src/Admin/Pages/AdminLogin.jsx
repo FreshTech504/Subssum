@@ -56,7 +56,7 @@ function AdminLogin() {
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id]: e.target.value })
     }
-    useEffect(() => {console.log('DATA', formData)}, [formData])
+    //useEffect(() => {console.log('DATA', formData)}, [formData])
     
     const handlePasswordLogin = async (e) => {
         e.preventDefault()

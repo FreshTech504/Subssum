@@ -158,7 +158,7 @@ function Login() {
                                     <p className="text-center text-error font-semibold">{passwordError}</p>
                                 </div>
                                 <div className='flex items-center justify-between tablet:flex-col-reverse'>
-                                        <div className="flex items-center gap-[8px]">
+                                        <div className="flex items-center gap-[14px]">
                                             <div onClick={() => setRemeberMe((prev) => !prev)} className={`relative cursor-pointer w-[40px] h-[20px] rounded-[36.5px] border-[0.5px] border-gray-30 ${remeberMe ? 'bg-second-color': 'bg-gray-20' }`}>
                                                 <span className={`h-4 w-4 rounded-full bg-white absolute top-[1px] ${ remeberMe ? 'right-[2px]' : 'left-[2px]'}`}></span>
                                             </div>
@@ -166,7 +166,7 @@ function Login() {
                                         </div>
 
                                         <Link to='/forgot-password' className="text-error text-[14px] ml-auto">
-                                            Recover Password
+                                            Forgot Password
                                         </Link>
                                 </div>
 

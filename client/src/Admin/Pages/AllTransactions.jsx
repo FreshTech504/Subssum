@@ -10,6 +10,7 @@ import ErrorYellow from '../../assets/error-yellow.png'
 import ErrorGreen from '../../assets/error-green.png'
 import { TbCurrencyNaira } from "react-icons/tb";
 import { Link } from "react-router-dom";
+import { CiSearch } from "react-icons/ci";
 
 function AllTransactions() {
   const { isFetchingTransction, transaction } = useFetchTransaction()
@@ -104,39 +105,47 @@ function AllTransactions() {
 
   return (
     <div className="relative w-full overflow-x-hidden flex">
-      <div className="h-[100vh]">
+      <div className="h-[100vh] w-[276px] fixed left-0 top-0">
         <Sidebar />
       </div>
 
-      <div className="relative w-full">
+      <div className="relative w-full ml-[276px]">
         <TopNav />
 
-        <div
-          onClick={handleFilterOptions}
-          className=" flex p-2 w-[190px] cursor-pointer rounded-[12px] border-[1px] border-gray-30 bg-gray-10 items-center gap-2"
-        >
-          <img className="w-[15.6px] h-[9.6px]" alt="filter" src={FilterImg} />
-          <p className="text-[16px] text-color-4">Filter</p>
-        </div>
-        {filterOption && (
-          <div className="absolute z-40 top-[50px] left-0 flex p-2 w-[190px] rounded-[12px] border-[1px] border-gray-30 bg-gray-10 items-center gap-2">
-            <div className="flex flex-col w-full">
-              {filterOptions.map((item) => (
-                <div
-                  key={item.value}
-                  onClick={() => handleSelectedFilter(item.value)}
-                  className={`w-full hover:text-color-3 font-semibold cursor-pointer p-2 border-b-[1px] border-b-gray-30 ${
-                    filterValue === item.value ? "text-color-3" : "text-color-2"
-                  }`}
-                >
-                  {item.text}
-                </div>
-              ))}
-            </div>
+        <div className="flex px-4 items-center justify-between mt-24">
+          <div className="bg-gray-10 flex items-center gap-1">
+            <CiSearch className="text-[24px]" />
+            <input type="text" placeholder="Search Email, Transaction ID." className="input bg-transparent border-none" />
           </div>
-        )}
 
-        <table className="overflow-y-auto mt-12 h-full w-[96%] border-collapse">
+            <div
+              onClick={handleFilterOptions}
+              className=" ml-auto flex p-2 w-[190px] cursor-pointer rounded-[12px] border-[1px] border-gray-30 bg-gray-10 items-center gap-2"
+            >
+              <img className="w-[15.6px] h-[9.6px]" alt="filter" src={FilterImg} />
+              <p className="text-[16px] text-color-4">Filter</p>
+            </div>
+            {filterOption && (
+              <div className="absolute z-40 top-[50px] left-0 flex p-2 w-[190px] rounded-[12px] border-[1px] border-gray-30 bg-gray-10 items-center gap-2">
+                <div className="flex flex-col w-full">
+                  {filterOptions.map((item) => (
+                    <div
+                      key={item.value}
+                      onClick={() => handleSelectedFilter(item.value)}
+                      className={`w-full hover:text-color-3 font-semibold cursor-pointer p-2 border-b-[1px] border-b-gray-30 ${
+                        filterValue === item.value ? "text-color-3" : "text-color-2"
+                      }`}
+                    >
+                      {item.text}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+        </div>
+
+        <table className="overflow-y-auto mt-8 h-full w-[96%] border-collapse">
           <thead className="w-full text-center phone:text-start">
             <tr className="text-[14px] text-gray-60 text-center  phone:text-start">
               <th className="p-2 phone:text-start">Services</th>
@@ -151,7 +160,7 @@ function AllTransactions() {
 
           <tbody className="relative w-full text-center phone:text-start">
             {isFetchingTransction ? (
-              <div className="absolute flex w-full top-12 items-center justify-center">
+              <div className="absolute flex w-full top-20 items-center justify-center">
                 <div className="loading-spinner flex items-center justify-center h-16 w-16 rounded-full left-0 top-0"></div>
               </div>
             ) : (
@@ -242,7 +251,7 @@ function AllTransactions() {
         </table>
       </div>
 
-      <div className="ml-auto">
+      <div className="ml-auto w-[215px] ">
         <Aside />
       </div>
     </div>

@@ -112,7 +112,10 @@ export async function verifyNewUser(req, res, next){
         const user = await UserModel.findById({ _id: id})
         console.log('ID', user._id)
         if(!user){
-            return res.status(400).json({ success: false, data: 'Invalid Link'})
+            return res.status(400).json({ success: false, data: 'Invalid Verification Link'})
+        }
+        if(!user.verified){
+            return res.status(400).json({ success: false, data: 'Account Already Verified'})
         }
 
         const findToken = await TokenModel.findOne({

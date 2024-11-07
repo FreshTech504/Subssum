@@ -100,3 +100,75 @@ export function useFetchTransaction(query){
 
     return transactionData
 }
+
+//FETCH ALL USERS
+export function useFetchUsers(query){
+    const [ userDataInfo, setUserDataInfo ] = useState({ isFetchingUser: true, userData: null, userDataStatus: null, userServerError: null, })
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/user/getAllUsers`, {withCredentials: true}) : await axios.get(`/user/getUser/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setUserDataInfo({ isFetchingUser: false, userData: data, userDataStatus: status, userServerError: null})
+                } else{
+                    setUserDataInfo({ isFetchingUser: false, userData: null, userDataStatus: status, userServerError: null})
+                }
+            } catch (error) {
+                setUserDataInfo({ isFetchingUser: false, userData: null, userDataStatus: null, userServerError: error})
+            }
+        }
+        fetchUser()
+    }, [query])
+
+    return userDataInfo
+}
+
+//FETCH ALL DATA PLANS
+export function useFetAllDataPlans(query){
+    const [ dataPlans, setDataPlans ] = useState({ isFetchingDataPlans: true, dataPlans: null, dataPlansStatus: null, dataPlansServerError: null, })
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/data/adminFetchAllDataPlans`, {withCredentials: true}) : await axios.get(`/data/adminFetchDataPlans/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setDataPlans({ isFetchingDataPlans: false, dataPlans: data, dataPlansStatus: status, dataPlansServerError: null})
+                } else{
+                    setDataPlans({ isFetchingDataPlans: false, dataPlans: null, dataPlansStatus: status, dataPlansServerError: null})
+                }
+            } catch (error) {
+                setDataPlans({ isFetchingDataPlans: false, dataPlans: null, dataPlansStatus: null, dataPlansServerError: error})
+            }
+        }
+        fetchUser()
+    }, [query])
+
+    return dataPlans
+}
+
+//FETCH ALL MOBILE NETWORKS
+export function useFetAllNetworks(query){
+    const [ networkData, setNetworkData ] = useState({ isFetchingNetworkData: true, networkData: null, networkStatus: null, networkServerError: null, })
+    useEffect(() => {
+        const fetchNetworks = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/network/getAllNetwork`, {withCredentials: true}) : await axios.get(`/network/getANetwork/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setNetworkData({ isFetchingNetworkData: false, networkData: data, networkStatus: status, networkServerError: null})
+                } else{
+                    setNetworkData({ isFetchingNetworkData: false, networkData: null, networkStatus: status, networkServerError: null})
+                }
+            } catch (error) {
+                setNetworkData({ isFetchingNetworkData: false, networkData: null, networkStatus: null, networkServerError: error})
+            }
+        }
+        fetchNetworks()
+    }, [query])
+
+    return networkData
+}

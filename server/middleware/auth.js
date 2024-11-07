@@ -75,7 +75,7 @@ export const ValidateTransactionPin = async (req, res, next) => {
     const isMatchPin = await isUser.matchPin(transactionPin);
     if (!isMatchPin) {
 
-      return res.status(406).json({ success: false, data: 'Invalid Transcation Pin'});
+      return res.status(406).json({ success: false, data: 'Invalid Transaction Pin'});
     }
 
 
