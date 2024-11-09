@@ -32,7 +32,7 @@ function OurServices() {
           <h2 className="text-[36.84px] font-bold text-gray-90 text-center">Your All-in-One Subscription Hub</h2>
 
           <p className="text-[20.46px] tablet:text-[18px] phone:text-[16px] text-gray-70 font-normal w-[80%] text-center items-center justify-center">
-            Say goodbye to the hassle of multiple apps and platforms, and hello to the simplicity and convenience of managing your subscriptions with us.
+          Eliminate the inconvenience of using multiple apps and platforms; enjoy the ease and convenience of managing all your subscriptions with us.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ function OurServices() {
 
                 <div className='mt-8 flex flex-col gap-[7px]'>
                   <h3 className='text-[24px] text-gray-90 font-semibold'>Buy Airtime & Data</h3>
-                  <p className='text-[16px] font-normal text-gray-70'>Our app lets you buy airtime and data swiftly, so you're always in touch with what matters most. </p>
+                  <p className='text-[16px] font-normal text-gray-70'>Our app lets you quickly purchase airtime and data, ensuring you stay connected with what matters most. </p>
                 </div>
             </div>
 
@@ -69,7 +69,7 @@ function OurServices() {
 
                 <div className='mt-8 flex flex-col gap-[7px]'>
                     <h3 className='text-[24px] text-gray-90 font-semibold'>Cable TV</h3>
-                    <p className='text-[16px] font-normal text-gray-70'>Explore a world of content with our cable TV service. From the latest shows we bring it all to your screen.</p>
+                    <p className='text-[16px] font-normal text-gray-70'>Explore a world of content with our subscriptions to your cable TV service. </p>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@ function OurServices() {
 
                 <div className='mt-8 flex flex-col gap-[7px]'>
                     <h3 className='text-[24px] text-gray-90 font-semibold'>Result Token</h3>
-                    <p className='text-[16px] font-normal text-gray-70'>Get instant access to your results with our result checker token. No more waiting, no more delays.</p>
+                    <p className='text-[16px] font-normal text-gray-70'>Unlock immediate access to your results with our result checker token. Say goodbye to waiting and hello to instant insights!</p>
                 </div>
             </div>
 
@@ -105,7 +105,7 @@ function OurServices() {
 
                 <div className='mt-8 flex flex-col gap-[7px]'>
                     <h3 className='text-[24px] text-gray-90 font-semibold'>Utility Bills</h3>
-                    <p className='text-[16px] font-normal text-gray-70'>Pay your electricity, water, gas, and other utility bills seamlessly with just a few taps. Never miss a due date again!</p>
+                    <p className='text-[16px] font-normal text-gray-70'>Effortlessly pay your electricity, water, gas, and other utility bills with just a few taps. Ensure you never miss a due date again!</p>
                 </div>
             </div>
 

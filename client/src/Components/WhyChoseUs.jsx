@@ -6,17 +6,17 @@ import ArrowImg from '../assets/arrow.png'
 function WhyChoseUs() {
     const whyChooeUsData = [
         {
-            text: 'Efficient Customer Support',
+            text: 'Efficient Customer Supports',
             img: SearchImg,
             style: 'bg-[#EFF3FB]',
         },
         {
-            text: 'Safe & Secure Transaction',
+            text: 'Safe & Secure Transactions',
             img: LockImg,
             style: 'bg-[#FFF6E5]',
         },
         {
-            text: 'Fast & Reliable Service',
+            text: 'Fast & Reliable Services',
             img: ArrowImg,
             style: 'bg-[#EFF3FB]',
         },
@@ -24,10 +24,20 @@ function WhyChoseUs() {
   return (
     <div className="small-pc:pad6 pad4 w-full flex flex-col gap-[48.09px] items-center justify-center">
         <div className="flex flex-col gap-[16.37px] text-center items-center">
-            <h2 className="text-[36.84px]  font-bold text-gray-90">Why Choose Us</h2>
+            <h2 className="text-[36.84px]  font-bold text-gray-90">Discover the Benefits of Choosing Us!</h2>
 
             <p className="text-[20.46px] phone:text-[16px] tablet:text-[18px] text-gray-70 font-normal w-[80%] text-center items-center justify-center">
-                Because we stand for excellence in every aspect. Our commitment to delivering top-notch service, innovative solutions, and customer satisfaction sets us apart.
+            We stand for excellence in every aspect. Our commitment to delivering top-notch service, innovative solutions, and customer satisfaction sets us apart, which includes reliable connectivity, affordable tariffs, creative services, exceptional customer support, rewards and loyalty programs, reseller programs, secure billing, and business solutions.
+            Efficient Customer Supports
+            <br />
+            Safe & Secure Transactions
+            <br />
+            Fast & Reliable Services
+            <br />
+            Your All-in-One Subscription Hub
+            <br />
+            Eliminate the inconvenience of using multiple apps and platforms; enjoy the ease and convenience of managing all your subscriptions with us.
+
             </p>
         </div>
 

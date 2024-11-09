@@ -112,7 +112,7 @@ const seeConfirmPassword = () => {
                     <div className="flex flex-col w-full gap-[16px]">
                         <div className="inputGroup relative">
                             <label className="label">Password</label>
-                            <input type={passwordVisible ? 'text' : 'password'} onChange={handleChange} id="password" className="input" placeholder="Gabon4351" />
+                            <input type={passwordVisible ? 'text' : 'password'} onChange={handleChange} id="password" className="input  text-[14px] p-[8px] placeholder-black" placeholder="Gabon4351" />
                             <div onClick={seePassword} className='absolute right-[10px] bottom-[10px] text-[20px] cursor-pointer'>
                                         {
                                             passwordVisible ? (
@@ -125,7 +125,7 @@ const seeConfirmPassword = () => {
                         </div>
                         <div className="inputGroup relative">
                             <label className="label">Confirm Password</label>
-                            <input type={confirmPasswordVisible ? 'text' : 'password'} onChange={handleChange} id="confirmPassword" className="input" placeholder="Gabon4351" />
+                            <input type={confirmPasswordVisible ? 'text' : 'password'} onChange={handleChange} id="confirmPassword" className="input  text-[14px] p-[8px] placeholder-black" placeholder="Gabon4351" />
                             <div onClick={seeConfirmPassword} className='absolute right-[10px] bottom-[10px] text-[20px] cursor-pointer'>
                                         {
                                             confirmPasswordVisible ? (

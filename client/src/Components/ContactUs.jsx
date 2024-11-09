@@ -12,7 +12,7 @@ function ContactUs() {
                 <div className='flex flex-col gap-[24.56px]'>
                     <h2 className='text-gray-90 font-bold text-[36.84px]'>Contact Us</h2>
                     <p className='text-[20px] font-normal text-gray-70'>
-                        We're here to listen, assist, and respond to your queries. Whether it's a question, feedback, or assistance you need, reaching out to us is the first step toward a solution.
+                    We are dedicated to listening, assisting, and responding to your inquiries confidently and professionally. Whatever your question, feedback, or need for assistance, reaching out to us is the decisive first step toward an effective solution.
                     </p>
                 </div>
 

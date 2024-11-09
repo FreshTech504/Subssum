@@ -193,79 +193,72 @@ function Register() {
     }
 
   return (
-    <div className='flex items-center w-full overflow-x-hidden h-[100vh] tablet:h-auto bg-gray-10 small-pc:justify-center small-pc:bg-white'>
-        <div className="relative flex w-[470px] h-full overflow-y-hidden small-pc:hidden">
-            <div className='fixed left-0 top-0 flex w-full h-full'>
-                <img src={SideImg} alt='image of subsum' className='h-full' />
-            </div>
+    <div className="flex items-center w-full overflow-x-hidden h-[100vh] tablet:h-auto bg-gray-10 small-pc:justify-center small-pc:bg-white">
+    <div className="relative flex w-[400px] h-full overflow-y-hidden small-pc:hidden">
+        <div className="fixed left-0 top-0 flex w-full h-full">
+            <img src={SideImg} alt="image of subsum" className="h-full" />
+        </div>
+    </div>
+
+    <div className="relative flex items-center justify-center h-full w-full">
+        <div className="absolute w-[80%] flex items-center justify-between top-[16px] small-pc:bg-gray-10 small-pc:w-full small-pc:pl-[10%] phone:pl-[5%] small-pc:pr-[10%] phone:pr-[5%] small-pc:top-0 small-pc:p-8 small-pc:border-[1px] small-pc:border-gray-30">
+            <Link to="/" className="flex items-center gap-1 text-[14px] text-second-color phone:hidden">
+                <IoIosArrowBack />
+                Home
+            </Link>
+            <Link to="/">
+                <img src={LogoImg} alt="logo of subsum" className="hidden phone:flex phone:w-[100px] phone:h-[25px]" />
+            </Link>
+            <Button name={'Login'} link={'login'} bg={true} />
         </div>
 
-        <div className='relative flex items-center justify-center h-full w-full'>
-            <div className='absolute w-[80%] flex items-center justify-between top-[24px] h-[24px] small-pc:bg-gray-10 small-pc:w-full small-pc:pl-[10%] phone:pl-[2%] small-pc:pr-[10%] phone:pr-[2%] small-pc:top-0 small-pc:p-8 small-pc:border-[1px] small-pc:border-gray-30'>
-                <Link to='/' className='flex items-center gap-1 text-[16px] text-second-color phone:hidden'>
-                    <IoIosArrowBack />
-                    Home
-                </Link>
-
-                <Link to='/'>
-                    <img src={LogoImg} alt="logo of subsum" className="hidden phone:flex phone:w-[108.97px] phone:h-[25px]" />
-                </Link>
-
-                <Button name={'Login'} link={'login'} bg={true} />
+        <div className="flex flex-col items-center justify-center gap-[20px] w-[400px] phone:w-[90%] mt-[8rem] phone:mt-[6rem]">
+            <div className="text-[22px] phone:[18px] flex text-center items-center text-gray-70 font-semibold">
+                Sign up
             </div>
 
-            <div className='flex flex-col items-center justify-center gap-[26px] w-[500px] phone:w-[90%] mt-[10rem] phone:mt-[7rem]'>
-                <div className='text-[25px] phone:[20px] flex text-center items-center text-gray-70' >
-                    Sign up
+            <form onSubmit={handleSignup} className="flex flex-col gap-[16px] w-full mb-4">
+                <Google setIsLoading={setIsLoading} isLoading={isLoading} text={'Sign up with Google'} />
+                <div className="flex items-center justify-center gap-[12px] w-full">
+                    <hr className="border-[1px] border-gray-40 w-full" />
+                    <p className="text-[12px] text-gray-80 w-full text-center">Or continue with</p>
+                    <hr className="border-[1px] border-gray-40 w-full" />
                 </div>
 
-                <form onSubmit={handleSignup} className='flex flex-col gap-[24px] w-full mb-4'>
-                    <Google setIsLoading={setIsLoading} isLoading={isLoading} text={'Sign up with Google'} />
-
-                    <div className='flex items-center justify-center gap-[14px] w-full'>
-                        <hr className='border-[1px] border-gray-40 w-full' />
-                        <p className='text-[13px] text-gray-80 w-full text-center'>Or continue with</p>
-                        <hr className='border-[1px] border-gray-40 w-full' />
-                    </div>
-
-                    <div className='pad3 phone:pad3b bg-white rounded-[12px] border-[1px] flex gap-[10px] border-gray-30'>
-                        <div className='flex flex-col gap-[32px] w-full'>
-                            <div className='flex flex-col gap-4 w-full'>
-                                <div className='inputGroup'>
-                                    <label className='label'>Email Address</label>
-                                    <input className='input' type='email' id='email' onChange={handleChange} placeholder='wabdotmail@gmail.com' />
-                                    <p className='text-[14px] text-error font-semibold'>{emailError}</p>
+                <div className="p-[16px] bg-white rounded-[8px] border-[1px] flex flex-col gap-[12px] border-gray-30">
+                    <div className="flex flex-col gap-[12px] w-full">
+                        <div className="inputGroup">
+                            <label className="label text-[14px]">Email Address</label>
+                            <input  className="input text-[14px] p-[8px] placeholder-black "  type="email" id="email"  onChange={handleChange}   placeholder="wabdotmail@gmail.com"  />
+                            <p className="text-[12px] text-error font-semibold">{emailError}</p>
+                        </div>
+                        <div className="inputGroup">
+                            <label className="label text-[14px]">First Name</label>
+                            <input  maxLength={50}  className="input text-[14px] p-[8px] placeholder-black "  type="text" id="firstName" onChange={handleChange} placeholder="Wahab" />
+                            <p className="text-[12px] text-error font-semibold">{firstNameError}</p>
+                        </div>
+                        <div className="inputGroup">
+                            <label className="label text-[14px]">Last Name</label>
+                            <input maxLength={50} className="input text-[14px] p-[8px] placeholder-black " type="text" id="lastName" onChange={handleChange} placeholder="Lawal" />
+                            <p className="text-[12px] text-error font-semibold">{lastNameError}</p>
+                        </div>
+                        <div className="inputGroup relative">
+                            <label className="label text-[14px]">Password</label>
+                            <div className="relative w-full">
+                                <input className="input w-full text-[14px] p-[8px] placeholder-black " type={showPassword ? 'text' : 'password'} id="password" onChange={handleChange} placeholder="Gabon4351" />
+                                <div
+                                    onClick={seePassword}
+                                    className={`absolute right-[10px] bottom-[15px] z-10 text-[18px] cursor-pointer`}
+                                >
+                                    {showPassword ? <FaEye /> : <FaRegEyeSlash />}
                                 </div>
-                                <div className='inputGroup'>
-                                    <label className='label'>First Name</label>
-                                    <input maxLength={50} className='input' type='text' id='firstName' onChange={handleChange} placeholder='Wahab' />
-                                    <p className='text-[14px] text-error font-semibold'>{firstNameError}</p>
-                                </div>
-                                <div className='inputGroup'>
-                                    <label className='label'>Last Name</label>
-                                    <input maxLength={50} className='input' type='text' id='lastName' onChange={handleChange} placeholder='Lawal' />
-                                    <p className='text-[14px] text-error font-semibold'>{lastNameError}</p>
-                                </div>
-                                <div className='inputGroup relative'>
-                                    <label className='label'>Password</label>
-                                    <div className='relative w-full'>
-                                        <input className='input w-full' type={showPassword ? 'text' : 'password'} id='password' onChange={handleChange} placeholder='Gabon4351' />
-                                        <div onClick={seePassword} className={`absolute right-[10px] bottom-[15px] z-10 text-[20px] cursor-pointer`}>
-                                            {
-                                                showPassword ? (
-                                                    <FaEye />
-                                                ) : (
-                                                    <FaRegEyeSlash />
-                                                )
-                                            }
-                                        </div>
-                                    </div>
-                                    <p className='text-[14px] text-error min-h-3 font-semibold'>{passwordError}</p>
-                                </div>
-                                <div className='inputGroup relative'>
+                            </div>
+                            <p className="text-[12px] text-error font-semibold">{passwordError}</p>
+                        </div>
+                        <div className='inputGroup relative'>
                                     <label className='label'>Confirm Password</label>
                                     <div className='relative w-full'>
-                                        <input className='input w-full' type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' onChange={handleChange} placeholder='Gabon4351' />
+                                        <input className='input w-full text-[14px] p-[8px] placeholder-black' type={showConfirmPassword ? 'text' : 'password'} id='confirmPassword' onChange={handleChange} placeholder='Gabon4351' />
                                         <div onClick={seeConfirmPassword} className='absolute right-[10px] bottom-[15px] z-10 text-[20px] cursor-pointer'>
                                             {
                                                 showConfirmPassword ? (
@@ -278,31 +271,29 @@ function Register() {
                                     </div>
                                     <p className='text-[14px] text-error min-h-3 font-semibold'>{confirmPasswordError}</p>
                                 </div>
-                            </div>
-                            {/**ERROR TEXT */}
-                            <p className="text-center text-error font-semibold">{errorResponse}</p>
-                            {
-                                isLoading ? (
-                                    <LoadingBtn />
-                                ) : (
-
-                                    <ButtonTwo onClick={handleSignup} text={'Create Account'} />
-                                )
-                            }
-                            
-                            <p className='text-center text-gray-90 font-semibold'>
-                                Already have an account? {' '}
-                                <Link to='/login' className='text-gray-50'>Login here</Link>
-                            </p>
-
-                        </div>
                     </div>
-                    
-                </form>
-            </div>
-
+                    <p className="text-center text-error font-semibold">{errorResponse}</p>
+                    {isLoading ? (
+                        <LoadingBtn />
+                    ) : (
+                        <ButtonTwo
+                            onClick={handleSignup}
+                            text={'Create Account'}
+                            className="text-[14px] font-semibold px-[12px] py-[6px] tablet:px-[10px] tablet:py-[5px] w-[60%] rounded-md"
+                        />
+                    )}
+                    <p className="text-center text-gray-90 font-semibold text-[14px]">
+                        Already have an account?{' '}
+                        <Link to="/login" className="text-gray-50">
+                            Login here
+                        </Link>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
+</div>
+
   )
 }
 
