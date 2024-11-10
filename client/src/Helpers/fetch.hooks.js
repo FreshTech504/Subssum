@@ -172,3 +172,51 @@ export function useFetAllNetworks(query){
 
     return networkData
 }
+
+//FETCH ALL TV PROVIDERS
+export function useFetAllTVProviders(query){
+    const [ networkData, setNetworkData ] = useState({ isFetchingTvProviderData: true, tvProviderDataData: null, tvProviderStatusStatus: null, TvProviderServerError: null, })
+    useEffect(() => {
+        const fetchNetworks = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/cabletv/getTVProvider`, {withCredentials: true}) : await axios.get(`/cabletv/getATVProvider/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setNetworkData({ isFetchingTvProviderData: false, tvProviderDataData: data, tvProviderStatusStatus: status, TvProviderServerError: null})
+                } else{
+                    setNetworkData({ isFetchingTvProviderData: false, tvProviderDataData: null, tvProviderStatusStatus: status, TvProviderServerError: null})
+                }
+            } catch (error) {
+                setNetworkData({ isFetchingTvProviderData: false, tvProviderDataData: null, tvProviderStatusStatus: null, TvProviderServerError: error})
+            }
+        }
+        fetchNetworks()
+    }, [query])
+
+    return networkData
+}
+
+//FETCH ALL CABLETV PLANS
+export function useFetchAdminCableTvPlans(query){
+    const [ cabletvplan, setCabletvplan] = useState({ isFetchingCableTvPlans: true, cabletvplan: null, cabletvplanStatus: null, cabletvplanServerError: null, })
+    useEffect(() => {
+        const fetchcabletvPlan = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/cabletv/getAdminAllCableTv`, {withCredentials: true}) : await axios.get(`/cabletv/getAdminACableTv/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setCabletvplan({ isFetchingCableTvPlans: false, cabletvplan: data, cabletvplanStatus: status, cabletvplanServerError: null})
+                } else{
+                    setCabletvplan({ isFetchingCableTvPlans: false, cabletvplan: null, cabletvplanStatus: status, cabletvplanServerError: null})
+                }
+            } catch (error) {
+                setCabletvplan({ isFetchingCableTvPlans: false, cabletvplan: null, cabletvplanStatus: null, cabletvplanServerError: error})
+            }
+        }
+        fetchcabletvPlan()
+    }, [query])
+
+    return cabletvplan
+}

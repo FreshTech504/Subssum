@@ -64,6 +64,8 @@ import NewDataPlan from './Admin/Pages/Services/NewDataPlan'
 import NewNetwork from './Admin/Pages/Services/NewNetwork'
 import AdminAirtime from './Admin/Pages/Services/AdminAirtime'
 import AdminTvSubscription from './Admin/Pages/Services/AdminTvSubscription'
+import NewTV from './Admin/Pages/Services/NewTV'
+import AdminCableTvPlans from './Admin/Pages/Services/AdminCableTvPlans'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -338,7 +340,10 @@ function App() {
                   <Route path='/admin-airtime' element={<AdminAirtime />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/admin-tv-subscription' element={<AdminTvSubscription />} />
+                  <Route path='/admin-tv-provider' element={<AdminTvSubscription />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-tv-subscription' element={<AdminCableTvPlans />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/admin-electricity-bill' element={<AdminProfile />} />
@@ -352,6 +357,9 @@ function App() {
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/new-network/:id' element={<NewNetwork />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/new-tv/:id' element={<NewTV />} />
                 </Route>
 
               </Routes>

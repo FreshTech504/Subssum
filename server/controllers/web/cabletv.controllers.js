@@ -2,6 +2,7 @@ import CableTvPlanModel from "../../model/CableTvPlans.js"
 import axios from 'axios'
 import UserModel from "../../model/User.js"
 import TransctionHistroyModel from "../../model/TransactionHistroy.js";
+import TvProviderModel from "../../model/TvProvider.js";
 
 export async function buyCableTvPlan(req, res){
     //console.log(req.body)
@@ -120,6 +121,17 @@ export async function getAllCableTv(req, res){
     }
 }
 
+export async function getAdminAllCableTv(req, res){
+    try {
+        const plans = await CableTvPlanModel.find()
+
+        res.status(200).json({ success: true, data: plans })
+    } catch (error) {
+        console.log('UNABLE TO GET AL CABLE TV PLAN', error)
+        res.status(500).jscon({ success: false, data: 'Unable to get all cable tv plan' })
+    }
+}
+
 export async function getACableTv(req, res) {
     const { id } = req.params
     try {
@@ -130,6 +142,20 @@ export async function getACableTv(req, res) {
 
         const { costPrice, ...getPlan } = plan._doc
         res.status(200).json({ success: false, data: getPlan})
+    } catch (error) {
+        console.log('UNABLE TO GET A CABLE TV', error)
+    }
+}
+
+export async function getAdminACableTv(req, res) {
+    const { id } = req.params
+    try {
+        const plan = await CableTvPlanModel.findById({ _id: id })
+        if(!plan){
+            return res.status(404).json({ success: false, data: 'Cable TV Plan not found' })
+        }
+
+        res.status(200).json({ success: false, data: plan})
     } catch (error) {
         console.log('UNABLE TO GET A CABLE TV', error)
     }
@@ -171,12 +197,99 @@ export async function validateCardNumber(req, res) {
     }
 }
 
-export async function deletetvs(req, res){
-    try{
-        console.log('YOO')
-        const del = await CableTvPlanModel.deleteMany({ platformName: 'Startimes' })
-        res.status(200).json({ success: true, data: 'deleted' })
-    } catch {
+//TV PROIVIDER
+export async function createTVProvider(req, res){
+    const { name, code, img, slugName, disabled } = req.body
+    console.log('object cc')
+    try {
+        if(!name){
+            return res.status(404).json({ success: false, data: 'Provide a name' })
+        }
+        if(!code){
+            return res.status(404).json({ success: false, data: 'Provide a code' })
+        }
 
+        const tvProviderExist = await TvProviderModel.findOne({ code: code })
+        if(tvProviderExist){
+            return res.status(400).json({ success: false, data: 'Mobile Network with code already exist' })
+        }
+
+        const newTvProvider = await TvProviderModel.create({
+            name, code, img, slugName, disabled
+        })
+
+        res.status(201).json({ success: true, data: `${newTvProvider.name} Tv Provider Created.` })
+    } catch (error) {
+        console.log('UNABLE TO CREATE NEW TV PROVIDER', error)
+        res.status(500).json({ success: false, data: 'Unable to create new provider' })
+    }
+}
+
+export async function updateTVProvider(req, res){
+    const { _id, name, code, img, slugName, disabled } = req.body
+    console.log('object', req.body)
+    try {
+        const findNetwork = await TvProviderModel.findById({ _id: _id });
+        if(!findNetwork){
+            return res.status(404).json({ success: false, data: 'No tv provider with this id found'})
+        }
+
+        const updateNetwork = await TvProviderModel.findByIdAndUpdate(
+            _id,
+            {
+                name, 
+                code, 
+                img, 
+                slugName, 
+                disabled
+            },
+            { new: true }
+        )
+
+        return res.status(201).json({ success: true, data: 'TV Provider updated Successfull' })
+    } catch (error) {
+        console.log('UNABLE TO UPDATE TV PROVIDER', error)
+        res.status(500).json({ success: false, data: 'Unable to update tv provider' })
+    }
+}
+
+export async function deleteTVProvider(req, res){
+    const { id } = req.body
+    try {
+        const deleteNewtwork = await TvProviderModel.findByIdAndDelete({ _id: id })
+
+        res.status(201).json({ success: false, data: 'TV Provider Deleted' })
+    } catch (error) {
+        console.log('UNABLE TO DELETE TV PROVIDER', error)
+        res.status(500).json({ success: false, data: 'Unable to delete tv provider' })
+    }
+}
+
+export async function getTVProvider(req, res){
+    try {
+        const allNetworks = await TvProviderModel.find()
+
+        return res.status(200).json({ success: true, data: allNetworks })
+    } catch (error) {
+        console.log('UNABLE TO GET ALL TV PROVIDER', error)
+        res.status(500).json({ success: false, data: 'Unable to get all tv provider' })
+    }
+}
+
+export async function getATVProvider(req, res){
+    const { id } = req.params
+    if(!id){
+        return res.status(404).json({ success: false, data: 'Provide an ID' })
+    }
+    try {
+        const network = await TvProviderModel.findById(id)
+        
+        if(!network){
+            return res.status(404).json({ success: false, data: 'Tv provider not found' })
+        }
+
+        res.status(200).json({ success: true, data: network })
+    } catch (error) {
+        res.status(500).json({ success: false, data: 'Unable to get tv provider' })
     }
 }

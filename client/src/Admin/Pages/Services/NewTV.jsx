@@ -1,27 +1,27 @@
-import { useEffect, useRef, useState } from 'react'
-import Sidebar from '../../Components/Sidebar'
-import TopNav from '../../Components/TopNav'
-import Aside from '../../Components/Aside'
+import { useEffect, useRef, useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import { app } from '../../../firebase'
-import ButtonTwo from '../../../Components/Helpers/ButtonTwo'
-import LoadingBtn from '../../../Components/Helpers/LoadingBtn'
-import { IoAddOutline } from "react-icons/io5";
-import { newNetwork, updateNetwork } from '../../../Helpers/api'
-import toast from 'react-hot-toast'
-import { useFetAllNetworks } from '../../../Helpers/fetch.hooks'
-import { useLocation, useNavigate } from 'react-router-dom'
+import Aside from "../../Components/Aside"
+import Sidebar from "../../Components/Sidebar"
+import TopNav from "../../Components/TopNav"
+import { useFetAllTVProviders } from "../../../Helpers/fetch.hooks"
+import { IoAddOutline } from "react-icons/io5"
+import LoadingBtn from "../../../Components/Helpers/LoadingBtn"
+import ButtonTwo from "../../../Components/Helpers/ButtonTwo"
+import { createTVProvider, updateTvProvider } from "../../../Helpers/api"
+import toast from "react-hot-toast"
 
-function NewNetwork() {
+function NewTV() {
     const navigate = useNavigate()
     const loc = useLocation()
     const pathName = loc.pathname.split('/')[2]
-    
+
+    const { isFetchingTvProviderData, tvProviderDataData } = useFetAllTVProviders(pathName)
+    const tvServicesData = tvProviderDataData?.data
+
     const [ newPlan, setNewPlan ] = useState( pathName === 'noid' ? true : false )
 
-    const { isFetchingNetworkData, networkData } = useFetAllNetworks( !newPlan ? pathName : '' )
-    const mobileNetworkData = networkData?.data
-  
     const [ formData, setFormData ] = useState({})
 
     const handleChange = (e) => {
@@ -69,23 +69,23 @@ function NewNetwork() {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => 
-                    setFormData({ ...formData, icon: downloadURL })
+                    setFormData({ ...formData, img: downloadURL })
                 );
             }
         );
     };
 
-    const handleNewNetwork = async (e) => {
+    const handleNewTvProvider = async (e) => {
         e.preventDefault()
         if(!formData?.name){
-            setImageError('Enter Network Name')
+            setImageError('Enter Name')
             setTimeout(() => {
                 setImageError()
             }, 2500)
             return
         }
         if(!formData?.code){
-            setImageError('Enter Network Code')
+            setImageError('Enter Code')
             setTimeout(() => {
                 setImageError()
             }, 2500)
@@ -93,9 +93,10 @@ function NewNetwork() {
         }
         try {
             setLoading(true)
-            const res = await newNetwork(formData)
+            const res = await createTVProvider(formData)
             if(res.success){
                 toast.success(res.data)
+                navigate('/admin-tv-subscription')
             } else {
                 toast.error(res.data)
             }
@@ -106,14 +107,22 @@ function NewNetwork() {
         }
     }
 
-    const handleUpdateNetwork = async (id) => {
-        setFormData({ ...formData, _id: id })
+    useEffect(() => {
+        if(!newPlan){
+            setFormData({ ...formData, _id: tvServicesData?._id })
+        }
+    }, [newPlan, tvServicesData])
+
+    const handleUpdateTvProvider = async ({ disabled }) => {
+        console.log('disabled', disabled)
+        const updatedFormData = { ...formData, disabled };
         try {
             setLoading(true)
-            const res = await updateNetwork(formData)
+            
+            const res = await updateTvProvider(updatedFormData)
             if(res.success){
                 toast.success(res.data)
-                navigate('/admin-airtime')
+                navigate('/admin-tv-subscription')
             } else {
                 toast.error(res.data)
             }
@@ -134,24 +143,31 @@ function NewNetwork() {
       <div className="relative w-full ml-[276px]">
         <TopNav />
 
-        <div className="w-full flex flex-col gap-8 mt-[100px] px-12">
+        <div className="mt-[100px] px-12">
+            
             <h1 className='text-[26px] font-semibold text-[#1F2937]'>
-                { newPlan ? 'Add New' : 'Update' } Network
+                { newPlan ? 'Add New' : 'Update' } Provider
             </h1>
+            
+            <p className="font-bold">{tvServicesData?.disabled && 'Disabled'}</p>
+            <form onSubmit={ newPlan ? handleNewTvProvider : handleUpdateTvProvider } className='flex flex-col gap-6 mt-16'>
+            <div className="inputGroup flex items-center justify-between w-full flex-row">
+                    <label className="label w-[20%]">TV Provider Name</label>
+                    <input type="text" defaultValue={tvServicesData?.name} onChange={handleChange} id='name' className="input w-full" />
+                </div>
 
-            <form onSubmit={ () => newPlan ? handleNewNetwork : handleUpdateNetwork(mobileNetworkData?._id) } className='flex flex-col gap-6'>
                 <div className="inputGroup flex items-center justify-between w-full flex-row">
-                    <label className="label w-[20%]">Network Name</label>
-                    <input type="text" defaultValue={mobileNetworkData?.name} onChange={handleChange} id='name' className="input w-full" />
+                    <label className="label w-[20%]">Tv Provider Code</label>
+                    <input type="text" defaultValue={tvServicesData?.code} onChange={handleChange} id='code' className="input w-full" />
+                </div>
+
+                <div className="inputGroup flex items-center justify-between w-full flex-row">
+                    <label className="label w-[20%]">Tv Provider Slug</label>
+                    <input type="text" defaultValue={newPlan ? formData?.name?.toLowerCase().trim() : tvServicesData?.slugName } onChange={handleChange} id='slugName' className="input w-full" />
                 </div>
 
                 <div className="inputGroup flex items-center w-full flex-row">
-                    <label className="label w-[20%]">Network Code</label>
-                    <input type="text" defaultValue={mobileNetworkData?.code} onChange={handleChange} id='code' className="input w-full" />
-                </div>
-
-                <div className="inputGroup flex items-center w-full flex-row">
-                    <label className="label w-[20%]">Icon</label>
+                    <label className="label w-[20%]">Image</label>
                     <div onClick={() => fileRef.current.click()} className='w-full flex flex-col items-center justify-center p-6 border-[3px] border-dotted cursor-pointer'>
                         <IoAddOutline className='text-[36px] font-semibold' />
                         <p className='font-semibold  text-[20px]'>Add Logo</p>
@@ -181,15 +197,34 @@ function NewNetwork() {
                         ''
                     }
 
-                    {
+                    <div className="flex items-center gap-8 flex-wrap">
+{
                         loading ? (
                             <LoadingBtn />
                         ) : (
-                            <ButtonTwo onClick={ () => newPlan ? handleNewNetwork : handleUpdateNetwork(mobileNetworkData?._id) } text={`${ newPlan  ? 'Add' : 'Update'}`} />
+                            <ButtonTwo onClick={ () => newPlan ? handleNewTvProvider : handleUpdateTvProvider(tvServicesData?._id) } text={`${ newPlan  ? 'Add' : 'Update'}`} />
                         )
                     }
 
+                    {
+                        !newPlan && (
+                            <>
+                                {
+                                    loading ? (
+                                        <LoadingBtn />
+                                    ) : (
+                                        <ButtonTwo onClick={() => handleUpdateTvProvider({ disabled: tvServicesData?.disabled === true ? false : true })} text={tvServicesData?.disabled ? 'Enable' : 'Disable'} />
+                                    )
+                                }
+                            </>
+                        )
+                    }
+
+                    </div>
+
+
             </form>
+
         </div>
         
       </div>
@@ -203,4 +238,4 @@ function NewNetwork() {
   )
 }
 
-export default NewNetwork
+export default NewTV

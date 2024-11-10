@@ -639,3 +639,27 @@ export async function deleteDataPlan({ id }){
         return res.data
     }
 }
+
+// NEW TV PROVIDER 
+export async function createTVProvider(formData){
+    try {
+        const res = await axios.post('/cabletv/createTVProvider', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to add new tv provider'
+        return res.data
+    }
+}
+
+// UPDATE TV PROVIDER 
+export async function updateTvProvider(updatedFormData){
+    try {
+        const res = await axios.post('/cabletv/updateTVProvider', updatedFormData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('UPDATE TV PROVIDER',error)
+        const res = error.response || 'Unable to update tv provider'
+        return res.data
+    }
+}
