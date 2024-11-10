@@ -10,7 +10,7 @@ function Features() {
             <div className="w-[80%] flex flex-col mt-8 justify-center">
                 <h2 className="text-center text-[36.84px] font-bold text-gray-90">Become an Agent</h2>
                 <p className="text-center font-normal text-[20px] text-gray-70">
-                    As an agent, you receive a commission for every transaction you facilitate on behalf of your valued customers."
+                As an agent, you have the opportunity to earn a commission for each transaction you successfully facilitate, ensuring satisfaction for your valued customers while rewarding your hard work.
                 </p>
             </div>
             
@@ -28,7 +28,7 @@ function Features() {
                 <div className="mr-auto mt-3 w-[50%] phone:w-[60%] flex flex-col gap-[24.56px]">
                     <h2 className="text-[36.84px] font-bold text-[#BB5B17]">Your Loyalty is Rewarded!</h2>
                     <p className="font-normal text-[20px] text-[#D28B3E]">
-                        It's not just about convenience; it's about earning while you make the most of what we offer.
+                    It's not merely about convenience; it's about turning your time into earnings while thoroughly enjoying what we provide.
                     </p>
                 </div>
 
@@ -36,10 +36,10 @@ function Features() {
             </div>
 
             <div className="flex-1 h-full bg-[#AEB7EF] relative small-pc:p-6 overflow-hidden rounded-[24.56px]">
-                <div className="ml-auto mt-16 small-pc:mt-4 mr-12 w-[50%] phone:w-[60%] flex flex-col gap-[24.56px]">
+                <div className="ml-auto mt-8 small-pc:mt-4 mr-12 w-[50%] phone:w-[60%] flex flex-col gap-[24.56px]">
                     <h2 className="text-[36.84px] font-bold text-[#414CA5]">Instant Withdrawal</h2>
                     <p className="font-normal text-[20px] text-[#414CA5]">
-                        Require fast cash? Instantly transfer your earnings to your wallet or bank account.
+                    Are you in need of fast cash? Seamlessly transfer your earnings to your wallet or bank account instantly and get the funds you need now!
                     </p>
                 </div>
 

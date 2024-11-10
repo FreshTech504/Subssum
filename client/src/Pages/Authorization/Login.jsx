@@ -138,13 +138,13 @@ function Login() {
                             <div className='flex flex-col gap-4 w-full'>
                                 <div className='inputGroup'>
                                     <label className='label'>Email Address</label>
-                                    <input className='input' type='text' id='emailOrMobile' onChange={handleChange} placeholder='wabdotmail@gmail.com' />
+                                    <input className='input  text-[14px] p-[8px] placeholder-black' type='text' id='emailOrMobile' onChange={handleChange} placeholder='wabdotmail@gmail.com'  style={{ color: 'black' }}/>
                                     <p className="text-center text-error font-semibold">{emailError}</p>
                                 </div>
                                 <div className='inputGroup relative'>
                                     <label className='label'>Password</label>
                                     <div className="relative w-full">
-                                        <input className='input w-full' type={showPassword ? 'text' : 'password'} id='password' onChange={handleChange} placeholder='Gabon4351' />
+                                        <input className='input w-full  text-[14px] p-[8px] placeholder-black' type={showPassword ? 'text' : 'password'} id='password' onChange={handleChange} placeholder='Gabon4351'  style={{ color: 'black' }} />
                                         <div onClick={seePassword} className='absolute right-[10px] bottom-[10px] text-[20px] cursor-pointer'>
                                             {
                                                 showPassword ? (

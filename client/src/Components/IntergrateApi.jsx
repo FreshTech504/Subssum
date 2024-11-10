@@ -10,17 +10,17 @@ function IntergrateApi() {
         {
             img: FileImg,
             title: 'Concise API Documentation',
-            text: "We've made it straightforward and user-friendly, ensuring that you can seamlessly connect to our system without hassle.",
+            text: "We've designed our system to be intuitive and accessible, allowing you to connect effortlessly without any complications.",
         },
         {
             img: GearImg,
             title: 'Timely Tech Support',
-            text: "Our responsive tech support team is here to help you whenever you encounter tech challenges. Quick solutions, alway",
+            text: "Count on our expert tech support team to resolve your technical challenges quickly and efficiently. We're here to provide you with practical solutions whenever you need help!",
         },
         {
             img: StartImg,
             title: 'Reliable Service Uptime',
-            text: "Reliable Service, No Downtime. Count on us for uninterrupted service. We keep you connected, always.",
+            text: "Unwavering Service, No Interruption. Trust us to keep you seamlessly connected, always. Experience the difference of nonstop reliability!",
         }
     ]
 
@@ -31,7 +31,7 @@ function IntergrateApi() {
                 <div className='flex flex-col gap-[16.37px]'>
                     <h2 className='text-gray-90 font-bold text-[36.84px]'>Integrate our API</h2>
                     <p className='text-[20px] font-normal text-gray-70'>
-                        Integrate our well-documented API, which allows you to build your custom payment platform and earn by serving a vast user base. Regardless of the scale or complexity of your vision, you can bring it to life.
+                    Unlock the potential of our robust, well-documented API to create your custom payment platform and capitalize on a vast user base. Whatever your vision's scale or complexity, you can confidently bring it to life.
                     </p>
                 </div>
                 

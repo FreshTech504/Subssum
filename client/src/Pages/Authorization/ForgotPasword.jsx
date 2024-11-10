@@ -55,24 +55,24 @@ function ForgotPasword() {
         onSubmit={handleForgotPassword}
         className="flex flex-col gap-[24px] w-[500px] phone:w-[90%]"
       >
-        <div className="text-center">
-          <p className="text-[24px] text-gray-50">Forgot Password</p>
+        <div className="text-center mt-[90px]">
+          <p className="text-[20px] text-gray-50 font-semibold">Reset Password</p>
         </div>
 
-        <div className="pad3 mt-[104px] bg-white rounded-[12px] flex flex-col gap-[24px] border-[1px] border-gray-30">
-          <p className="text-[24px] text-gray-70">
+        <div className="pad3 mt-[2px] bg-white rounded-[10px] flex flex-col gap-[16px] border-[1px] border-gray-30">
+          <p className="text-[16px] text-gray-70 text-left">
             Enter the email you used to create your account
           </p>
 
-          <div className="flex flex-col gap-[32px]">
-            <div className="flex flex-col w-full gap-[16px]">
+          <div className="flex flex-col gap-[16px]">
+            <div className="flex flex-col w-full gap-[12px]">
               <div className="inputGroup relative">
-                <label className="label">Email Address</label>
+                <label className="label text-[14px]">Email Address</label>
                 <input
                   type="email"
                   onChange={handleChange}
                   id="email"
-                  className="input"
+                  className="input text-[14px] p-[8px] placeholder-black"
                   placeholder="wabdotmail@gmail.com"
                 />
               </div>
@@ -94,6 +94,7 @@ function ForgotPasword() {
         </div>
       </form>
     </div>
+    
   );
 }
 

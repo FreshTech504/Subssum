@@ -12,17 +12,17 @@ function SignupSuccessful() {
         <Navbar showBtn={false} />
 
         <div className="pad3 mt-[110px] w-[500px] phone:w-[90%] bg-white rounded-[12px] flex flex-col gap-[24px] border-[1px] border-gray-30">
-            <div className="flex items-center w-full gap-[24px] phone:flex-col">
+            <div className="flex items-center w-full gap-[16px] phone:flex-col  phone:flex-row phone:items-center">
                 <div>
-                  <img src={EnvelopImg} alt="envelop" className='w-[200px] h-[113.5px] phone:h-auto phone:w-[100px]' />
+                  <img src={EnvelopImg} alt="envelop" className='w-[120px] h-[80px] phone:h-[70[x]] phone:w-[100px]' />
                 </div>
 
-                <div className="flex flex-col gap-[16px]">
-                  <h2 className="text-gray-70 text-[24px]">
+                <div className="flex flex-col gap-[8px]">
+                  <h2 className="text-gray-70 text-[20px]  phone:text-[18px]">
                     Check Your Email
                   </h2>
 
-                  <p className="text-gray-80 text-[16px]">
+                  <p className="text-gray-80 text-[14px] phone:text-[13px]">
                       {msg}
                   </p>
                 </div>

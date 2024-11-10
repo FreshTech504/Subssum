@@ -83,7 +83,7 @@ const handleReportTransaction = () => {
               <p className={`text-[14px] text-gray-80 font-medium`}>{transactionData?.platform}</p>
             </span>
             <span className='flex items-center justify-between'>
-              <h3 className='font-normal text-[14px] text-gray-70'>transaction ID</h3>
+              <h3 className='font-normal text-[14px] text-gray-70'>Transaction ID</h3>
               <p className={`text-[14px] text-gray-80 font-medium`}>{transactionData?.transactionId}</p>
             </span>
             <span className='flex items-center justify-between'>
@@ -98,7 +98,7 @@ const handleReportTransaction = () => {
                 <LoadingBtn />
               ) : (
                 <>
-                  <ButtonTwo onClick={() => handleDownloadRecipt(transactionData?.transactionId)} text={'Download Recept'} />
+                  <ButtonTwo onClick={() => handleDownloadRecipt(transactionData?.transactionId)} text={'Download Reciept'} />
     
                   <Button bg={false} name={'Report Transaction'} onClick={handleReportTransaction} styles={`text-error bg-gray-10 border-[2px]`} />
                 </>

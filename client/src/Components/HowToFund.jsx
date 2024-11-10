@@ -16,7 +16,7 @@ function HowToFund() {
                     <div className='flex flex-col gap-4 w-[50%] tablet:w-full z-10 '>
                         <h3 className="text-[36.84px] tablet:text-[24px] font-bold text-gray-90">Fund & Buy <br /> with your <span className="text-second-color">Card</span></h3>
                         <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px]">
-                            Access any of our services with a card, even without an account, and conveniently fund your wallet as well.
+                        Enjoy the convenience of accessing our services with a card. No account is needed! Plus, effortlessly fund your wallet for a seamless experience.
                         </p>
                     </div>
 
@@ -29,7 +29,7 @@ function HowToFund() {
                     <div className='flex flex-col gap-4 w-[50%] tablet:w-full z-10'>
                         <h3 className="text-[36.84px] tablet:text-[24px] font-bold text-gray-90">Fund & Buy with Bank Transfer</h3>
                         <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px]">
-                        Access any of our services with a card, even without an account, and conveniently fund your wallet as well.
+                        Unlock the convenience of our services using your card. No account is needed! Easily fund your wallet and enjoy seamless access to everything we offer.
                         </p>
                     </div>
 
