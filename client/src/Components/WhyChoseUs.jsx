@@ -28,16 +28,6 @@ function WhyChoseUs() {
 
             <p className="text-[20.46px] phone:text-[16px] tablet:text-[18px] text-gray-70 font-normal w-[80%] text-center items-center justify-center">
             We stand for excellence in every aspect. Our commitment to delivering top-notch service, innovative solutions, and customer satisfaction sets us apart, which includes reliable connectivity, affordable tariffs, creative services, exceptional customer support, rewards and loyalty programs, reseller programs, secure billing, and business solutions.
-            Efficient Customer Supports
-            <br />
-            Safe & Secure Transactions
-            <br />
-            Fast & Reliable Services
-            <br />
-            Your All-in-One Subscription Hub
-            <br />
-            Eliminate the inconvenience of using multiple apps and platforms; enjoy the ease and convenience of managing all your subscriptions with us.
-
             </p>
         </div>
 
