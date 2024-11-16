@@ -63,6 +63,7 @@ export async function register(req, res) {
                 const referrer = await UserModel.findById(referredBy);
                 if (referrer) {
                     referrer.referrals.push(user._id);
+                    referrer.walletBonus += siteSetting?.referralBonusFee ? Number(siteSetting?.referralBonusFee) : 0
                     await referrer.save();
                     user.referredBy = referrer._id;
                     await user.save();
@@ -118,9 +119,7 @@ export async function verifyNewUser(req, res, next){
         if(!user){
             return res.status(400).json({ success: false, data: 'Invalid Verification Link'})
         }
-        if(!user.verified){
-            return res.status(400).json({ success: false, data: 'Account Already Verified'})
-        }
+
 
         const findToken = await TokenModel.findOne({
             userId: user._id,
@@ -195,6 +194,7 @@ export async function login(req, res){
                 
         
                 const verifyUrl = `${process.env.MAIL_WEBSITE_LINK}/${user._id}/verify/${token.token}`
+                console.log('LOGIN VERIFY URL', verifyUrl, user.email)
                 const siteSetting = await SiteSettingsModel.findOne()
                 try {
                     // send mail
