@@ -99,11 +99,14 @@ export const adminSidebarMenu = [
         link: 'help-and-support',
         icon: RiCustomerService2Fill
     },
-    {
-        name: 'Blog',
-        link: 'view-blogs',
-        icon: MdPostAdd
-    },
+    /**
+     {
+         name: 'Blog',
+         link: 'view-blogs',
+         icon: MdPostAdd
+     },
+     * 
+     */
     {
         name: 'My Profile',
         link: 'admin-profile',

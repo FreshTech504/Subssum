@@ -21,14 +21,18 @@ router.get('/getATVProvider/:id', controllers.getATVProvider)
 router.post('/buyCableTvPlan', Protect, ValidateTransactionPin, controllers.buyCableTvPlan )
 router.post('/validateCardNumber', controllers.validateCardNumber)
 //*
-router.post('/createCableTvPlan',  controllers.createCableTvPlan )
+router.post('/createCableTvPlan', AdminProtect, controllers.createCableTvPlan )
+router.post('/updateCableTvPlan', AdminProtect, controllers.updateCableTvPlan )
+router.post('/deleteCableTvPlan', AdminProtect, controllers.deleteCableTvPlan )
+
+
 
 
 //GET ROUTES
 router.get('/getAllCableTv', controllers.getAllCableTv)
 router.get('/getAllCableTv/:id', controllers.getACableTv)
 
-router.get('/getAdminAllCableTv', AdminProtect, controllers.getAllCableTv)
+router.get('/getAdminAllCableTv', AdminProtect, controllers.getAdminAllCableTv)
 router.get('/getAdminACableTv/:id', AdminProtect, controllers.getAdminACableTv)
 
 //PUT ROUTES

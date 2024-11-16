@@ -4,6 +4,14 @@ const notificationsSchema = new mongoose.Schema({
     note: {
         type: String,
         required: true
+    },
+    accountFor: {
+        type: String,
+        enum: ['Users', 'Admin']
+    },
+    suspended: {
+        type: Boolean,
+        default: false
     }
 },
 { timestamps: true },

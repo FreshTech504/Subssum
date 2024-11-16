@@ -220,3 +220,321 @@ export function useFetchAdminCableTvPlans(query){
 
     return cabletvplan
 }
+
+//FETCH ALL ELECTRIC PROVIDERS
+export function useFetAllElectricProviders(query){
+    const [ electricProviderData, setElectricProviderData ] = useState({ isFetchingElectricProviderData: true, electricProviderData: null, electricProviderStatusStatus: null, electricProviderServerError: null, })
+    useEffect(() => {
+        const fetchNetworks = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/electric/getAllElectricProvider`, {withCredentials: true}) : await axios.get(`/electric/getAElectricProvider/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setElectricProviderData({ isFetchingElectricProviderData: false, electricProviderData: data, electricProviderStatusStatus: status, electricProviderServerError: null})
+                } else{
+                    setElectricProviderData({ isFetchingElectricProviderData: false, electricProviderData: null, electricProviderStatusStatus: status, electricProviderServerError: null})
+                }
+            } catch (error) {
+                setElectricProviderData({ isFetchingElectricProviderData: false, electricProviderData: null, electricProviderStatusStatus: null, electricProviderServerError: error})
+            }
+        }
+        fetchNetworks()
+    }, [query])
+
+    return electricProviderData
+}
+
+//FETCH ALL AIRTIME TO CASH TRANSACIONS
+export function useFetAllAirtimeToCash(query){
+    const [ airtimeToCashData, setAirtimeToCashData ] = useState({ isFetchingTransactionData: true, transactionData: null, transactionDataStatus: null, transactionDataServerError: null, })
+    useEffect(() => {
+        const fetchAirtimeToCashTransaction = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/airtimeToCash/getAllTransactions`, {withCredentials: true}) : await axios.get(`/airtimeToCash/getATransaction/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setAirtimeToCashData({ isFetchingTransactionData: false, transactionData: data, transactionDataStatus: status, transactionDataServerError: null})
+                } else{
+                    setAirtimeToCashData({ isFetchingTransactionData: false, transactionData: null, transactionDataStatus: status, transactionDataServerError: null})
+                }
+            } catch (error) {
+                setAirtimeToCashData({ isFetchingTransactionData: false, transactionData: null, transactionDataStatus: null, transactionDataServerError: error})
+            }
+        }
+        fetchAirtimeToCashTransaction()
+    }, [query])
+
+    return airtimeToCashData
+}
+
+//FETCH ALL PAYOUT TRANSACTION
+export function useFetAllpayoutRequest(query){
+    const [ payoutRequestData, setPayoutRequestData ] = useState({ isFetchingPayoutRequest: true, payoutrequestData: null, payoutRequestStatus: null, payoutRequestServerError: null, })
+    useEffect(() => {
+        const fetchPayoutRequestData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/user/getAllPayoutRequest`, {withCredentials: true}) : await axios.get(`/user/getAPayoutRequest/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setPayoutRequestData({ isFetchingPayoutRequest: false, payoutrequestData: data, payoutRequestStatus: status, payoutRequestServerError: null})
+                } else{
+                    setPayoutRequestData({ isFetchingPayoutRequest: false, payoutrequestData: null, payoutRequestStatus: status, payoutRequestServerError: null})
+                }
+            } catch (error) {
+                setPayoutRequestData({ isFetchingPayoutRequest: false, payoutrequestData: null, payoutRequestStatus: null, payoutRequestServerError: error})
+            }
+        }
+        fetchPayoutRequestData()
+    }, [query])
+
+    return payoutRequestData
+}
+
+//FETCH SALES ANALYSIS
+export function useFetchSalesAnalysis(query) {
+    const [salesData, setSalesData] = useState({
+        isFetchingSalesData: true,
+        salesData: null,
+        salesDataStatus: null,
+        salesDataServerError: null,
+    });
+
+    const fetchSalesData = async () => {
+        setSalesData((prev) => ({ ...prev, isFetchingSalesData: true }));
+        try {
+            const { data, status } = await axios.get(`/statistics/salesAnalysis/${query}`, { withCredentials: true });
+            if (status === 200) {
+                setSalesData({ isFetchingSalesData: false, salesData: data, salesDataStatus: status, salesDataServerError: null });
+            } else {
+                setSalesData({ isFetchingSalesData: false, salesData: null, salesDataStatus: status, salesDataServerError: null });
+            }
+        } catch (error) {
+            setSalesData({ isFetchingSalesData: false, salesData: null, salesDataStatus: null, salesDataServerError: error });
+        }
+    };
+
+    useEffect(() => {
+        fetchSalesData();
+    }, [query]);
+
+    return { ...salesData, refetchSalesData: fetchSalesData };
+}
+
+//FETCH SITES SETTINGS
+export function useFetchSiteSettings(query){
+    const [ siteSettingsData, setSiteSettingsData ] = useState({ isFetchSiteSettingsData: true, siteSettingsData: null, siteSettingsStatus: null, siteSettingsServerError: null, })
+    useEffect(() => {
+        const fetchSiteSettings = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/admin/getSiteSettings`, {withCredentials: true}) : await axios.get(`/admin/getSiteSettings/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setSiteSettingsData({ isFetchSiteSettingsData: false, siteSettingsData: data, siteSettingsStatus: status, siteSettingsServerError: null})
+                } else{
+                    setSiteSettingsData({ isFetchSiteSettingsData: false, siteSettingsData: null, siteSettingsStatus: status, siteSettingsServerError: null})
+                }
+            } catch (error) {
+                setSiteSettingsData({ isFetchSiteSettingsData: false, siteSettingsData: null, siteSettingsStatus: null, siteSettingsServerError: error})
+            }
+        }
+        fetchSiteSettings()
+    }, [query])
+
+    return siteSettingsData
+}
+
+//FETCH NOTIFICATION
+export function useFetchNotification(query){
+    const [ notificationData, setNotificationData ] = useState({ isFetchingNotifications: true, notificationsData: null, notificationStatus: null, notificationServerError: null, })
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/notification/getAllNotification`, {withCredentials: true}) : await axios.get(`/notification/getANotification/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: data, notificationStatus: status, notificationServerError: null})
+                } else{
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: status, notificationServerError: null})
+                }
+            } catch (error) {
+                setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: null, notificationServerError: error})
+            }
+        }
+        fetchNotifications()
+    }, [query])
+
+    return notificationData
+}
+
+//FETCH USER NOTIFICATION
+export function useFetchUserNotification(query){
+    const [ notificationData, setNotificationData ] = useState({ isFetchingNotifications: true, notificationsData: null, notificationStatus: null, notificationServerError: null, })
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/notification/getAllUserNotification`, {withCredentials: true}) : await axios.get(`/notification/getAllUserNotification/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: data, notificationStatus: status, notificationServerError: null})
+                } else{
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: status, notificationServerError: null})
+                }
+            } catch (error) {
+                setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: null, notificationServerError: error})
+            }
+        }
+        fetchNotifications()
+    }, [query])
+
+    return notificationData
+}
+
+//FETCH ADMIN NOTIFICATION
+export function useFetchAdminNotification(query){
+    const [ notificationData, setNotificationData ] = useState({ isFetchingNotifications: true, notificationsData: null, notificationStatus: null, notificationServerError: null, })
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/notification/getAllAdminNotification`, {withCredentials: true}) : await axios.get(`/notification/getAllAdminNotification/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: data, notificationStatus: status, notificationServerError: null})
+                } else{
+                    setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: status, notificationServerError: null})
+                }
+            } catch (error) {
+                setNotificationData({ isFetchingNotifications: false, notificationsData: null, notificationStatus: null, notificationServerError: error})
+            }
+        }
+        fetchNotifications()
+    }, [query])
+
+    return notificationData
+}
+
+//FETCH ADMIN
+export function useFetchAdminData(query){
+    const [ adminData, setAdminData ] = useState({ isFetchingAdminData: true, adminData: null, adminStatus: null, adminServerError: null, })
+    useEffect(() => {
+        const fetchAdminData = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/admin/getAllAdmin`, {withCredentials: true}) : await axios.get(`/admin/getAdmin/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setAdminData({ isFetchingAdminData: false, adminData: data, adminStatus: status, adminServerError: null})
+                } else{
+                    setAdminData({ isFetchingAdminData: false, adminData: null, adminStatus: status, adminServerError: null})
+                }
+            } catch (error) {
+                setAdminData({ isFetchingAdminData: false, adminData: null, adminStatus: null, adminServerError: error})
+            }
+        }
+        fetchAdminData()
+    }, [query])
+
+    return adminData
+}
+
+//FETCH ADMIN NOTIFICATION
+export function useFetchActivities(query){
+    const [ activitiesData, setActivitiesData ] = useState({ isFetchingActivities: true, activitiesData: null, activitiesStatus: null, activitiesServerError: null, })
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/admin/getAllActivities`, {withCredentials: true}) : await axios.get(`/admin/getAllActivities/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setActivitiesData({ isFetchingActivities: false, activitiesData: data, activitiesStatus: status, activitiesServerError: null})
+                } else{
+                    setActivitiesData({ isFetchingActivities: false, activitiesData: null, activitiesStatus: status, activitiesServerError: null})
+                }
+            } catch (error) {
+                setActivitiesData({ isFetchingActivities: false, activitiesData: null, activitiesStatus: null, activitiesServerError: error})
+            }
+        }
+        fetchActivities()
+    }, [query])
+
+    return activitiesData
+}
+
+//FETCH WEB STATISTICS
+export function useFetchWebStatistics(query){
+    const [ webStatisticsData, setWebStatisticsData ] = useState({ isFetchingWebStatistic: true, webStatisticsData: null, webStatisticsStatus: null, webStatisticsError: null, })
+    useEffect(() => {
+        const fetchWebStatistics = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/statistics/websiteStatistics`, {withCredentials: true}) : await axios.get(`/statistics/websiteStatistics/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setWebStatisticsData({ isFetchingWebStatistic: false, webStatisticsData: data, webStatisticsStatus: status, webStatisticsError: null})
+                } else{
+                    setWebStatisticsData({ isFetchingWebStatistic: false, webStatisticsData: null, webStatisticsStatus: status, webStatisticsError: null})
+                }
+            } catch (error) {
+                setWebStatisticsData({ isFetchingWebStatistic: false, webStatisticsData: null, webStatisticsStatus: null, webStatisticsError: error})
+            }
+        }
+        fetchWebStatistics()
+    }, [query])
+
+    return webStatisticsData
+}
+
+//FETCH SERVICES STATISTICS
+export function useFetchServicesStatistics(query){
+    const [ webServicesData, setWebServicesData ] = useState({ isFetchingWebServices: true, webServicesData: null, webServicesStatus: null, webServicesError: null, })
+    useEffect(() => {
+        const fetchWebServices = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/statistics/servicesStatistics`, {withCredentials: true}) : await axios.get(`/statistics/servicesStatistics/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setWebServicesData({ isFetchingWebServices: false, webServicesData: data, webServicesStatus: status, webServicesError: null})
+                } else{
+                    setWebServicesData({ isFetchingWebServices: false, webServicesData: null, webServicesStatus: status, webServicesError: null})
+                }
+            } catch (error) {
+                setWebServicesData({ isFetchingWebServices: false, webServicesData: null, webServicesStatus: null, webServicesError: error})
+            }
+        }
+        fetchWebServices()
+    }, [query])
+
+    return webServicesData
+}
+
+//FETCH REPORTED TRANSACTIONS
+export function useFetchReportedTransactions(query){
+    const [ reportedTransactionsData, setTeportedTransactionsData ] = useState({ isFetchingReportedTransactions: true, reportedTransactionsData: null, reportedTransactionsStatus: null, reportedTransactionsServerError: null, })
+    useEffect(() => {
+        const fetchActivities = async () => {
+            try {
+                const { data, status} = !query ? await axios.get(`/transactions/fetchAllReportTransaction`, {withCredentials: true}) : await axios.get(`/transactions/fetchAReportTransaction/${query}`, {withCredentials: true})
+                //console.log('Data from Hooks>>>', data, 'STATUS', status)
+
+                if(status === 200){
+                    setTeportedTransactionsData({ isFetchingReportedTransactions: false, reportedTransactionsData: data, reportedTransactionsStatus: status, reportedTransactionsServerError: null})
+                } else{
+                    setTeportedTransactionsData({ isFetchingReportedTransactions: false, reportedTransactionsData: null, reportedTransactionsStatus: status, reportedTransactionsServerError: null})
+                }
+            } catch (error) {
+                setTeportedTransactionsData({ isFetchingReportedTransactions: false, reportedTransactionsData: null, reportedTransactionsStatus: null, reportedTransactionsServerError: error})
+            }
+        }
+        fetchActivities()
+    }, [query])
+
+    return reportedTransactionsData
+}

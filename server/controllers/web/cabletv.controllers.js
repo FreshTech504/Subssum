@@ -3,6 +3,7 @@ import axios from 'axios'
 import UserModel from "../../model/User.js"
 import TransctionHistroyModel from "../../model/TransactionHistroy.js";
 import TvProviderModel from "../../model/TvProvider.js";
+import ActivitiesModel from "../../model/Activities.js";
 
 export async function buyCableTvPlan(req, res){
     //console.log(req.body)
@@ -88,9 +89,13 @@ export async function buyCableTvPlan(req, res){
 
 export async function createCableTvPlan(req, res) {
     const { platformCode, platformName, planName, planId, slug, costPrice, price } = req.body
+    const { firstName, lastName, _id } = req.admin
     try {
         if(!platformCode || !platformName || !planName || !planId || !costPrice || !price){
             return res.status(400).json({ success: false, data: 'Fill all required fileds' })
+        }
+        if(price < costPrice ){
+            return res.status(400).json({ success: false, data:'Price cannot be less than cost price' })
         }
 
         const findCableTvPlan = await CableTvPlanModel.findOne({ planId: planId })
@@ -102,11 +107,62 @@ export async function createCableTvPlan(req, res) {
             platformCode, platformName, planName, planId, slug, costPrice, price
         })
 
+        const newActivity = await ActivitiesModel.create({
+            note: `Cable TV plan created`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
+
         console.log('NEW DATA', newCableTvPlan)
         res.status(201).json({ success: true, data: `New ${platformName} cable TV plan created`})
     } catch (error) {
         console.log('UNABLE TO CREATE DATA PLAN', error)
         res.status(500).json({ success: false, data: 'Unable to create new cable tv data plan'})
+    }
+}
+
+export async function updateCableTvPlan(req, res) {
+    const { _id, platformCode, platformName, planName, planId, slug, costPrice, price } = req.body
+    try {
+
+        const findCableTvPlan = await CableTvPlanModel.findById({ _id: _id })
+        if(!findCableTvPlan){
+            return res.status(400).json({ success: false, data: 'Cable Tv with this plan does not exist' })
+        }
+
+        const updateCableTvPlan = await CableTvPlanModel.findByIdAndUpdate(
+            _id,
+            {
+                platformCode, platformName, planName, planId, slug, costPrice, price
+            },
+            { new: true }
+        )
+
+        console.log('UPDATED DATA', updateCableTvPlan)
+        res.status(201).json({ success: true, data: `New ${updateCableTvPlan?.platformName} cable TV plan updated`})
+    } catch (error) {
+        console.log('UNABLE TO UPDATE DATA PLAN', error)
+        res.status(500).json({ success: false, data: 'Unable to update cable tv data plan'})
+    }
+}
+
+export async function deleteCableTvPlan(req, res){
+    const { id } = req.body
+    const { firstName, lastName, _id } = req.admin
+
+    try {
+        const deleteNewtwork = await CableTvPlanModel.findByIdAndDelete({ _id: id })
+
+        const newActivity = await ActivitiesModel.create({
+            note: ` Cable TV Plan deleted`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
+
+        res.status(201).json({ success: true, data: 'Cable TV Plan Deleted' })
+    } catch (error) {
+        console.log('UNABLE TO DELETE CABLE TV PLAN', error)
+        res.status(500).json({ success: false, data: 'Unable to delete tv plan' })
     }
 }
 
@@ -201,6 +257,7 @@ export async function validateCardNumber(req, res) {
 export async function createTVProvider(req, res){
     const { name, code, img, slugName, disabled } = req.body
     console.log('object cc')
+    const { firstName, lastName, _id } = req.admin
     try {
         if(!name){
             return res.status(404).json({ success: false, data: 'Provide a name' })
@@ -216,6 +273,12 @@ export async function createTVProvider(req, res){
 
         const newTvProvider = await TvProviderModel.create({
             name, code, img, slugName, disabled
+        })
+
+        const newActivity = await ActivitiesModel.create({
+            note: `Cable TV Provider created`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
         })
 
         res.status(201).json({ success: true, data: `${newTvProvider.name} Tv Provider Created.` })
@@ -255,10 +318,17 @@ export async function updateTVProvider(req, res){
 
 export async function deleteTVProvider(req, res){
     const { id } = req.body
+    const { firstName, lastName, _id } = req.admin
     try {
         const deleteNewtwork = await TvProviderModel.findByIdAndDelete({ _id: id })
 
-        res.status(201).json({ success: false, data: 'TV Provider Deleted' })
+        const newActivity = await ActivitiesModel.create({
+            note: `Cable TV Provider deleted`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
+
+        res.status(201).json({ success: true, data: 'TV Provider Deleted' })
     } catch (error) {
         console.log('UNABLE TO DELETE TV PROVIDER', error)
         res.status(500).json({ success: false, data: 'Unable to delete tv provider' })

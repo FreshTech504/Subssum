@@ -12,12 +12,19 @@ const ReportTransactionSchema = new mongoose.Schema({
     email: {
         type: String,
     },
+    mobileNumber: {
+        type: String,
+    },
     image: {
         type: String,
+    },
+    resolved: {
+        type: Boolean,
+        default: false,
     }
 },
 { timestamps: true }
 )
 
-const ReportTransactionModel = mongoose.model('', ReportTransactionSchema)
+const ReportTransactionModel = mongoose.model('reportTransaction', ReportTransactionSchema)
 export default ReportTransactionModel

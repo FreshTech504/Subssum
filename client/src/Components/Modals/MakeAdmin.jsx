@@ -12,7 +12,7 @@ function MakeAdmin({ setSelectedCard }) {
 
   const userInfo = userData?.data;
   const [ makingAdmin, setMakingAdmin ] = useState(false)
-  const [ formData, setFormData ] = useState({ id: pathName, password: '12345' })
+  const [ formData, setFormData ] = useState({ id: pathName, password: '123456' })
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value })

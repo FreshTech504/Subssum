@@ -189,7 +189,7 @@ export async function downloadReciept(req, res) {
 
 //REPORT TRANSACTIONS
 export async function reportTransaction(req, res){
-    const { name, email, description, imgUrl } = req.body
+    const { name, email, description, mobileNumber, imgUrl } = req.body
     try {
         if(!description){
            return res.status(400).json({ success: false, data: 'Please provide a problem description'})
@@ -198,7 +198,7 @@ export async function reportTransaction(req, res){
            return res.status(400).json({ success: false, data: 'Please provide a name or email'})
         }
         const newReport = await ReportTransactionModel.create({
-            name, email, description, image: imgUrl
+            name, email, description, image: imgUrl, mobileNumber
         })
 
         console.log('NEW TRANSACTIONS REPORT', newReport)
@@ -253,6 +253,44 @@ export async function updateTracStatus(req, res) {
     }
 }
 
-//UPDTAE USER TRANSACTIONS
+//UPDTAE ALL REPORTED TRANSACTION
+export async function fetchAllReportTransaction(req, res) {
+    try {
+        const reportedTransactions = await ReportTransactionModel.find()
 
+        res.status(200).json({ success: true, data: reportedTransactions })
+    } catch (error) {
+        console.log('UNABLE TO GET ALL REPORTED TRANSACTIONS',error)
+        res.status(500).json({ success: false, data: 'Unable to get all reported transactions' })
+    }
+}
+
+//FETCH REPORTED TRANSACTION
+export async function fetchAReportTransaction(req, res) {
+    const { id } = req.params
+    try {
+        const reportedTransactions = await ReportTransactionModel.findById({ _id: id })
+
+        res.stat(200).json({ success: true, data: reportedTransactions })
+    } catch (error) {
+        console.log('UNABLE TO GET ALL REPORTED TRANSACTIONS',error)
+        res.status(500).json({ success: false, data: 'Unable to get reported transactions' })
+    }
+}
+
+////MARK REPORTED TRANSACTION AS READ
+export async function markReportTransaction(req, res) {
+    const { id } = req.body
+    try {
+        const reportedTransactions = await ReportTransactionModel.findById({ _id: id })
+
+        reportedTransactions.resolved = !reportedTransactions.resolved
+        await reportedTransactions.save()
+
+        res.status(200).json({ success: true, data: `${reportedTransactions.resolved ? 'Report updated' : 'Report updated'}` })
+    } catch (error) {
+        console.log('UNABLE TO UPDATE REPORTED TRANSACTIONS',error)
+        res.status(500).json({ success: false, data: 'Unable to UPDATE reported transactions' })
+    }
+}
  

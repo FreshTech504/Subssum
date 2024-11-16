@@ -5,7 +5,7 @@ import AdminModel from '../model/Admin.js';
 //authorize user routes
 export const Protect = async (req, res, next) => {
     const token = req.cookies.subsumtoken;
-    //console.log('PROTECT TOKEN>>', token)
+    console.log('PROTECT TOKEN>>', token)
   
     if (!token) {
       return res.status(401).json({ success: false, data: 'Not Allowed Please Login' });
@@ -160,7 +160,7 @@ export const AdminProtect = async (req, res, next) => {
       return res.status(404).json({ success: false, data: 'Invalid Account' });
     }
     if (isAdmin.blocked === true) {
-      return res.status(404).json({ success: false, data: 'User Account has been blocked' });
+      return res.status(403).json({ success: false, data: 'User Account has been blocked' });
     }
 
     req.admin = isAdmin

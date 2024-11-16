@@ -4,6 +4,8 @@ import crypto from 'crypto'
 import sendEmail from "../../middleware/sendEmail.js";
 import { registerMail } from "../../middleware/mailer.js";
 import Mailgen from "mailgen";
+import ActivitiesModel from "../../model/Activities.js";
+import SiteSettingsModel from "../../model/SiteSettings.js";
 
 const mailGenerator = new Mailgen({
     theme: 'default',
@@ -50,7 +52,9 @@ export async function register(req, res) {
         const user = await UserModel.create({ firstName, lastName, email, password, createdSource: 'web' });
         console.log('USER CREATED');
 
-        const referralLink = `${process.env.CLIENT_URL}/register?ref=${user._id}`;
+        const siteSetting = await SiteSettingsModel.findOne()
+
+        const referralLink = `${siteSetting?.url}/register?ref=${user._id}`;
         user.referralLink = referralLink;
         await user.save();
 
@@ -81,7 +85,7 @@ export async function register(req, res) {
                 userEmail: user.email,
                 subject: 'SIGNUP SUCCESSFUL',
                 intro: 'PLEASE VERIFY EMAIL',
-                instructions: 'You Have Successfully Signed Up to Subssum, Please Click on the Button Below to verify your Email Address. Note Email is Valid for One (1) Hour.',
+                instructions: `You Have Successfully Signed Up to ${siteSetting?.siteName}, Please Click on the Button Below to verify your Email Address. Note Email is Valid for One (1) Hour.`,
                 outro: `
                 If you cannot click the reset button, copy and paste the url here in your browser ${verifyUrl}
                   \n  
@@ -134,6 +138,12 @@ export async function verifyNewUser(req, res, next){
         console.log('USER VERIFIED')
         const deleteToken = await TokenModel.findByIdAndDelete({ _id: findToken._id })
         
+        const newActivity = await ActivitiesModel.create({
+            note: `New user created`,
+            name: `${user?.firstName} ${user?.lastName}`,
+            userId: user?._id
+        })
+
         //sendToken(user, 200, res)
         res.status(200).json({ success: true, data: 'Account Verified' })
 
@@ -185,14 +195,14 @@ export async function login(req, res){
                 
         
                 const verifyUrl = `${process.env.MAIL_WEBSITE_LINK}/${user._id}/verify/${token.token}`
-        
+                const siteSetting = await SiteSettingsModel.findOne()
                 try {
                     // send mail
                     const emailContent = {
                         body: {
                             intro: 'PLEASE VERIFY EMAIL',
                             action: {
-                                instructions: `Your Subssum Account is not yet valid, Please Click on the Button Below to verify your Email Address. Note Email is Valid for One (1) Hour.`,
+                                instructions: `Your ${siteSetting?.siteName} Account is not yet valid, Please Click on the Button Below to verify your Email Address. Note Email is Valid for One (1) Hour.`,
                                 button: {
                                     color: '#33b5e5',
                                     text: 'Verify Your Email',
@@ -202,7 +212,7 @@ export async function login(req, res){
                             outro: `
                                 If you cannot click the reset button, copy and paste the url here in your browser ${verifyUrl}
         
-                                If you did not SignUp to Subssum, please ignore this email and report.
+                                If you did not SignUp to ${siteSetting?.siteName}, please ignore this email and report.
                             `
                         },
                     };
@@ -267,8 +277,9 @@ export async function google(req, res){
                 profile: photo,
                 verified: true,
             })
+            const siteSetting = await SiteSettingsModel.findOne()
             await newUser.save()
-            const referralLink = `${process.env.CLIENT_URL}/register?ref=${newUser._id}`;
+            const referralLink = `${siteSetting?.siteName}/register?ref=${newUser._id}`;
             newUser.referralLink = referralLink
             await newUser.save()
 
@@ -286,6 +297,12 @@ export async function google(req, res){
                     }
                 }
             }
+
+            const newActivity = await ActivitiesModel.create({
+                note: `New user created`,
+                name: `${newUser?.firstName}`,
+                userId: newUser?._id
+            })
 
             const token = newUser.getSignedToken();
             const pinSet = newUser.pin ? true : false 
