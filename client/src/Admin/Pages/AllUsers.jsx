@@ -86,6 +86,10 @@ function AllUsers() {
         <div className="mt-[100px] px-12">
           {/* Search Bar */}
           <div className='flex'>
+            <div className="mr-auto flex flex-col">
+              <p>Total User: {userInfo?.length}</p>
+            </div>
+            
             <div className="bg-gray-10 flex items-center gap-1 w-[250px] ml-auto">
               <CiSearch className="text-[24px]" />
               <input

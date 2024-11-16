@@ -7,7 +7,7 @@ import { app } from '../../../firebase'
 import ButtonTwo from '../../../Components/Helpers/ButtonTwo'
 import LoadingBtn from '../../../Components/Helpers/LoadingBtn'
 import { IoAddOutline } from "react-icons/io5";
-import { newNetwork, updateNetwork } from '../../../Helpers/api'
+import { deleteNetwork, newNetwork, updateNetwork } from '../../../Helpers/api'
 import toast from 'react-hot-toast'
 import { useFetAllNetworks } from '../../../Helpers/fetch.hooks'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -22,7 +22,7 @@ function NewNetwork() {
     const { isFetchingNetworkData, networkData } = useFetAllNetworks( !newPlan ? pathName : '' )
     const mobileNetworkData = networkData?.data
   
-    const [ formData, setFormData ] = useState({})
+    const [ formData, setFormData ] = useState({ _id: !newPlan ? pathName : '' })
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value})
@@ -96,6 +96,7 @@ function NewNetwork() {
             const res = await newNetwork(formData)
             if(res.success){
                 toast.success(res.data)
+                navigate('/admin-airtime')
             } else {
                 toast.error(res.data)
             }
@@ -124,6 +125,26 @@ function NewNetwork() {
         }
     }
 
+    const handleDeleteNetwork = async (id) => {
+        try {
+          const confirm = window.confirm('Are you sure you want to delete this network')
+          if(confirm){
+            setLoading(true)
+            const res = await deleteNetwork({ id: id })
+            if(res.success){
+              toast.success(res.data)
+              navigate('/admin-airtime')
+            } else {
+              toast.error(res.data)
+            }
+          }
+        } catch (error) {
+          
+        } finally {
+          setLoading(false)
+        }
+      }
+
   return (
     <div className="relative w-full overflow-x-hidden flex">
 
@@ -139,7 +160,7 @@ function NewNetwork() {
                 { newPlan ? 'Add New' : 'Update' } Network
             </h1>
 
-            <form onSubmit={ () => newPlan ? handleNewNetwork : handleUpdateNetwork(mobileNetworkData?._id) } className='flex flex-col gap-6'>
+            <form onSubmit={ newPlan ? handleNewNetwork : handleUpdateNetwork } className='flex flex-col gap-6'>
                 <div className="inputGroup flex items-center justify-between w-full flex-row">
                     <label className="label w-[20%]">Network Name</label>
                     <input type="text" defaultValue={mobileNetworkData?.name} onChange={handleChange} id='name' className="input w-full" />
@@ -181,13 +202,25 @@ function NewNetwork() {
                         ''
                     }
 
-                    {
-                        loading ? (
-                            <LoadingBtn />
-                        ) : (
-                            <ButtonTwo onClick={ () => newPlan ? handleNewNetwork : handleUpdateNetwork(mobileNetworkData?._id) } text={`${ newPlan  ? 'Add' : 'Update'}`} />
-                        )
-                    }
+                    <div className="flex items-center gap-12">
+                        {
+                            loading ? (
+                                <LoadingBtn />
+                            ) : (
+                                <ButtonTwo onClick={ newPlan ? handleNewNetwork : handleUpdateNetwork } text={`${ newPlan  ? 'Add' : 'Update'}`} />
+                            )
+                        }
+
+                        {
+                            !newPlan && (
+                                loading ? (
+                                <LoadingBtn />
+                            ) : (
+                                <ButtonTwo onClick={() => handleDeleteNetwork(mobileNetworkData?._id)} text={`Delete`} />
+                            )
+                            )
+                        }
+                    </div>
 
             </form>
         </div>

@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { verifyPaymentTransactions } from "../Helpers/api";
 import { signInSuccess } from "../Redux/user/userSlice";
+import { useFetchUserNotification } from "../Helpers/fetch.hooks";
 
 function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
     const location = useLocation();
@@ -20,6 +21,9 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
     const { currentUser } = useSelector((state) => state.subSubUser);
     const user = currentUser?.data
 
+    const { notificationsData } = useFetchUserNotification()
+    const notifications = notificationsData?.data
+    console.log('object', notifications)
     //verify funding
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -76,6 +80,20 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
                     <TopNav toggleMenu={toggleMenu} showMenu={showMenu} title={`Welcome, ${user.firstName ? user.firstName : ''} ${user.lastName ? user.lastName : ''}`} />
                 </div>
 
+                {/**NOTIFICATIONS */}
+                <marquee className={`font-semibold`}>
+                    <div className="flex items-center gap-4">
+                        {
+                            notifications?.map((item) => (
+                                <p key={item?._id} className="">
+                                    ***{item?.note}***
+                                </p>
+                            ))
+                        }
+                    </div>
+                </marquee>
+
+
                 <div className="flex items-start gap-[24px] mt-12 small-pc:flex-col phone:items-center">
                     <div className="flex flex-col gap-5">
                         <div className="card1 flex items-center gap-[97px]">
@@ -125,19 +143,38 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
                                         <p className="text-[24px] font-semibold">{user?.referrals.length}</p>
                                     </div>
 
-                                    <div className="flex flex-col gap-2">
-                                        <h2>Current wallet Bonus</h2>
-                                        <p className="text-[24px] font-semibold flex items-center">
-                                            <FaNairaSign className="text-[18px]" />
-                                            <span>{formatBalance(user.walletBonus ? user.walletBonus : 0)}</span>
-                                        </p>
+                                    <div className="flex flex-col gap-6">
+                                        <div className="flex flex-col gap-2">
+                                            <h2>Current wallet Bonus</h2>
+                                            <p className="text-[24px] font-semibold flex items-center">
+                                                <FaNairaSign className="text-[18px]" />
+                                                <span>{formatBalance(user.walletBonus ? user.walletBonus : 0)}</span>
+                                            </p>
+                                        </div>
+
+                                        <div className="flex flex-col gap-2 mt-auto">
+                                            <h2>Current cash wallet</h2>
+                                            <p className="text-[24px] font-semibold flex items-center">
+                                                <FaNairaSign className="text-[18px]" />
+                                                <span>{formatBalance(user.cashWallet ? user.cashWallet : 0)}</span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="flex cursor-pointer items-center gap-[3px] text-second-color text-[16px]">
-                                    <IoWalletOutline />
-                                    <p onClick={() => setSelectedCard('withdrawalCashOut')}>Cashout</p>
+                                <div className="flex items-center justify-between w-full gap-4">
+                                    <div className="flex cursor-pointer items-center gap-[3px] text-second-color text-[16px]">
+                                        <IoWalletOutline />
+                                        <p onClick={() => setSelectedCard('withdrawalCashOut')}>Cashout Bonus</p>
+                                    </div>
+
+                                    <div className="flex cursor-pointer items-center gap-[3px] text-second-color text-[16px]">
+                                        <IoWalletOutline />
+                                        <p onClick={() => setSelectedCard('withdrawalCashRequest')}>Withdraw Cash</p>
+                                    </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>

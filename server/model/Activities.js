@@ -4,6 +4,15 @@ const ActivitiesSchema = new mongoose.Schema({
     note: {
         type: String,
         required: true
+    },
+    name: {
+        type: String,
+    },
+    userId: {
+        type: String
+    },
+    img: {
+        type: String
     }
 },
 { timestamps: true },

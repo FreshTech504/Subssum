@@ -1,3 +1,4 @@
+import ActivitiesModel from "../../model/Activities.js";
 import DataPlansModel from "../../model/DataPlans.js"
 import TransctionHistroyModel from "../../model/TransactionHistroy.js";
 import UserModel from "../../model/User.js";
@@ -86,6 +87,7 @@ export async function buyData(req, res){
 
 export async function createDataPlans(req, res) {
     const { networkCode, networkName, dataCode, slug, planName, price, validity, costPrice } = req.body;
+    const { firstName, lastName, _id } = req.admin
     try {
         if (!networkCode || !networkName || !dataCode || !planName || !price || !validity || !costPrice) {
             return res.status(400).json({ success: false, data: 'All fields are required' });
@@ -104,6 +106,12 @@ export async function createDataPlans(req, res) {
         const newDataPlan = await DataPlansModel.create({
             networkCode, networkName, dataCode, slug: slug ? slug : dataCode, planName, price, validity, costPrice
         });
+
+        const newActivity = await ActivitiesModel.create({
+            note: `New ${networkName} Data Plan created`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
         console.log(newDataPlan);
         return res.status(201).json({ success: true, data: `New data plan created for ${networkName}` });
     } catch (error) {
@@ -148,10 +156,17 @@ export async function updateDataPlans(req, res) {
 
 export async function deleteDataPlan(req, res){
     const { id } = req.body
+    const { firstName, lastName, _id } = req.admin
     console.log('DELETE EDN', id)
     try {
         const deletDataPlan = await DataPlansModel.findByIdAndDelete({ _id: id })
         
+        const newActivity = await ActivitiesModel.create({
+            note: `Data Plan deleted`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
+
         res.status(201).json({ success: true, data: 'Data Plan deleted successful '})
     } catch (error) {
         console.log('UNABLE TO DELETE DATA PLAN', error)

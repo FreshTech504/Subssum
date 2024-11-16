@@ -17,7 +17,8 @@ function AllTransactions() {
   const [filterOption, setFilterOption] = useState(false);
   const [filterValue, setFilterValue] = useState(filterOptions[0].value);
   const [filteredTransactions, setFilteredTransactions] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("");
+  
   const transactionHistroy = transaction?.data || [];
 
   const handleFilterOptions = () => {
@@ -29,11 +30,16 @@ function AllTransactions() {
     setFilterValue(value);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   useEffect(() => {
     if (!transactionHistroy.length) return;
 
     let filtered = [...transactionHistroy];
 
+    // Apply filter based on selected filter value
     switch (filterValue) {
       case "latest":
         filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -45,26 +51,32 @@ function AllTransactions() {
         filtered = filtered.filter(
           (item) => item.status.toLowerCase() === "successful"
         );
-        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
       case "initiated":
         filtered = filtered.filter(
           (item) => item.status.toLowerCase() === "initiated"
         );
-        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
       case "failed":
         filtered = filtered.filter(
           (item) => item.status.toLowerCase() === "failed"
         );
-        filtered.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         break;
       default:
         break;
     }
 
+    // Apply search filter based on email or transaction ID
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (item) =>
+          item.transactionId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.email.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
     setFilteredTransactions(filtered);
-  }, [filterValue, transactionHistroy]);
+  }, [filterValue, transactionHistroy, searchTerm]);
 
   const getOrdinalSuffix = (day) => {
     if (day > 3 && day < 21) return "th"; // Special case for 11-13
@@ -114,8 +126,14 @@ function AllTransactions() {
 
         <div className="flex px-4 items-center justify-between mt-24">
           <div className="bg-gray-10 flex items-center gap-1">
-            <CiSearch className="text-[24px]" />
-            <input type="text" placeholder="Search Email, Transaction ID." className="input bg-transparent border-none" />
+            <CiSearch className="text-[24px]" />            
+            <input
+              type="text"
+              placeholder="Transaction ID, Search Email."
+              value={searchTerm}
+              onChange={handleSearchChange}
+              className="input bg-transparent border-none"
+            />
           </div>
 
             <div

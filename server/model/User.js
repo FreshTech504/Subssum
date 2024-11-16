@@ -41,6 +41,10 @@ export const UserSchema = new mongoose.Schema({
         type: Number, 
         default: 0,
     },
+    cashWallet: {
+        type: Number,
+        default: 0
+    },
     transactionTotal: {
         type: Number,
         default: 0,
@@ -58,6 +62,15 @@ export const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     },
+    bankName: {
+        type: String,
+    },
+    accountName: {
+        type: String
+    },
+    accountNumber: {
+        type: String
+    },
     verified: {
         type: Boolean,
         default: false
@@ -69,7 +82,6 @@ export const UserSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpire: Date,
 },
-{minimize: false},
 {timestamps: true}
 );
 

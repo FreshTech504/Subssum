@@ -59,7 +59,7 @@ useEffect(() => {console.log('FORM DATA', formData)}, [formData])
     console.log('DELETE EDN1')
     e.preventDefault()
     try {
-      setFormData({ ...formData, _id: dataPlansData._id })
+      setFormData({ ...formData, _id: pathName })
       const res = await updateDataPlans(formData)
       if(res.success){
         toast.success(res.data)

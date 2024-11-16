@@ -16,7 +16,7 @@ import LoadingBtn from "../Helpers/LoadingBtn";
 function ReportTransaction({ setSelectedCard }) {
   const { currentUser } = useSelector((state) => state.subSubUser);
   const user = currentUser?.data;
-  const [formData, setFormData] = useState({ email: user.email });
+  const [formData, setFormData] = useState({ email: user.email ? user?.email : '' });
   const [image, setImage] = useState(undefined);
   const [imageUploadProgress, setImageUploadProgress] = useState(0);
   const [imageError, setImageError] = useState(false);
@@ -72,7 +72,14 @@ function ReportTransaction({ setSelectedCard }) {
 
   const handleReportTransaction = async () => {
     if (!formData.name) {
-      setErrorResponse("Please provide a name or email");
+      setErrorResponse("Please provide a name");
+      setTimeout(() => {
+        setErrorResponse();
+      }, 2000);
+      return
+    }
+    if (!formData.email) {
+      setErrorResponse("Please provide an email");
       setTimeout(() => {
         setErrorResponse();
       }, 2000);
@@ -107,7 +114,7 @@ function ReportTransaction({ setSelectedCard }) {
   };
 
   return (
-    <div className="flex gap-6 w-full flex-col">
+    <div className="flex gap-6 w-full flex-col h-[70vh] overflow-y-auto scrollbar-thin">
       <div className="flex flex-col gap-2">
         <h2 className="text-[20px] text-gray-70 font-semibold">
           Report an Incident
@@ -128,6 +135,16 @@ function ReportTransaction({ setSelectedCard }) {
               id="name"
               onChange={handleChange}
               placeholder="Lawal Wahab Babatunde"
+            />
+          </div>
+          <div className="inputGroup flex flex-col gap-4">
+            <label className="label">Mobile Number</label>
+            <input
+              type="text"
+              className="input"
+              id="nammobileNumbere"
+              onChange={handleChange}
+              placeholder="09012345678"
             />
           </div>
           <div className="inputGroup flex flex-col gap-4">

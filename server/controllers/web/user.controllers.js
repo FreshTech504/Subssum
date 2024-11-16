@@ -1,11 +1,15 @@
+import ActivitiesModel from "../../model/Activities.js";
+import PayoutModel from "../../model/Payout.js";
+import TransctionHistroyModel from "../../model/TransactionHistroy.js";
 import UserModel from "../../model/User.js";
 
 function convertToNumber(str) {
-    return parseFloat(str);
+    const num = parseFloat(str);
+    return isNaN(num) ? 0 : num; 
 }
 
 function isNumber(value) {
-    return Number.isFinite(value);
+    return Number.isFinite(value) && value > 0; 
 }
 
 //USER CREATE PIN
@@ -132,7 +136,7 @@ export async function getUser(req, res){
   
 //ADMIN UPDATE USER
 export async function adminUpdateUser(req, res){
-    const { blocked, _id, username, firstName, lastName, mobile, email, acctBalance, walletBonus, referralLink, transactionTotal } = req.body
+    const { blocked, _id, username, firstName, lastName, mobile, email, acctBalance, walletBonus, cashWallet, referralLink, transactionTotal } = req.body
     if(req.body.password){
         return res.status(403).json({ success: false, data: 'Not allowed to update password' })
     }
@@ -154,6 +158,7 @@ export async function adminUpdateUser(req, res){
                     mobile,
                     acctBalance,
                     walletBonus,
+                    cashWallet,
                     referralLink,
                     transactionTotal, 
                 }
@@ -169,7 +174,7 @@ export async function adminUpdateUser(req, res){
 
 //USER ENDPOINT TO UPDATE ACCOUNT
 export async function updateUser(req, res){
-    const { username, firstName, lastName, mobile } = req.body
+    const { username, firstName, lastName, mobile, bankName, accountName, accountNumber } = req.body
     const { _id } = req.user
     try {
         const findUser = await UserModel.findById({ _id: _id });
@@ -185,6 +190,9 @@ export async function updateUser(req, res){
                     firstName,
                     lastName,
                     mobile,
+                    bankName, 
+                    accountName, 
+                    accountNumber
                 }
             },
             { new: true }
@@ -226,31 +234,168 @@ export async function updateUserProfilePicture(req, res){
 
 //USER CASHOUT FROM CASHOUT ACCOUNT
 export async function cashoutBonus(req, res) {
-    const { _id } = req.user
-    const { cashoutAmount } = req.body
+    const { _id } = req.user;
+    const { cashoutAmount } = req.body;
+
     try {
-        const getUser = await UserModel.findById({ _id })
+        const getUser = await UserModel.findById(_id);
 
-        const makeNumber = convertToNumber(cashoutAmount)
-        const isANumber = isNumber(makeNumber) 
+        // Convert cashoutAmount to a number
+        const makeNumber = convertToNumber(cashoutAmount);
+        const isANumber = isNumber(makeNumber);
 
-        if(!isANumber){
-            return res.status(406).json({ success: false, data: 'Invalid Amount'})
+        if (!isANumber) {
+            return res.status(406).json({ success: false, data: 'Invalid Amount' });
         }
 
-        if(getUser.walletBonus < isANumber){
-            return res.status(406).json({ success: false, data: 'Insufficient Fund'})
+        if (getUser.walletBonus < makeNumber) {
+            return res.status(406).json({ success: false, data: 'Insufficient Fund' });
         }
 
-        getAllUsers.acctBalance += isANumber
-        getAllUsers.walletBonus -= isANumber
-        getAllUsers.save()
+        // Update balances
+        getUser.acctBalance += makeNumber;
+        getUser.walletBonus -= makeNumber;
+        await getUser.save(); // Save changes to the database
 
+        // Exclude sensitive fields
+        const { resetPasswordToken, resetPasswordExpire, password: hashedPassword, pin, ...userData } = getUser._doc;
 
-        res.status(206).json({ success: true, data: 'Cash Bonus withdrawal successful'})
+        res.status(200).json({ success: true, msg: 'Cash Bonus withdrawal successful', data: { success: true, data: userData } });
     } catch (error) {
-        console.log('UNABLE TO PROCESS CASHOUT', error)
-        res.status(500).json({ success: false, data: 'Unable to process cashout request' })
+        console.log('UNABLE TO PROCESS CASHOUT', error);
+        res.status(500).json({ success: false, data: 'Unable to process cashout request' });
+    }
+}
+
+//USER REQUEST PAYOUT FROM ACCOUNT
+export async function requestPayout(req, res) {
+    const { _id } = req.user;
+    const { cashoutAmount } = req.body;
+
+    try {
+        const getUser = await UserModel.findById(_id);
+
+        // Convert cashoutAmount to a number
+        const makeNumber = convertToNumber(cashoutAmount);
+        const isANumber = isNumber(makeNumber);
+
+        if (!isANumber) {
+            return res.status(406).json({ success: false, data: 'Invalid Amount' });
+        }
+
+        if (getUser.cashWallet < makeNumber) {
+            return res.status(406).json({ success: false, data: 'Insufficient Fund' });
+        }
+
+        if (makeNumber < 1000) {
+            return res.status(406).json({ success: false, data: 'Minimium Withdrawal is NGN1000' });
+        }
+
+        const finalAmount = makeNumber - 50
+
+        //PROCRESS REQUEST TO ADMIN
+        const newRequestPayout = await PayoutModel.create({
+            userId: getUser._id,
+            amount: finalAmount,
+            bankName: getUser.bankName,
+            accountName: getUser.accountName,
+            accountNumber: getUser.accountNumber,
+            email: getUser?.email
+        })
+
+        const newActivity = await ActivitiesModel.create({
+            note: `${getUser?.firstName} ${getUser?.lastName} made a payout request of ${finalAmount}`,
+            name: `${getUser?.firstName} ${getUser?.lastName}`,
+            userId: getUser?._id
+        })
+
+        //CREATE NEW TRANSACTION
+        const createPayoutRequestTransaction = await TransctionHistroyModel.create({
+            userId: getUser?._id,
+            email: getUser?.email,
+            service: 'Payout Request',
+            platform: 'Cash Withdrawal',
+            number: `${getUser.bankName} - ${getUser.accountNumber}`,
+            amount: makeNumber,
+            totalAmount: finalAmount,
+            status: 'initiated',
+            paymentMethod: 'Transfer',
+            transactionId: newRequestPayout._id,
+            serviceId: newRequestPayout._id,
+            slug: 'PayoutRequest',
+            isUserLogin: true
+        })
+
+
+        // Update balances
+        //getUser.acctBalance += makeNumber;
+        getUser.cashWallet -= makeNumber;
+        await getUser.save(); // Save changes to the database
+
+        // Exclude sensitive fields
+        const { resetPasswordToken, resetPasswordExpire, password: hashedPassword, pin, ...userData } = getUser._doc;
+
+        res.status(200).json({ success: true, msg: 'Cash withdrawal request successful', data: { success: true, data: userData } });
+    } catch (error) {
+        console.log('UNABLE TO PROCESS CASHOUT', error);
+        res.status(500).json({ success: false, data: 'Unable to process cashout request' });
+    }
+}
+
+//APPROVE PAYOUT
+export async function approvePayout(req, res){
+    const { id } = req.body
+    const { _id, firstName, lastName } = req.admin
+    try {
+        const findReq = await PayoutModel.findById({ _id: id })
+        if(!findReq){
+            return res.status(404).json({ success: false, data: 'Payout request with the ID does not exist '})
+        }
+        findReq.approved = true
+        await findReq.save()
+
+        const findTransaction = await TransctionHistroyModel.findOne({ transactionId: id })
+        if(findTransaction){
+            findTransaction.income = Number(findTransaction?.amount) - Number(findTransaction?.totalAmount)
+            findTransaction.status= 'Successful',
+            await findTransaction.save()
+        }
+
+        const newActivity = await ActivitiesModel.create({
+            note: `${findTransaction?.email} has been paid from payout request NGN ${findTransaction?.totalAmount}`,
+            name: `${firstName} ${lastName}`,
+            userId: _id
+        })
+
+        res.status(201).json({ success: true, data: 'Payout request has been approved' })
+    } catch (error) {
+        console.log('UNABLE TO APPROVE PAYOUT REQUEST',error)
+        res.status(500).json({ success: false, data: 'Unable to approve payout request' })
+    }
+}
+
+//FETCH ALL PAYOUT REQUEST
+export async function getAllPayoutRequest(req, res) {
+    try {
+        const getPayoutRequest = await PayoutModel.find({ approved: false })
+
+        res.status(200).json({ success: true, data: getPayoutRequest })
+    } catch (error) {
+        console.log('UNABLED TO GET ALL PAYOUT REQUEST TRANSACTION', error)
+        res.status(500).json({ success: false, data: 'Unable to get all transactions' })
+    }
+}
+
+//FETCH A PAYOUT REQUEST
+export async function getAPayoutRequest(req, res) {
+    const { id } = req.body
+    try {
+        const getPayoutRequest = await PayoutModel.findById({ _id: id })
+
+        res.status(200).json({ success: true, data: getPayoutRequest })
+    } catch (error) {
+        console.log('UNABLED TO GET ALL PAYOUT REQUEST TRANSACTION', error)
+        res.status(500).json({ success: false, data: 'Unable to get all transactions' })
     }
 }
 
@@ -308,6 +453,8 @@ export async function blockUser(req, res) {
         res.status(500).json({ success: false, data: error.message || 'unable to perform blocking operation on user'})
     }
 }
+
+
 
 //DANGER
 export async function deleteUser(req, res) {

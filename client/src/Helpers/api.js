@@ -193,7 +193,7 @@ export async function updateUserProfilePicture({imgUrl}){
 //User cashout bounus wallet
 export async function cashoutBonus(formData){
     try {
-        const res = await axios.post(`/user/cashoutBonus`, formData, {withCredentials: true})
+        const res = await axios.post(`/user/cashoutBonus`, formData, { withCredentials: true})
         //console.log('cash out pin',res)
         if(res.data){
             return res.data
@@ -202,7 +202,23 @@ export async function cashoutBonus(formData){
         const res = error.response || 'Unable to cashout bonus'
         toast.error(res.data.data)
         //console.log('RESET PASSWORD', error)
-        return res
+        return res.data
+    }
+}
+
+//User cashout cash request wallet
+export async function requestPayout(formData){
+    try {
+        const res = await axios.post(`/user/requestPayout`, formData, { withCredentials: true})
+        //console.log('cash out pin',res)
+        if(res.data){
+            return res.data
+        }
+    } catch (error) {
+        const res = error.response || 'Unable to cashout bonus'
+        toast.error(res.data.data)
+        //console.log('RESET PASSWORD', error)
+        return res.data
     }
 }
 
@@ -604,6 +620,18 @@ export async function updateNetwork(formData){
     }
 }
 
+// DELETE NETWORK 
+export async function deleteNetwork({ id }){
+    try {
+        const res = await axios.post('/network/deleteNetwork', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('DELETE DATA PLAN',error)
+        const res = error.response || 'Unable to delete network'
+        return res.data
+    }
+}
+
 // CREATE DATA PLAN  
 export async function createDataPlans(formData){
     try {
@@ -653,13 +681,224 @@ export async function createTVProvider(formData){
 }
 
 // UPDATE TV PROVIDER 
+export async function deleteTVProvider({ id }){
+    try {
+        const res = await axios.post('/cabletv/updateTVProvider', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('DELETE TV PROVIDER',error)
+        const res = error.response || 'Unable to delete tv provider'
+        return res.data
+    }
+}
+
+// DELETE TV PROVIDER 
 export async function updateTvProvider(updatedFormData){
     try {
-        const res = await axios.post('/cabletv/updateTVProvider', updatedFormData, {withCredentials: true})
+        const res = await axios.post('/cabletv/deleteTVProvider', updatedFormData, {withCredentials: true})
         return res.data
     } catch (error) {
         //console.log('UPDATE TV PROVIDER',error)
         const res = error.response || 'Unable to update tv provider'
+        return res.data
+    }
+}
+
+// NEW CABLE TV PLAN 
+export async function createCableTvPlan(formData){
+    try {
+        const res = await axios.post('/cabletv/createCableTvPlan', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to add new cable tv plan'
+        return res.data
+    }
+}
+
+// UPDATE CABLE TV PLAN 
+export async function updateCableTvPlan(formData){
+    try {
+        const res = await axios.post('/cabletv/updateCableTvPlan', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to update cable tv plan'
+        return res.data
+    }
+}
+
+// DELETE CABLE TV PLAN 
+export async function deleteCableTvPlan({ id }){
+    console.log('dlee', id)
+    try {
+        const res = await axios.post('/cabletv/deleteCableTvPlan', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to delete cable tv plan'
+        return res.data
+    }
+}
+
+// NEW ELECTRIC PROVIDER 
+export async function createElectricProvider(formData){
+    try {
+        const res = await axios.post('/electric/createElectricProvider', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to add new cable tv plan'
+        return res.data
+    }
+}
+
+// UPDATE ELECTRIC PROVIDER
+export async function updateElectricProvider(formData){
+    try {
+        const res = await axios.post('/electric/updateElectricProvider', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to update cable tv plan'
+        return res.data
+    }
+}
+
+// DELETE ELECTRIC PROVIDER
+export async function deleteElectricProvider({ id }){
+    //console.log('dlee', id)
+    try {
+        const res = await axios.post('/electric/deleteElectricProvider', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('NEW TV PROVIDER',error)
+        const res = error.response || 'Unable to delete cable tv plan'
+        return res.data
+    }
+}
+
+// UPDATE AIRTIME TO CASH TRANSACTION
+export async function updateAirtime2Cash({ status, _id }){
+    //console.log('dlee', id)
+    try {
+        const res = await axios.post('/airtimeToCash/updateAirtime2Cash', { status, _id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('update airtime to cash status',error)
+        const res = error.response || 'Unable to update airtime to cash'
+        return res.data
+    }
+}
+
+// UPDATE PAYOUT REQUEST
+export async function approvePayout({ id }){
+    //console.log('dlee', id)
+    try {
+        const res = await axios.post('/user/approvePayout', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //console.log('update payout request',error)
+        const res = error.response || 'Unable to approve payout request'
+        return res.data
+    }
+}
+
+// UPDATE SITE SETTINGS
+export async function siteSettings(formData){
+    try {
+        const res = await axios.post('/admin/siteSettings', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update site settings'
+        return res.data
+    }
+}
+
+// CREATE NOTIFICATION
+export async function createNotification(formData){
+    try {
+        const res = await axios.post('/notification/createNotification', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update site settings'
+        return res.data
+    }
+}
+
+// UPDATE NOTIFICATION
+export async function updateNotification(formData){
+    try {
+        const res = await axios.post('/notification/updateNotification', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update site settings'
+        return res.data
+    }
+}
+
+// DELETE NOTIFICATION
+export async function deleteNotification(formData){
+    try {
+        const res = await axios.post('/notification/deleteNotification', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update site settings'
+        return res.data
+    }
+}
+
+// BLOCK ADMIN
+export async function blockAdmin(formData){
+    try {
+        const res = await axios.post('/admin/blockAdmin', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to block admin'
+        return res.data
+    }
+}
+
+// DELETE ADMIN
+export async function deleteAdmin(formData){
+    try {
+        const res = await axios.post('/admin/deleteAdmin', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to delete admin'
+        return res.data
+    }
+}
+
+// UPDATE ADMIN
+export async function updateAdmin(formData){
+    try {
+        const res = await axios.post('/admin/updateAdmin', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update admin'
+        return res.data
+    }
+}
+
+// UPDATE PROFILE ADMIN USER
+export async function adminUserUpdateProfile(formData){
+    try {
+        const res = await axios.post('/admin/adminUserUpdateProfile', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update admin'
+        return res.data
+    }
+}
+
+// MARK REPORTED TRANSACTIONS
+export async function markReportTransaction({ id }){
+    try {
+        const res = await axios.post('/transactions/markReportTransaction', { id }, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        const res = error.response || 'Unable to update reported transaction'
         return res.data
     }
 }

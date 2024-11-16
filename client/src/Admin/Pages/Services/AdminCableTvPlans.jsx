@@ -9,8 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 function AdminCableTvPlans() {
-  const { isFetchingTvProviderData, tvProviderDataData } =
-    useFetAllTVProviders();
+  const { isFetchingTvProviderData, tvProviderDataData } = useFetAllTVProviders();
   const TvServicesData = tvProviderDataData?.data;
   const { cabletvplan, isFetchingCableTvPlans } = useFetchAdminCableTvPlans();
   const tvPlans = cabletvplan?.data;
@@ -64,6 +63,12 @@ function AdminCableTvPlans() {
             >
               TV Service Providers
             </Link>
+            <Link
+              to="/new-cabletv-plan/noid"
+              className="bg-gray-60 py-[9px] px-[4px] rounded-[15px] text-white text-[16px] font-medium cursor-pointer"
+            >
+              New Cable Tv Plan
+            </Link>
           </div>
 
           <h1 className="text-[26px] mt-11 font-semibold text-[#1F2937]">
@@ -95,7 +100,7 @@ function AdminCableTvPlans() {
               currentPlans?.map((item) => (
                 <Link
                   key={item._id}
-                  to={`/new-data-plan/${item._id}`}
+                  to={`/new-cabletv-plan/${item._id}`}
                   className="w-[174px] p-6 gap-5 cursor-pointer hover:shadow-xl mb-4 flex flex-col items-center justify-center rounded-[20px] border-[1px]"
                 >
                   <p className="text-gray-70 font-medium text-[20px]">
@@ -105,7 +110,7 @@ function AdminCableTvPlans() {
                     {item?.planName}
                   </p>
                   <p className="text-[20px] font-medium">NGN {item.price}</p>
-                  <p className="text-[20px] font-medium">{item?.networkName}</p>
+                  <p className="text-[20px] font-medium">{item?.platformName}</p>
                 </Link>
               ))
             )}

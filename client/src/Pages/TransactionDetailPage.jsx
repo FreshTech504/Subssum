@@ -102,7 +102,7 @@ const handleReportTransaction = () => {
                 <div className="loading-spinner flex items-center justify-center h-16 w-16 rounded-full left-0 top-0"></div>   
               </div>
             ) : (
-            <div className="flex flex-col gap-8 w-[500px] phone:w-[94%] mt-8">
+            <div className="flex flex-col gap-8 w-[500px] phone:w-[94%] mt-8 mb-16">
                 <div className="flex items-center justify-between">
                     <img 
                       src={

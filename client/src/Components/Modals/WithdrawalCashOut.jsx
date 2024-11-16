@@ -3,9 +3,12 @@ import ButtonTwo from '../Helpers/ButtonTwo'
 import Loading from './Loading'
 import toast from 'react-hot-toast'
 import { cashoutBonus } from '../../Helpers/api'
+import { signInSuccess } from '../../Redux/user/userSlice'
+import { useDispatch } from 'react-redux'
 
 function WithdrawalCashOut({setSelectedCard, formData, setFormData}) {
     const [ isLoading, setIsLoading ] = useState(false)
+    const dispatch = useDispatch()
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.id]: e.target.value })
@@ -16,15 +19,21 @@ function WithdrawalCashOut({setSelectedCard, formData, setFormData}) {
             toast.error('Enter amount')
             return
         }
+        if(formData.cashoutAmount < 1){
+            toast.error('Amount Must be greater than one')
+            return
+        }
         try {
             setIsLoading(true)
             const res = await cashoutBonus(formData)
             //console.log(res)
-            if(res.status === 406){
-                setSelectedCard('transactionFailed')
-            }
-            if(res.status === 206){
+            if(res.success){
+                toast.success(res.msg)
+                dispatch(signInSuccess(res?.data))
                 setSelectedCard('transactionSuccessful')
+            } else{
+                toast.error(res.data)
+                setSelectedCard('transactionFailed')
             }
         } catch (error) {
 
@@ -45,7 +54,7 @@ function WithdrawalCashOut({setSelectedCard, formData, setFormData}) {
         <h2 className='text-[20px] font-semibold text-gray-60 text-cente'>Withdraw Cashout</h2>
 
         <div className='flex w-full flex-col gap-5'>
-            <input className='input' id='cashoutAmount' onChange={handleChange} placeholder='Enter amout you want to cash out' />
+            <input type='number' className='input' id='cashoutAmount' onChange={handleChange} placeholder='Enter amout you want to cash out' />
             <ButtonTwo onClick={handleCashout} text={'Submit'} />
         </div>
     </div>

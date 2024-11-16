@@ -66,11 +66,24 @@ import AdminAirtime from './Admin/Pages/Services/AdminAirtime'
 import AdminTvSubscription from './Admin/Pages/Services/AdminTvSubscription'
 import NewTV from './Admin/Pages/Services/NewTV'
 import AdminCableTvPlans from './Admin/Pages/Services/AdminCableTvPlans'
+import NewCableTvPplan from './Admin/Pages/Services/NewCableTvPplan'
+import AdminElectricBill from './Admin/Pages/Services/AdminElectricBill'
+import NewElectricProvider from './Admin/Pages/Services/NewElectricProvider'
+import AdminAirtimeToCash from './Admin/Pages/Services/AdminAirtimeToCash'
+import AdminAirtimeCashDetails from './Admin/Pages/Services/AdminAirtimeCashDetails'
+import WithdrawalCashRequest from './Components/Modals/WithdrawalCashRequest'
+import NewNotifications from './Components/Modals/NewNotifications'
+import NewAdminUser from './Components/Modals/NewAdminUser'
+import EditAdmin from './Components/Modals/EditAdmin'
+import ViewReportedTransaction from './Components/Modals/ViewReportedTransaction'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
   const [ popupBg, setPopupBg ] = useState(false)
   const [ showMenu, setShowMenu ] = useState(false)
+  const [ notificationId, setNotificationId ] = useState()
+  const [ adminUserId, setAdminUserId ] = useState()
+  const [ reportedTransactionData, setReportedTransactionData ] = useState({})
 
   const [ formData, setFormData ] = useState({})
 
@@ -136,6 +149,12 @@ function App() {
             <WithdrawalCashOut setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />
           </div>
         )
+      case 'withdrawalCashRequest':
+        return (
+          <div>
+            <WithdrawalCashRequest setSelectedCard={setSelectedCard} formData={formData} setFormData={setFormData} />
+          </div>
+        )
       case 'reportTransaction':
         return (
           <div>
@@ -164,6 +183,30 @@ function App() {
         return (
           <div>
             <MakeAdmin setSelectedCard={setSelectedCard} />
+          </div>
+        )
+      case `newNotification`:
+        return (
+          <div>
+            <NewNotifications notificationId={notificationId} />
+          </div>
+        )
+      case 'newAdminUser':
+        return (
+          <div>
+            <NewAdminUser adminUserId={adminUserId} />
+          </div>
+        )
+      case 'editAdmin':
+        return (
+          <div>
+            <EditAdmin adminUserId={adminUserId} />
+          </div>
+        )
+      case 'viewReportedTransaction': 
+        return (
+          <div>
+            <ViewReportedTransaction reportedTransactionData={reportedTransactionData} />
           </div>
         )
     }
@@ -310,13 +353,13 @@ function App() {
                   <Route path='/site-settings' element={<SiteSettings />} />
                 </Route>                
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/notifications' element={<Notifications />} />
+                  <Route path='/notifications' element={<Notifications setNotificationId={setNotificationId} setSelectedCard={setSelectedCard} />} />
                 </Route>                
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/admin-control' element={<AdminUsers />} />
+                  <Route path='/admin-control' element={<AdminUsers setAdminUserId={setAdminUserId} setSelectedCard={setSelectedCard} />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/help-and-support' element={<HelpAndSupport />} />
+                  <Route path='/help-and-support' element={<HelpAndSupport truncateText={truncateText} setReportedTransactionData={setReportedTransactionData} setSelectedCard={setSelectedCard} />} />
                 </Route>                
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/view-blogs' element={<ViewBlogs />} />
@@ -346,10 +389,10 @@ function App() {
                   <Route path='/admin-tv-subscription' element={<AdminCableTvPlans />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/admin-electricity-bill' element={<AdminProfile />} />
+                  <Route path='/admin-electricity-bill' element={<AdminElectricBill />} />
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
-                  <Route path='/admin-convert-to-cash' element={<AdminProfile />} />
+                  <Route path='/admin-convert-to-cash' element={<AdminAirtimeToCash />} />
                 </Route>
 
                 <Route element={<AuthorizeAdmin />} >
@@ -360,6 +403,15 @@ function App() {
                 </Route>
                 <Route element={<AuthorizeAdmin />} >
                   <Route path='/new-tv/:id' element={<NewTV />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/new-cabletv-plan/:id' element={<NewCableTvPplan />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/new-electric-provider/:id' element={<NewElectricProvider />} />
+                </Route>
+                <Route element={<AuthorizeAdmin />} >
+                  <Route path='/admin-convert-to-cash-details/:id' element={<AdminAirtimeCashDetails />} />
                 </Route>
 
               </Routes>

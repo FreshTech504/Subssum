@@ -110,8 +110,12 @@ function UserDetails({ setSelectedCard }) {
                               <input type="number" id="acctBalance" defaultValue={userInfo?.acctBalance} onChange={handleChange} className="input w-full" />
                             </div>
                             <div className="inputGroup flex-row items-center justify-between gap-4">
-                              <label className="label w-[40%]">User Cash Point</label>
+                              <label className="label w-[40%]">User Bonus Cash Point(BONUS)</label>
                               <input type="number" id="walletBonus" defaultValue={userInfo?.walletBonus} onChange={handleChange} className="input w-full" />
+                            </div>
+                            <div className="inputGroup flex-row items-center justify-between gap-4">
+                              <label className="label w-[40%]">User Cash wallet</label>
+                              <input type="number" id="cashWallet" defaultValue={userInfo?.cashWallet} onChange={handleChange} className="input w-full" />
                             </div>
                             <div className="inputGroup flex-row items-center justify-between gap-4">
                               <label className="label w-[40%]">User Transaction Total</label>

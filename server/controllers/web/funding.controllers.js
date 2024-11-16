@@ -1,3 +1,4 @@
+import ActivitiesModel from "../../model/Activities.js";
 import MonnifyModel from "../../model/Monnify.js";
 import PendingFundingModel from "../../model/PendingFunding.js";
 import TransctionHistroyModel from "../../model/TransactionHistroy.js";
@@ -251,6 +252,12 @@ export async function verifyPaymentTransactions(req, res){
                 updateTransaction.verified = true
                 await updateTransaction.save()
             }
+
+            const newActivity = await ActivitiesModel.create({
+                note: `Account Funded by ${user.firstName} ${user?.lastName}`,
+                name: `${user?.firstName} ${user?.lastName}`,
+                userId: user?._id
+            })
         }
 
         const { resetPasswordToken, resetPasswordExpire, password, pin, ...userData } = user._doc

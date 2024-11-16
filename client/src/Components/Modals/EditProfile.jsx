@@ -34,10 +34,12 @@ function EditProfile({ formData, setFormData, setSelectedCard }) {
         }
     }
   return (
-    <div className="w-full card2">
+    <div className="w-full card2 h-[70vh] overflow-y-auto scrollbar-thin">
         {
             isLoading && (
-                <Loading />
+                <div className="w-full h-full flex items-center justify-center">
+                    <Loading />
+                </div>
             )
         }
         <h2 className="w-full font-semibold text-[20px] text-gray-70">Edit Details</h2>
@@ -59,6 +61,20 @@ function EditProfile({ formData, setFormData, setSelectedCard }) {
                 <div className="inputGroup">
                     <label className="label">Username</label>
                     <input className="input" id="username" onChange={handleChange} defaultValue={user.username} type="text" />
+                </div>
+
+                <h2 className="w-full font-semibold text-[20px] text-gray-70">Account Details</h2>
+                <div className="inputGroup">
+                    <label className="label">Bank Name</label>
+                    <input className="input" id="bankName" onChange={handleChange} defaultValue={user.bankName} type="text" />
+                </div>
+                <div className="inputGroup">
+                    <label className="label">Account Name</label>
+                    <input className="input" id="accountName" onChange={handleChange} defaultValue={user.accountName} type="text" />
+                </div>
+                <div className="inputGroup">
+                    <label className="label">Account Number</label>
+                    <input className="input" id="accountNumber" onChange={handleChange} defaultValue={user.accountNumber} type="text" />
                 </div>
             </div>
             

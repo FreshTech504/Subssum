@@ -10,7 +10,7 @@ function AdminData() {
     const mobileNetworkData = networkData?.data
     const { dataPlans, isFetchingDataPlans } = useFetAllDataPlans()
     const dataPlansData = dataPlans?.data
-    console.log('object', dataPlansData)
+    //console.log('object', dataPlansData)
     
     const [availablePlans, setAvailablePlans] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);

@@ -3,6 +3,7 @@ import TransctionHistroyModel from '../../model/TransactionHistroy.js';
 import DataPlansModel from "../../model/DataPlans.js"
 import CableTvPlanModel from '../../model/CableTvPlans.js';
 import { registerMail } from '../../middleware/mailer.js';
+import SiteSettingsModel from '../../model/SiteSettings.js';
 
 //buy airtime with logging
 export async function quickBuyAirtime(req, res){
@@ -189,14 +190,15 @@ export async function quickBuyElectricity(req, res){
     const { providerCode, providerName, meterNumber, amount: inputAmount, transactionId, phoneNumber, meterType } = req.body
     const { amountPaid, transcationRef, status: paymentStatus } = req.paymentDetails
     try {
+        const siteSetting = await SiteSettingsModel.findOne()
         let fullAmount
-        fullAmount = Math.ceil(Number(Number(amountPaid) - ((amountPaid * 1.5) / 100) ))
+        fullAmount = Math.ceil(Number(Number(amountPaid) - ((amountPaid * 1.5) / Number(siteSetting?.electricCharges)) ))
         if(Number(fullAmount) < Number(inputAmount)){
             console.log('first aa1', fullAmount, inputAmount)
             return res.status(406).json({ success: false, data: 'Invalid amount sent' })
         }
         if(Number(inputAmount) >= 2400){
-            fullAmount = Math.ceil(Number(Number(amountPaid) - ((amountPaid * 1.5) / 100) ) - 100)
+            fullAmount = Math.ceil(Number(Number(amountPaid) - ((amountPaid * 1.5) / 100) ) - Number(siteSetting?.electricCharges))
         }
         console.log('first aa3', fullAmount, inputAmount)
 
@@ -246,7 +248,7 @@ export async function quickBuyElectricity(req, res){
             newTransaction.totalAmount = finalAmount
             newTransaction.serviceId = dataResponse?.token
             newTransaction.income = Number(fullAmount) - Number(amount)
-            newTransaction.status = 'Successfull'
+            newTransaction.status = 'Successful'
             await newTransaction.save()
 
             //SEND EMAIL TO USER

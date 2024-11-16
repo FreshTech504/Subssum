@@ -16,11 +16,8 @@ import electricRoutes from './routes/web/electricity.routes.js'
 import networkRoutes from './routes/web/mobileNetwork.routes.js'
 import quickbuyRoutes from './routes/web/quickbuy.routes.js'
 import adminRoutes from './routes/web/admin.routes.js'
+import notificationRoutes from './routes/web/notification.routes.js'
 import statisticsRoutes from './routes/web/websitesStatistics.routes.js'
-
-
-
-
 
 
 
@@ -83,6 +80,7 @@ app.use('/api/web/electric', electricRoutes)
 app.use('/api/web/network', networkRoutes)
 app.use('/api/web/quickbuy', quickbuyRoutes)
 app.use('/api/web/admin', adminRoutes)
+app.use('/api/web/notification', notificationRoutes)
 app.use('/api/web/statistics', statisticsRoutes)
 
 

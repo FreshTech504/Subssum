@@ -138,7 +138,7 @@ export async function validateAirtimeTransfer(req, res) {
             return res.status(206).json({ 
                 success: true,
                 msg: `${apiResponse.description.message}`,
-                data: { success: true, data: 'Airtime to cash successful'},
+                data: { success: true, data: 'Airtime to cash successful. Account will updated once verified'},
                 transaction: transactionInfoDetails
             })
         }
@@ -169,9 +169,10 @@ export async function airtimeToCashWebhook(req, res) {
             }
             findTransaction.status = 'Successful'
             findTransaction.amount = amount
+            findTransaction.income = Number(findTransaction.amount * 0.05)
             await findTransaction.save()
 
-            getUser.acctBalance += Number(findTransaction.totalAmount)
+            getUser.cashWallet += Number(findTransaction.totalAmount)
             await getUser.save()
 
             try {
@@ -198,5 +199,86 @@ export async function airtimeToCashWebhook(req, res) {
     } catch (error) {
         console.log('ERROR FROM AIRTIME TO CASH WEB HOOK', error)
         res.status(500).json({ success: false, data: 'Error from airtime to cash webhook' })
+    }
+}
+
+//update transaction status by admin
+export async function updateStatus(req, res) {
+    const { status, _id } = req.body
+    try {
+        const findTransaction = await TransctionHistroyModel.findById({ _id: _id })
+        
+        if(!findTransaction){
+            return  res.status(404).json({ success: false, data: 'Transaction data not found' })
+        }
+
+        let user
+        if(findTransaction?.isUserLogin === true){
+            user = await UserModel.findById({ _id: findTransaction.userId})
+        }
+        if(status === 'approve'){
+            if(findTransaction.status.toLowerCase() === 'successful'){
+                return res.status(200).json({ success: true, data: 'Transaction already verified' })
+            }
+            findTransaction.status = 'Successful'
+            await findTransaction.save()
+            if(findTransaction?.isUserLogin === true){
+                user.cashWallet += findTransaction.totalAmount
+                await user.save()
+            }
+        }
+        if(status === 'hold'){
+            console.log('object', status)
+            if(findTransaction.status.toLowerCase() === 'successful'){
+                if(findTransaction?.isUserLogin === true){
+                    user.cashWallet -= findTransaction.totalAmount
+                    await user.save()
+                }
+            }
+            findTransaction.status = 'Pending'
+            await findTransaction.save()
+            console.log('object',findTransaction)
+        }
+        if(status === 'reject'){
+            if(findTransaction.status.toLowerCase() === 'successful'){
+                if(findTransaction?.isUserLogin === true){
+                    user.cashWallet -= findTransaction.totalAmount
+                    await user.save()
+                }
+            }
+            findTransaction.status = 'Failed'
+            await findTransaction.save()
+        }
+
+        res.status(201).json({ success: true, data: 'Transaction Updated' })
+    } catch (error) {
+        console.log('UNABLE TO UPDATE AIRTIME TO CASH TRANSACTIONS', error)
+        res.status(500).json({ success: false, data: 'Unable to update transaction' })
+    }
+}
+
+//Get all Airtime to Cash
+export async function getAllTransactions(req, res) {
+    try {
+        const allTransfers = await TransctionHistroyModel.find({ slug: 'AirtimeToCash' })
+
+        res.status(200).json({ success: true, data: allTransfers })
+    } catch (error) {
+        console.log('UNABLE TO GET ALL AIRTIME TO CASH TRANSACTIONS', error)
+        res.status(500).json({ success: false, data: 'Unable to get airtime to cash transactions' })
+    }
+}
+
+//Get a Airtime to Cash
+export async function getATransaction(req, res) {
+    const { id } = req.params
+    console.log('PARAMSa', id)
+    try {
+        const allTransfers = await TransctionHistroyModel.findById({ _id: id })
+
+        res.status(200).json({ success: true, data: allTransfers })
+    } catch (error) {
+        console.log('UNABLE TO GET ALL AIRTIME TO CASH TRANSACTION', error)
+        res.status(500).json({ success: false, data: 'Unable to get airtime to cash transaction' })
     }
 }
