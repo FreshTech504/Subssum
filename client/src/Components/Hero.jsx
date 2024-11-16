@@ -18,8 +18,8 @@ function Hero() {
     });
 
   return (
-    <div className="w-full flex items-center overflow-x-hidden medium-pc:flex-col medium-pc:gap-12">
-        <div className="flex medium-pc:flex-1 flex-col mr-auto">
+    <div className="w-full gap-12 flex items-center overflow-x-hidden medium-pc:flex-col medium-pc:gap-12">
+        <div className="flex flex-[60%] medium-pc:flex-1 flex-col mr-auto">
             <div className='text-[32px] tablet:text-[24px] phone:text-[19px] font-bold flex flex-col'>
                 <h2>The <span className="text-second-color">BEST</span> place to subscribe / buy</h2>
                 <h2 className="text-second-color">
@@ -29,8 +29,9 @@ function Hero() {
             </div>
 
             <div className="flex flex-col mt-[2rem]">
-                <p className="text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> Get all your subscriptions and payment needs in one place.
-                With just a few clicks, you can purchase Data and Airtime and pay electricity bills and cable TV subscriptions by creating an account to get an incentive/promo and updates about our services. You can also make purchases without creating an account. 
+                <p className="text-gray-90 text-[16px] phone:text-[15px] mb-[1.5rem] font-normal"> 
+                    Get all your subscriptions and payment needs in one place.
+                    With just a few clicks, you can purchase Data and Airtime and pay electricity bills and cable TV subscriptions by creating an account to get an incentive/promo and updates about our services. You can also make purchases without creating an account. 
                 </p>
 
                 <h3 className='mb-[1.5rem] font-semibold text-primary-color'>Click and Get Started Here 👇</h3>
@@ -85,7 +86,7 @@ function Hero() {
             </div>
         </div>
 
-        <div className='flex ml-auto medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
+        <div className='flex flex-[40%] ml-auto medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
             <img alt='picture of dashboard' src={DashboardImg} className='w-[518px] medium-pc:w-[100%]' />
         </div>
     </div>

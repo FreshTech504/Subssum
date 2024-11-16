@@ -5,7 +5,7 @@ import DashboardTwoImg from '../assets/dashboard2.png';
 function GetStarted() {
   return (
     <div className='small-pc:pad6 pad4 overflow-hidden w-full flex flex-col gap-[32.74px] items-center justify-center'>
-      <div className="w-full h-[456.36px] flex items-center justify-center overflow-hidden relative rounded-[24.56px] bg-gray-20">
+      <div className="w-full h-[500px] phone:h-auto phone:py-8 flex items-center justify-center overflow-hidden relative rounded-[24.56px] bg-gray-20">
         <img alt='dashboard image' src={DashboardImg} className='absolute top-[23px] left-[-5px] small-pc:left-[-6rem] tablet:left-[-12rem]' />
 
         <div className="w-[464.55px] phone:w-[94%] flex flex-col gap-[40px] items-center justify-center">
