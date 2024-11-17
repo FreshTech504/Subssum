@@ -3,6 +3,7 @@ import LogoImg from '../../../assets/logo.png'
 import Button from '../../Helpers/Button'
 import ButtonTwo from '../../Helpers/ButtonTwo'
 import { downloadReciept } from '../../../Helpers/api';
+import LoadingBtn from '../../Helpers/LoadingBtn';
 
 function CardThree({ formData, setFormData, setActiveCard, transactionData }) {
   const [ isLoading, setIsLoading ] = useState(false)
