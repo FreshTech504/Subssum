@@ -61,6 +61,12 @@ function Payout() {
                     <h3 className="text-[14px] font-medium text-[#000000]" >User Request</h3>
 
                     <p className="text-[16px] font-medium text-[#000000]" >{item?.bankName} is requesting a payment</p>
+                    <p>
+                      Account Details
+                      <p>{item?.bankName}</p>
+                      <p>{item?.accountName}</p>
+                      <p>{item?.accountNumber}</p>
+                    </p>
 
                     <div className="mt-8 rounded-[15px] p-4 bg-[#F8F8F8] flex flex-col">
                         <div className="flex flex-col gap-[2px]">
