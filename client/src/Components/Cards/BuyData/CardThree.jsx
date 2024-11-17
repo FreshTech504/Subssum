@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import LogoImg from '../../../assets/logo.png'
 import Button from '../../Helpers/Button'
 import ButtonTwo from '../../Helpers/ButtonTwo'
+import { downloadReciept } from '../../../Helpers/api';
 
 function CardThree({ formData, setFormData, setActiveCard, transactionData }) {
   const [ isLoading, setIsLoading ] = useState(false)
