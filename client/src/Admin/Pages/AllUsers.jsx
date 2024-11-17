@@ -10,7 +10,10 @@ import { IoIosArrowForward } from "react-icons/io";
 
 function AllUsers() {
   const { isFetchingUser, userData } = useFetchUsers();
-  const userInfo = userData?.data || [];
+  const allusers = userData?.data || [];
+  const userInfo = allusers?.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
 
