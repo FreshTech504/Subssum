@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { signoutUser } from '../Helpers/api';
 import { signOut } from '../Redux/user/userSlice';
 import { useDispatch } from 'react-redux';
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 function Sidebar() {
     const dispatch = useDispatch()
@@ -48,6 +49,15 @@ function Sidebar() {
                         <Link key={idx} to={item.link ? `/${item.link}` : ''} className={`w-full h-[46px] p-3 flex items-center gap-[14px] rounded-[12px] text-[16px] ${isActive(`/${item.link}`) ? 'bg-second-color text-white' : 'text-second-color'}`}>
                             <Icon className={`text-[21px] ${isActive(`/${item.link}`) ? 'text-white' : 'text-second-color'}`} />
                             {item.name}
+
+                            {
+                                item.imageArray  && (
+                                    <div className="ml-auto">
+                                        <MdKeyboardArrowDown />
+                                    </div>
+                                )
+                            }
+
                         </Link>
                         {
                             item.imageArray && isActive(`/${item.link}`) && (
@@ -72,12 +82,12 @@ function Sidebar() {
                     )
                 })
             }
+            <div onClick={handleSignout} className={`w-full cursor-pointer text-second-color hover:text-error h-[46px] p-3 flex items-center gap-[14px] rounded-[12px] text-[16px]`}>
+                <MdLogout className='text-[22px]' />
+                <p className='text-[20px]'>Logout</p>
+            </div>
         </div>
 
-        <div onClick={handleSignout} className='flex items-center gap-2 mt-auto cursor-pointer hover:text-error'>
-            <MdLogout className='text-[22px] text-second-color' />
-            <p className='text-[20px] text-second-color'>Logout</p>
-        </div>
     </div>
   )
 }

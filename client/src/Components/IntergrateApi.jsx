@@ -26,7 +26,7 @@ function IntergrateApi() {
 
   return (
     <div className="small-pc:pad6 pad4 w-full flex items-center gap-[20.46px] justify-between small-pc:flex-col">
-        <div className="flex-1 flex h-[734px] rounded-[24.56px] relative bg-[#F6F6F6] overflow-hidden pl-5 pr-5">
+        <div className="flex-1 flex h-[734px] phone:h-[950px] rounded-[24.56px] relative bg-[#F6F6F6] overflow-hidden pl-5 pr-5">
             <div className='p-5 flex flex-col gap-[55.25px] w-[70%] phone:w-[100%]'>
                 <div className='flex flex-col gap-[16.37px]'>
                     <h2 className='text-gray-90 font-bold text-[36.84px]'>Integrate our API</h2>
@@ -35,14 +35,14 @@ function IntergrateApi() {
                     </p>
                 </div>
                 
-                <div className='bg-[#0373DB] w-[50%] tablet:w-[70%] flex items-center justify-center pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px]'>
+                <div className='bg-[#0373DB] phone:mb-[9rem] w-[50%] tablet:w-[70%] flex items-center justify-center pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px]'>
                     <Link className='link text-white tet-[16px] font-semibold'>
                         Learn More
                     </Link>
                 </div>
             </div>
 
-            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] small-pc:right-[-10px] small-pc:w-[300px] tablet:w-[200px] phone:w-[160px]' />
+            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
         </div>
 
         <div className="flex-1 flex flex-col h-[734px] rounded-[24.56px] bg-[#F6F6F6] p-5">

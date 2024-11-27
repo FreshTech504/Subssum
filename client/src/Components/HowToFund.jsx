@@ -6,7 +6,7 @@ function HowToFund() {
   return (
     <div className="small-pc:pad6 pad4 w-full flex flex-col gap-[32.74px] items-center justify-center">
         <div className="flex gap-[16.37px] items-center justify-center flex-col">
-          <h2 className="text-[36.84px]  tablet:text-[24px] font-bold text-gray-90 text-center">Buy & Fund your wallet Seamlessly</h2>
+          <h2 className="text-[36.84px] tablet:text-[24px] font-bold text-gray-90 text-center">Buy & Fund your wallet Seamlessly</h2>
 
         </div>
 
@@ -15,12 +15,12 @@ function HowToFund() {
                 <div className='flex flex-col gap-8 '>
                     <div className='flex flex-col gap-4 w-[50%] tablet:w-full z-10 '>
                         <h3 className="text-[36.84px] tablet:text-[24px] font-bold text-gray-90">Fund & Buy <br /> with your <span className="text-second-color">Card</span></h3>
-                        <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px]">
+                        <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px] phone:text-[15px] phone:w-[60%]">
                         Enjoy the convenience of accessing our services with a card. No account is needed! Plus, effortlessly fund your wallet for a seamless experience.
                         </p>
                     </div>
 
-                    <img alt='card image' src={CardImg} className='absolute right-0 bottom-0 tablet:w-[100px] tablet:bottom-[-20px]' />
+                    <img alt='card image' src={CardImg} className='absolute right-0 bottom-0 tablet:w-[100px] phone:w-[150px] tablet:bottom-[-20px]' />
                 </div>
             </div>
 
@@ -28,12 +28,12 @@ function HowToFund() {
                 <div className='flex flex-col gap-8 '>
                     <div className='flex flex-col gap-4 w-[50%] tablet:w-full z-10'>
                         <h3 className="text-[36.84px] tablet:text-[24px] font-bold text-gray-90">Fund & Buy with Bank Transfer</h3>
-                        <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px]">
+                        <p className="text-gray-70 font-normal text-[20.46px] tablet:text-[18px] phone:text-[15px] phone:w-[60%]">
                         Unlock the convenience of our services using your card. No account is needed! Easily fund your wallet and enjoy seamless access to everything we offer.
                         </p>
                     </div>
 
-                    <img alt='phone transafer' src={PhoneTransfer} className='absolute right-0 bottom-0 tablet:w-[100px] tablet:bottom-[-20px]' />
+                    <img alt='phone transafer' src={PhoneTransfer} className='absolute right-0 bottom-0 tablet:w-[100px] phone:w-[150px] tablet:bottom-[-20px]' />
                 </div>
             </div>
         </div>

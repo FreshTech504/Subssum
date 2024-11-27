@@ -125,21 +125,21 @@ const handleReportTransaction = () => {
                     </div>
                 </div>
 
-                <div className=" flex items-center justify-between gap-8 phone:gap-6">
+                <div className=" flex items-center justify-between gap-8 phone:gap-6 phone:flex-col w-full">
                   {
                     isLoading ? (
-                      <div className="flex-1">
+                      <div className="flex-1 w-full">
                         <LoadingBtn />
                       </div>
                     ) : (
-                      <div onClick={() => handleDownloadRecipt(item.transactionId)} className="flex-1 cursor-pointer rounded-[6px] p-2 flex items-center justify-center gap-[10px] bg-gray-20">
+                      <div onClick={() => handleDownloadRecipt(item.transactionId)} className="w-full flex-1 cursor-pointer rounded-[6px] p-2 flex items-center justify-center gap-[10px] bg-gray-20">
                         <p className="text-[16px] font-semibold text-second-color">Download Receipt</p>
                         <GoDownload className="text-[20px] text-second-color" />
                       </div>
                     )
                   }
 
-                  <div onClick={handleReportTransaction} className="flex-1 cursor-pointer rounded-[6px] p-2 flex items-center justify-center gap-[10px] bg-gray-20">
+                  <div onClick={handleReportTransaction} className="w-full flex-1 cursor-pointer rounded-[6px] p-2 flex items-center justify-center gap-[10px] bg-gray-20">
                     <p className="text-[16px] font-semibold text-error">Report Transaction</p>
                     <BiError className="text-[20px] text-error" />
                   </div>

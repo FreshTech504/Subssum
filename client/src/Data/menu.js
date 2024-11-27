@@ -27,7 +27,7 @@ export const services = [
     }
     ,
     {
-        name: 'Buy Electricity',
+        name: 'Pay Electricity Bills',
         link: '/quickbuy-electric',
         icon: MdTv
     }

@@ -29,7 +29,7 @@ function Hero() {
             </div>
 
             <div className="flex flex-col mt-[2rem]">
-                <p className="text-gray-90 text-[16px] phone:text-[15px] mb-[1.5rem] font-normal"> 
+                <p className="text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> 
                     Get all your subscriptions and payment needs in one place.
                     With just a few clicks, you can purchase Data and Airtime and pay electricity bills and cable TV subscriptions by creating an account to get an incentive/promo and updates about our services. You can also make purchases without creating an account. 
                 </p>

@@ -104,7 +104,7 @@ const seeConfirmPassword = () => {
             </div>
 
             <div className="pad3 mt-[104px] bg-white rounded-[12px] flex flex-col gap-[24px] border-[1px] border-gray-30">
-                <p className="text-[24px] text-gray-70">
+                <p className="text-[24px] phone:text-[21px] text-gray-90 font-semibold">
                     Choose a new password for your account
                 </p>
 
@@ -145,7 +145,7 @@ const seeConfirmPassword = () => {
                         isLoading ? (
                             <LoadingBtn />
                         ) : (
-                            <ButtonTwo onClick={handleResetPassword} text={'Reset Password'} />
+                            <ButtonTwo onClick={handleResetPassword} text={'Reset Password'} style={`font-medium`} />
                         )
                     }
                 </div>

@@ -92,7 +92,7 @@ function Footer() {
             &copy; copyright subssum
         </p>
 
-        <img alt="bank" src={BankImg} className="absolute right-3 bottom-3 tablet:w-[200px] phone:w-[170px]" />
+        <img alt="bank" src={BankImg} className="absolute right-3 bottom-3 tablet:w-[200px] phone:w-[280px] phone:top-6 phone:right-[-6rem] " />
     </div>
   )
 }

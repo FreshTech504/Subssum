@@ -122,8 +122,8 @@ export const sidebarMenus = [
         ]
     },
     {
-        name: 'Transaction Histroy',
-        link: 'transaction-histroy',
+        name: 'Transaction History',
+        link: 'transaction-history',
         icon: PiNotepadLight
     },
     {

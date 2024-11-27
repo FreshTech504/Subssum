@@ -106,7 +106,7 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
                             </div>
 
                             <div>
-                                <ButtonTwo onClick={handleFundWallet} text={'Fund Wallet'} />
+                                <ButtonTwo onClick={handleFundWallet} text={'Fund Wallet'} style={`phone:text-[13px]`} />
                             </div>
                         </div>
 
@@ -114,7 +114,7 @@ function Dashboard({setSelectedCard, toggleMenu, showMenu, shortText}) {
                             <div className="flex flex-col gap-[16px]">
                                 <div className="flex flex-col gap-[4px] text-second-color text-[16px]">
                                     <p>Referral</p>
-                                    <p>Referral Code: <span className="font-semibold">{shortText(user.referralLink, 20)}</span></p>
+                                    <p>Referral Link: <span className="font-semibold">{shortText(user.referralLink, 20)}</span></p>
                                 </div>
 
                                 <div className="flex items-center gap-4">
