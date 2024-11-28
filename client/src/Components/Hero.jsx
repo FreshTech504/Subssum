@@ -30,8 +30,7 @@ function Hero() {
 
             <div className="flex flex-col mt-[2rem]">
                 <p className="text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> 
-                    Get all your subscriptions and payment needs in one place.
-                    With just a few clicks, you can purchase Data and Airtime and pay electricity bills and cable TV subscriptions by creating an account to get an incentive/promo and updates about our services. You can also make purchases without creating an account. 
+                    All your subscriptions, sorted in one place! In a rush to get things done? No worries—you can make a purchase right away without creating an account. But here’s the deal: sign up or log in to unlock exclusive discounts and save big. Your choice, your convenience!
                 </p>
 
                 <h3 className='mb-[1.5rem] font-semibold text-primary-color'>Click and Get Started Here 👇</h3>
