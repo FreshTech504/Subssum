@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer components {
+  .app{
+    @apply max-w-[100vw] overflow-x-hidden
+  }
   .pad1 {
     @apply pt-[11px] pb-[11px] pr-[50px] pl-[50px] ;
   }
