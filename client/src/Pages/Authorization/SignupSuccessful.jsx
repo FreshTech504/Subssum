@@ -14,7 +14,7 @@ function SignupSuccessful() {
         <div className="pad3 mt-[110px] w-[500px] phone:w-[90%] bg-white rounded-[12px] flex flex-col gap-[24px] border-[1px] border-gray-30">
             <div className="flex items-center w-full gap-[16px] phone:flex-col  phone:flex-row phone:items-center">
                 <div>
-                  <img src={EnvelopImg} alt="envelop" className='w-[120px] h-[80px] phone:h-[70[x]] phone:w-[100px]' />
+                  <img src={EnvelopImg} alt="envelop" className='w-[120px] h-[80px] phone:h-[70px] phone:w-[100px]' />
                 </div>
 
                 <div className="flex flex-col gap-[8px]">

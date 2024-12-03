@@ -85,7 +85,8 @@ const seeConfirmPassword = () => {
           }
           if(res?.data.success){
               toast.success(res?.data?.data)
-              navigate("/login");
+              navigate('/reset-password-success')
+              //navigate("/login");
         }
       } catch (error) {
           

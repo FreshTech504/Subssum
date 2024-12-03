@@ -35,11 +35,14 @@ function IntergrateApi() {
                     </p>
                 </div>
                 
+                {/**
+                 * 
                 <div className='bg-[#0373DB] phone:mb-[9rem] w-[50%] tablet:w-[70%] flex items-center justify-center pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px]'>
                     <Link className='link text-white tet-[16px] font-semibold'>
                         Learn More
                     </Link>
                 </div>
+                 */}
             </div>
 
             <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
@@ -65,9 +68,12 @@ function IntergrateApi() {
                 }
             </div>
             
+            {/**
+             * 
             <Link className='text-second-color font-semibold text-[16px] mt-auto mb-16 small-pc:mb-0'>
                 Learn More
             </Link>
+             */}
         </div>
 
     </div>

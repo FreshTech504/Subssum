@@ -76,6 +76,7 @@ import NewNotifications from './Components/Modals/NewNotifications'
 import NewAdminUser from './Components/Modals/NewAdminUser'
 import EditAdmin from './Components/Modals/EditAdmin'
 import ViewReportedTransaction from './Components/Modals/ViewReportedTransaction'
+import ResetPasswordSuccessful from './Pages/Authorization/ResetPasswordSuccessful'
 
 function App() {
   const [ selectedCard, setSelectedCard ] = useState(null)
@@ -265,6 +266,7 @@ function App() {
                 <Route path='/forgot-password' element={<ForgotPasword />} />
                 <Route path='/signup-successful' element={<SignupSuccessful />} />
                 <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
+                <Route path='/reset-password-success' element={<ResetPasswordSuccessful />} />
                 <Route path='/reset-email-sent' element={<ResetEmailSent />} />
                 <Route path='/:id/verify/:token' element={<VerifyUser />} />
                 <Route path='/login' element={<Login />} />
