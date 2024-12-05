@@ -93,6 +93,12 @@ function CardOne({ formData, setFormData, setActiveCard, setCardOne }) {
             toast.error('Minimium amount is 50')
             return
         }
+        if(phoneNumberMisMatched){
+            return
+        }
+        if(numberError?.length > 0){
+            return
+        }
         const timeStamp = Date.now()
         setFormData({ ...formData, status: 'Initiated' , totalAmount: formData?.amount, transactionId: timeStamp })
         setActiveCard('cardTwo')

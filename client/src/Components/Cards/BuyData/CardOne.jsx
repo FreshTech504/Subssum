@@ -117,6 +117,9 @@ function CardOne({ formData, setFormData, setActiveCard, setCardOne }) {
         if(numberError?.length > 0){
             return
         }
+        if(phoneNumberMisMatched){
+            return
+        }
         const timeStamp = Date.now()
         setFormData({ ...formData, status: 'Initiated' , totalAmount: formData?.price, transactionId: timeStamp })
         setActiveCard('cardTwo')
