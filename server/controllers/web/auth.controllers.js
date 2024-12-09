@@ -413,6 +413,12 @@ export async function resetPassword (req, res, next){
             return  res.status(400).json({ success: false, data: 'Invalid Reset Token'})
         }
 
+        const isMatch = await user.matchPasswords(password);
+
+        if(isMatch){
+            return res.status(403).json({ success: false, data: 'Old password and new password cannot be the same'})
+        }
+
         user.password = password
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined
