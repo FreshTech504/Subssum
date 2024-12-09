@@ -43,7 +43,7 @@ function Features() {
                     </p>
                 </div>
 
-                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-4 phone:w-[150px]" />
+                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-4 phone:top-0 phone:w-[140px]" />
             </div>
 
         </div>

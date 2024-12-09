@@ -28,7 +28,7 @@ function IntergrateApi() {
     <div className="small-pc:pad6 pad4 w-full flex items-center gap-[20.46px] justify-between small-pc:flex-col">
         <div className="flex-1 flex h-[734px] phone:h-[950px] rounded-[24.56px] relative bg-[#F6F6F6] overflow-hidden pl-5 pr-5">
             <div className='p-5 flex flex-col gap-[55.25px] w-[70%] phone:w-[100%]'>
-                <div className='flex flex-col gap-[16.37px]'>
+                <div className='flex flex-col gap-[16.37px] phone:mb-[150px]'>
                     <h2 className='text-gray-90 font-bold text-[36.84px]'>Integrate our API</h2>
                     <p className='text-[20px] font-normal text-gray-70'>
                     Unlock the potential of our robust, well-documented API to create your custom payment platform and capitalize on a vast user base. Whatever your vision's scale or complexity, you can confidently bring it to life.
