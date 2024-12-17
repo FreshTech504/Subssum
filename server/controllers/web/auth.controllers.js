@@ -11,7 +11,8 @@ const mailGenerator = new Mailgen({
     theme: 'default',
     product: {
         name: 'Subssum',
-        link: `${process.env.MAIL_WEBSITE_LINK}`
+        link: `${process.env.MAIL_WEBSITE_LINK}`,
+        copyright: ''
     }
 })
 
@@ -340,24 +341,40 @@ export async function forgotPassword (req, res, next){
             // send mail
             const emailContent = {
                 body: {
-                    intro: 'You have Requested a password reset.',
+                    intro: `
+                        <span style="color: #000080; font-weight: 400;">
+                            You have Requested a password reset for your account. To proceed with resetting your password, please click the button below.
+                        </span>
+                    `,
                     action: {
-                        instructions: 'Please click the following button to reset your password. Link Expires in 10 mintues',
+                        instructions: `
+                            <span style="color: #000080; font-weight: 400;">
+                                Please note that this link will expire in 10 minutes, so make sure to complete the process promptly. 
+                                If you did not request a password reset, you can safely ignore this message.
+                            </span>
+                        `,
                         button: {
-                            color: '#33b5e5',
+                            color: '#000080',
                             text: 'Reset Your Password',
                             link: resetUrl
                         },
                     },
                     outro: `
-                        If you cannot click the reset button, copy and paste the url here in your browser ${resetUrl}
-
-                        If you did not request this reset, please ignore this email.
+                        <span style="color: #000080; font-weight: 400;">
+                            you can easily resolve this by copying and pasting the URL into your browser:
+                        </span>
+                        <br><br>
+                        <a href="${resetUrl}" style="color: #000080; font-weight: 400; text-decoration: none;">${resetUrl}</a>
                     `
                 },
             };
+            
 
-            const emailTemplate = mailGenerator.generate(emailContent)
+            let emailTemplate = mailGenerator.generate(emailContent)
+            emailTemplate = emailTemplate.replace(
+                'Subssum',
+                `<img src="https://res.cloudinary.com/dsjwuwjm1/image/upload/v1734470897/logo_u3h8pr.png" alt="Subssum Logo" style="width: 150px; height: auto;" />`
+            );
             const emailText = mailGenerator.generatePlaintext(emailContent)
 
             try {
@@ -377,6 +394,7 @@ export async function forgotPassword (req, res, next){
             user.resetPasswordExpire = undefined
 
             await user.save()
+            console.log('EMAIL COULD NOT BE SENT', error)
             return res.status(500).json({ success: false, data: 'Email could not be sent' })
         }
     } catch (error) {
