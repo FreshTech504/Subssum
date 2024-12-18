@@ -45,7 +45,7 @@ function IntergrateApi() {
                  */}
             </div>
 
-            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
+            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] left-[-135px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
         </div>
 
         <div className="flex-1 flex flex-col h-[734px] rounded-[24.56px] bg-[#F6F6F6] p-5">

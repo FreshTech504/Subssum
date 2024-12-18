@@ -30,7 +30,7 @@ function Hero() {
 
             <div className="flex flex-col mt-[2rem]">
                 <p className="text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> 
-                    All your subscriptions, sorted in one place! In a rush to get things done? No worries—you can make a purchase right away without creating an account. But here’s the deal: sign up or log in to unlock exclusive discounts and save big. Your choice, your convenience!
+                    All your subscriptions, sorted in one place! In a rush to get things done? No worries—you can make a purchase right away without creating an account. But here’s the deal, sign up or log in to unlock exclusive discounts and save big. Your choice, your convenience!
                 </p>
 
                 <h3 className='mb-[1.5rem] font-semibold text-primary-color'>Click and Get Started Here 👇</h3>
@@ -80,7 +80,7 @@ function Hero() {
                 </div>
             </div>
 
-            <div className='mt-[2rem] w-[40%] phone:w-[65%]'>
+            <div className='mt-[2rem] w-[20%] phone:w-[65%]'>
                 <Button link={'register'} name={'Get Started'} bg={true} />
             </div>
         </div>
