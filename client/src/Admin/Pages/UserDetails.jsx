@@ -4,7 +4,7 @@ import Sidebar from "../Components/Sidebar"
 import TopNav from "../Components/TopNav"
 import Aside from "../Components/Aside"
 import { useState } from "react"
-import { adminUpdateUser } from "../../Helpers/api"
+import { adminUpdateUser, adminVerifyUser } from "../../Helpers/api"
 import toast from "react-hot-toast"
 import { jwtDecode } from "jwt-decode"
 
@@ -39,6 +39,27 @@ function UserDetails({ setSelectedCard }) {
         
       } finally{
         setUpdatingUser(false)
+      }
+    }
+
+    const [ verifying, setVerifting ] = useState(false)
+    const handleVerifyUser = async () => {
+      if(verifying){
+        return
+      }
+      try {
+        setVerifting(true)
+        const res = await adminVerifyUser(formData)
+        if(res.success){
+          toast.success(res.data)
+          window.location.reload()
+        } else {
+          toast.error(res.data)
+        }
+      } catch (error) {
+        
+      } finally{
+        setVerifting(false)
       }
     }
 
@@ -136,6 +157,13 @@ function UserDetails({ setSelectedCard }) {
                               <div onClick={handleMakeAdmin} className="py-2 px-3 flex-1 flex items-center justify-center font-semibold cursor-pointer text-white rounded-[8px] bg-[#6882B6] border-[1px] border-[#6882B6] shadow-xl">
                                   Make Admin
                               </div>
+                            )
+                          }
+                          {
+                            !userInfo?.verified  && (
+                              <div onClick={handleVerifyUser} className="py-2 px-3 flex-1 flex items-center justify-center font-semibold cursor-pointer text-white rounded-[8px] bg-[#6882B6] border-[1px] border-[#6882B6] shadow-xl">
+                                { verifying ? 'verifying...' : 'Verifiy User'}
+                            </div>
                             )
                           }
                         </div>

@@ -99,7 +99,7 @@ function AdminUsers({ setAdminUserId, setSelectedCard }) {
               <tr className="text-[12px] py-[16px] px-[12px] text-[#333333] font-semibold gap-[10px]">
                 <th className="py-[16px] px-[12px] text-start">Full Name</th>
                 <th className="py-[16px] px-[12px] text-start">Role</th>
-                <th className="py-[16px] px-[12px] text-start">Username</th>
+                <th className="py-[16px] px-[12px] text-start">email</th>
                 <th className="py-[16px] px-[12px] text-start">Status</th>
                 <th className="py-[16px] px-[12px] text-start">Action</th>
               </tr>
@@ -120,7 +120,7 @@ function AdminUsers({ setAdminUserId, setSelectedCard }) {
                       <p>{item?.role}</p>
                     </td>
                     <td className='py-[16px] px-[12px] text-[12px] font-normal text-[#828282]'>
-                      {item?.username}
+                      {item?.email}
                     </td>
                     <td className={`py-[16px] px-[12px] text-[12px] font-normal text-[#828282] ${item?.blocked ? 'text-error' : 'text-success'}`}>
                       {item?.blocked ? 'Not Active' : 'Active'}

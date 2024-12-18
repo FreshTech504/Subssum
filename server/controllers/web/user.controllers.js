@@ -172,6 +172,27 @@ export async function adminUpdateUser(req, res){
     }
 }
 
+//ADMIN ENDPOINT TO VERIFY USER
+export async function adminVerifyUser(req, res) {
+    const { _id } = req.body
+    if(!_id){
+        return res.status(400).json({ success: false, data: 'User id is required' })
+    }
+    try {
+        const getUser = await UserModel.findById({ _id: _id })
+        if(!getUser){
+            return res.status(404).json({ success: false, data: 'User not found' })
+        }
+        getUser.verified = true
+        await getUser.save()
+
+        res.status(200).json({ success: true, data: 'User verified' })
+    } catch (error) {
+        console.log('UNABLE TO VERIFY USER BY ADMIN', error)
+        res.status(500).json({ success: false, data: 'Unable to verify user '})
+    }
+}
+
 //USER ENDPOINT TO UPDATE ACCOUNT
 export async function updateUser(req, res){
     const { username, firstName, lastName, mobile, bankName, accountName, accountNumber } = req.body

@@ -568,6 +568,20 @@ export async function adminUpdateUser(formData){
     }
 }
 
+//Admin verify user
+export async function adminVerifyUser(formData){
+    try {
+        const res = await axios.post('/user/adminVerifyUser', formData, {withCredentials: true})
+        return res.data
+    } catch (error) {
+        //const errorMsg = error.response.data.data || 'Unable to Login User'
+        //toast.error(errorMsg)
+        //console.log('UPADATE USER ERROR', error)
+        const res = error.response || 'Unable to verify user'
+        return res.data
+    }
+}
+
 // ADMIN toggle block user
 export async function blockUser({ id }){
     try {

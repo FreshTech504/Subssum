@@ -9,7 +9,6 @@ function EditAdmin({ adminUserId }) {
     const { adminData, isFetchingAdminData } = useFetchAdminData(adminUserId)
     const data = adminData?.data
 
-    console.log('object', data)
 
     const [ loading, setLoading ] = useState(false)
     const [ formData, setFormData ] = useState({ _id: adminUserId, })

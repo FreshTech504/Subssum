@@ -11,6 +11,8 @@ router.post('/requestPayout', Protect, controllers.requestPayout)
 router.post('/approvePayout', AdminProtect, controllers.approvePayout)
 router.post('/updateUser', Protect, controllers.updateUser)
 router.post('/adminUpdateUser', AdminProtect, AdminRole(['Manager', 'Admin']), controllers.adminUpdateUser)
+router.post('/adminVerifyUser', AdminProtect, AdminRole(['Manager', 'Admin']), controllers.adminVerifyUser)
+
 router.post('/blockUser', AdminProtect, AdminRole(['Staff', 'Manager', 'Admin']), controllers.blockUser)
 router.post('/updatePassword', Protect, controllers.updatePassword)
 router.post('/updateUserProfilePicture', Protect, controllers.updateUserProfilePicture)

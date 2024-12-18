@@ -62,6 +62,7 @@ function AdminLogin() {
         e.preventDefault()
         const passwordlength = passwordInput.join('')
         setFormData({...formData, password: passwordlength})
+        console.log('formData', formData)
         if(passwordlength?.length < 6){
             setError('Enter a valid Password');
             setTimeout(() => {
