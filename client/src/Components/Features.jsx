@@ -14,13 +14,13 @@ function Features() {
                 </p>
             </div>
             
-            <div className="bg-[#0373DB] pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px] mt-12">
+            {/* <div className="bg-[#0373DB] pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px] mt-12">
                 <Link to='/register' className='link text-white font-semibold text-[16px]'>
                     Get Started
                 </Link>
-            </div>
+            </div> */}
 
-            <img alt='star' src={StarsImg} className="w-[442px] phone:w-[85%] relative left-[78px] bottom-[-70px]" />
+            <img alt='star' src={StarsImg} className="w-[300px] phone:w-[85%] relative left-[20px] bottom-[-220px]" />
         </div>
 
         <div className="flex-1 flex flex-col gap-[20.46px] h-[734.68px]">
@@ -32,7 +32,7 @@ function Features() {
                     </p>
                 </div>
 
-                <img alt="gold" src={GoldImg} className="absolute bottom-0 right-0 phone:w-[150px]" />
+                <img alt="gold" src={GoldImg} className="absolute bottom-0 right-0 phone:w-[150px] h-[180px]" />
             </div>
 
             <div className="flex-1 h-full bg-[#AEB7EF] relative small-pc:p-6 overflow-hidden rounded-[24.56px]">
@@ -43,7 +43,7 @@ function Features() {
                     </p>
                 </div>
 
-                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-4 phone:top-0 phone:w-[140px]" />
+                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-0 phone:top-0 phone:w-[140px] h-[150px]" />
             </div>
 
         </div>
