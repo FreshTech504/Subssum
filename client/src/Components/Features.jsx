@@ -20,7 +20,7 @@ function Features() {
                 </Link>
             </div> */}
 
-            <img alt='star' src={StarsImg} className="w-[400px] phone:w-[85%] phone:h-[40%] relative left-[20px] bottom-[-130px]" />
+            <img alt='star' src={StarsImg} className="w-[400px] phone:w-[85%] phone:h-[60%] phone:bottom-[-130px] relative left-[20px] bottom-[-130px]" />
         </div>
 
         <div className="flex-1 flex flex-col gap-[20.46px] h-[734.68px]">
@@ -36,14 +36,14 @@ function Features() {
             </div>
 
             <div className="flex-1 h-full bg-[#AEB7EF] relative small-pc:p-6 overflow-hidden rounded-[24.56px]">
-                <div className="ml-auto mt-8 small-pc:mt-4 mr-12 w-[50%] phone:w-[60%] flex flex-col gap-[24.56px]">
+                <div className="ml-auto mt-8 small-pc:mt-4 ml-45 w-[50%] phone:w-[60%] flex flex-col gap-[24.56px]">
                     <h2 className="text-[36.84px] font-bold text-[#414CA5]">Instant Withdrawal</h2>
                     <p className="font-normal text-[20px] text-[#414CA5]">
                     Are you in need of fast cash? Seamlessly transfer your earnings to your wallet or bank account instantly and get the funds you need now!
                     </p>
                 </div>
 
-                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-0 phone:top-0 phone:h-[350px] h-[350px]" />
+                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-0 phone:top-0 phone:w-[200px] phone:h-[450px] h-[350px]" />
             </div>
 
         </div>
