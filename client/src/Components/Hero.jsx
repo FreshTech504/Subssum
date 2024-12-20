@@ -80,14 +80,16 @@ function Hero() {
                 </div>
             </div>
 
-            <div className='mt-[2rem] w-[20%] phone:w-[65%]'>
-                <Button link={'register'} name={'Get Started'} bg={true} />
-            </div>
-        </div>
-
-        <div className='flex flex-[40%] ml-auto medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
+            <div className='flex flex-[40%] mr-[50rem] mt-[6rem] medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
             <img alt='picture of dashboard' src={DashboardImg} className='w-[518px] medium-pc:w-[100%]' />
         </div>
+
+        </div>
+        <div className='mt-[2rem] w-[20%] mr-[65rem] phone:w-[50%]'>
+                <Button link={'register'} name={'Get Started'} bg={true} />
+        </div>
+
+      
     </div>
   )
 }

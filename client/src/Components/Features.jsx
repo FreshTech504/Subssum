@@ -20,7 +20,7 @@ function Features() {
                 </Link>
             </div> */}
 
-            <img alt='star' src={StarsImg} className="w-[300px] phone:w-[85%] relative left-[20px] bottom-[-220px]" />
+            <img alt='star' src={StarsImg} className="w-[400px] phone:w-[85%] phone:h-[40%] relative left-[20px] bottom-[-130px]" />
         </div>
 
         <div className="flex-1 flex flex-col gap-[20.46px] h-[734.68px]">
@@ -43,7 +43,7 @@ function Features() {
                     </p>
                 </div>
 
-                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-0 phone:top-0 phone:w-[140px] h-[150px]" />
+                <img src={WIthdrawImg} alt="withdrawal" className="absolute left-0 top-0 phone:top-0 phone:h-[350px] h-[350px]" />
             </div>
 
         </div>
