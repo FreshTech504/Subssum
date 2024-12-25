@@ -32,7 +32,7 @@ function CardOne({ formData, setFormData, setActiveCard, setCardOne }) {
                     const result = await validatePhoneNumberAsync(formData.phoneNumber);
                     
                     if(result.telco.toLowerCase() !== formData.networkName.toLowerCase()){
-                        setPhoneNumberMisMatched(`Phone number Entered is an ${result.telco} number`)
+                        setPhoneNumberMisMatched(`Phone number Entered is a ${result.telco} number`)
                         setNumberError()
                         setNumberSuccess()
                     } 
