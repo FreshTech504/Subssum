@@ -375,6 +375,14 @@ export async function forgotPassword (req, res, next){
                 'Subssum',
                 `<img src="https://res.cloudinary.com/dsjwuwjm1/image/upload/v1734470897/logo_u3h8pr.png" alt="Subssum Logo" style="width: 150px; height: auto;" />`
             );
+            emailTemplate = emailTemplate.replace(
+                'Yours truly,',
+                `<p style="color: #000080; font-weight: 400;">Yours truly,<br>Subssum</p>`
+            );
+            emailTemplate = emailTemplate.replace(
+                'Subssum',
+                ``
+            );
             const emailText = mailGenerator.generatePlaintext(emailContent)
 
             try {
