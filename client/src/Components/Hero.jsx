@@ -29,27 +29,29 @@ function Hero() {
             </div>
 
             <div className="flex flex-col mt-[2rem]">
-                <p className="text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> 
-                    All your subscriptions, sorted in one place! In a rush to get things done? No worries—you can make a purchase right away without creating an account. But here’s the deal, sign up or log in to unlock exclusive discounts and save big. Your choice, your convenience!
-                </p>
+                <p className="text-gray-90 text-[14px] phone:text-[14px] mb-[0.5rem] font-normal"> 
+                    All your subscriptions, sorted in one place! In a rush to get things done?</p>
+                <p className="text-gray-90 text-[14px] phone:text-[14px] mb-[0.5rem] font-normal"> No worries—you can make a purchase right away without creating an account. </p>
+                <p className="text-gray-90 text-[14px] phone:text-[14px] mb-[0.5rem] font-normal" >But here’s the deal, sign up or log in to unlock exclusive discounts and save big. </p>
+                <p className="text-gray-90 text-[14px] phone:text-[14px] mb-[0.5rem] font-normal">Your choice, your convenience!</p>
 
                 <h3 className='mb-[1.5rem] font-semibold text-primary-color'>Click and Get Started Here 👇</h3>
 
                 <div className="flex gap-4 flex-col">
                     <div className="flex items-center gap-4 phone:gap-[10px]">
-                        <Link to='/quickbuy-airtime' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-airtime' className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={AirtimeImg} alt="Airtime" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Airtime</p>
                             </div>
                         </Link>
-                        <Link to='/quickbuy-data' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-data' className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={DataImg} alt="Data" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Data</p>
                             </div>
                         </Link>
-                        <Link to='/quickbuy-electric' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-electric' className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={ElectricityImg} alt="Electricity" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Electricity</p>
@@ -58,36 +60,39 @@ function Hero() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Link to='/quickbuy-tv' className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <Link to='/quickbuy-tv' className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={CableTv} alt="Cable TV" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Cable TV</p>
                             </div>
                         </Link>
-                        <div className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <div className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={EducationImg} alt="Education" />
-                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Education</p>
+                                <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Education </p>
+                                <p className='bg-[#0373DB] flex text-center items-center justify-center rounded-[10.23px] mb-[1rem]'>Coming soon..</p>
                             </div>
                         </div>
-                        <div className="flex items-center justify-center bg-gray-20 h-[178.6px] w-[178.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
+                        <div className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={OthersImg} alt="Others" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Others</p>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div className='flex flex-[40%] mr-[50rem] mt-[6rem] medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
+                    
+            <div className='flex flex-[40%] ml-[44rem] mt-[-35rem] h-[30px] medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[50%] phone-w-[80%]'>
             <img alt='picture of dashboard' src={DashboardImg} className='w-[518px] medium-pc:w-[100%]' />
         </div>
-
-        </div>
-        <div className='mt-[2rem] w-[20%] mr-[65rem] phone:w-[50%]'>
+        <div className='mt-[-4rem] w-[20%] mr-[65rem] phone:w-[20%]'>
                 <Button link={'register'} name={'Get Started'} bg={true} />
         </div>
+                </div>
+                
+            </div>
+
+        </div>
+      
 
       
     </div>
