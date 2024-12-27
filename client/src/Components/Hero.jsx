@@ -70,13 +70,14 @@ function Hero() {
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={EducationImg} alt="Education" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Education </p>
-                                <p className='bg-[#0373DB] flex text-center items-center justify-center rounded-[10.23px] mb-[1rem]'>Coming soon..</p>
+                                <p className='bg-[#0373DB] text-white flex text-center items-center justify-center rounded-[10.23px] mb-[1rem]'>Coming soon..</p>
                             </div>
                         </div>
                         <div className="flex items-center justify-center bg-gray-20 h-[150.6px] w-[140.6px] tablet:h-[99.17px] tablet:w-[99.17px] rounded-[24.56px] tablet:rounded-[15.36px]">
                             <div className="flex flex-col gap-[13.3px]">
                                 <img className='phone:w-[51.19px]' src={OthersImg} alt="Others" />
                                 <p className="text-[18px] phone:text-[12.51px] text-center text-gray-60 font-semibold">Others</p>
+                                <p className='bg-[#0373DB] text-white flex text-center items-center justify-center rounded-[10.23px] mb-[1rem]'>Coming soon..</p>
                             </div>
                         </div>
                     </div>

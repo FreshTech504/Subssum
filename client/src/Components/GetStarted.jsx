@@ -6,7 +6,7 @@ function GetStarted() {
   return (
     <div className='small-pc:pad6 pad4 overflow-hidden w-full flex flex-col gap-[32.74px] items-center justify-center'>
       <div className="w-full h-[500px] phone:h-auto phone:py-8 flex items-center justify-center overflow-hidden relative rounded-[24.56px] bg-gray-20">
-        <img alt='dashboard image' src={DashboardImg} className='absolute top-[23px] left-[-5px] small-pc:left-[-6rem] tablet:left-[-12rem]' />
+        <img alt='dashboard image' src={DashboardImg} className='absolute top-[23px] left-[-5px] small-pc:left-[-6rem] tablet:left-[-12rem] phone-mr-[-50px]' />
 
         <div className="w-[464.55px] phone:w-[94%] flex flex-col gap-[40px] items-center justify-center">
           <div className='flex flex-col gap-[16px]'>
@@ -23,7 +23,7 @@ function GetStarted() {
           </div>
         </div>
 
-        <img src={DashboardTwoImg} alt="dashboard" className='absolute top-[40.93px] right-[-5px] small-pc:right-[-8rem] tablet:right-[-12rem]' />
+        <img src={DashboardTwoImg} alt="dashboard" className='absolute top-[40.93px] right-[-5px] small-pc:right-[-8rem] tablet:right-[-12rem] phone-mr-[-50px]' />
       </div>
     </div>
   );

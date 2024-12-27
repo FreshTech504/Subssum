@@ -12,6 +12,11 @@ function Features() {
                 <p className="text-center font-normal text-[20px] text-gray-70">
                 As an agent, you have the opportunity to earn a commission for each transaction you successfully facilitate, ensuring satisfaction for your valued customers while rewarding your hard work.
                 </p>
+                <div className='bg-[#0373DB] w-[50%] tablet:w-[90%] phone:ml-[20px] pt-[15px] pb-[15px] rounded-[10.23px] flex text-center items-center justify-center ml-[90px] '>
+           <p className='text-white'>
+              Coming Soon....
+            </p>
+          </div>
             </div>
             
             {/* <div className="bg-[#0373DB] pt-[17.39px] pb-[17.39px] pl-[51.16px] pr-[51.16px] rounded-[10.23px] mt-12">

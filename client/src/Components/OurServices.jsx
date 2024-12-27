@@ -36,7 +36,7 @@ function OurServices() {
           </p>
         </div>
 
-        <div className='flex items-center justify-center gap-[24.56px] flex-wrap'>
+        <div className='flex items-center justify-center gap-[16.56px] flex-wrap'>
             <div className='w-[279.34px] h-[398px] phone:w-[94%] phone:h-auto p-3 flex flex-col rounded-[24.56px] border-[1px] border-gray-30'>
                 <div className='w-full bg-gray-20 p-3 rounded-[24.56px] gap-[9.2px] flex flex-col'>
                   <div className='flex items-center gap-[9.2px]'>
