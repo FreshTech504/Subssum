@@ -108,6 +108,7 @@ export async function login(req, res) {
                 email: getUser.email,
                 otp: code
             })
+            await newOtp.save()
             console.log('code', code)
 
             await registerMail({
