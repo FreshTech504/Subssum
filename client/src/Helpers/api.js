@@ -497,9 +497,9 @@ export async function quickBuyElectricity(formData){
 }
 
 //ADMIN
-export async function adminPasswordLogin(formData){
+export async function adminPasswordLogin(requestData){
     try {
-        const res = await axios.post('/admin/login', formData, {withCredentials: true})
+        const res = await axios.post('/admin/login', requestData, {withCredentials: true})
         return res.data
     } catch (error) {
         //const errorMsg = error.response.data.data || 'Unable to Login User'
@@ -511,9 +511,9 @@ export async function adminPasswordLogin(formData){
 }
 
 //Validate passcode
-export async function adminPasscodeLogin(formData){
+export async function adminPasscodeLogin(requestData){
     try {
-        const res = await axios.post('/admin/validatePasscode', formData, {withCredentials: true})
+        const res = await axios.post('/admin/validatePasscode', requestData, {withCredentials: true})
         return res.data
     } catch (error) {
         //const errorMsg = error.response.data.data || 'Unable to Login User'

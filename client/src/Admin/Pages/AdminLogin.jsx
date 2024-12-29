@@ -59,121 +59,111 @@ function AdminLogin() {
     //useEffect(() => {console.log('DATA', formData)}, [formData])
     
     const handlePasswordLogin = async (e) => {
-        e.preventDefault()
-        const passwordlength = passwordInput.join('')
-        setFormData({...formData, password: passwordlength})
-        console.log('formData', formData)
-        if(passwordlength?.length < 6){
+        e.preventDefault();
+    
+        const passwordlength = passwordInput.join(''); // Combine password input
+        if (passwordlength?.length < 6) {
             setError('Enter a valid Password');
-            setTimeout(() => {
-                setError();
-            }, 2000);
+            setTimeout(() => setError(), 2000);
             return;
         }
-
-                
+    
+        // Ensure email validation
+        if (!formData.email) {
+            setError('Enter Email');
+            setTimeout(() => setError(), 2000);
+            return;
+        }
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(formData.email)) {
+            setError('Please enter a valid email');
+            setTimeout(() => setError(), 2000);
+            return;
+        }
+    
+        // Create a new object with the password and existing form data
+        const requestData = { ...formData, password: passwordlength };
+    
         try {
-            setIsLoading(true)
-            if(!formData.email){
-                setError('Enter Email');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if(!emailPattern.test(formData.email)){
-                setError('Please enter a valid email');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-            if(!formData.password){
-                setError('Enter Password');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-
-            const res = await adminPasswordLogin(formData)
-            if(res.data.success === false){
+            setIsLoading(true);
+            const res = await adminPasswordLogin(requestData); // Pass requestData directly
+            if (res.data.success === false) {
                 setError(res.data.data);
-                setTimeout(() => {
-                    setError();
-                }, 2000);
+                setTimeout(() => setError(), 2000);
             }
-            if(res.success){
-                setFormData({ ...formData, email: res.email })
-                setCurrentCard('passcode')
-                toast.success(res.data)
+            if (res.success) {
+                setFormData({ ...requestData, email: res.email });
+                setCurrentCard('passcode');
+                toast.success(res.data);
             }
         } catch (error) {
-            
+            console.error(error);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
+    
 
     const handlePasscodeLogin = async (e) => {
-        e.preventDefault()
-        const passcodelength = passcodeInput.join('')
-        setFormData({...formData, passcode: passcodelength})
-        if(passcodelength?.length < 6){
+        e.preventDefault();
+    
+        // Join passcode inputs to form the passcode
+        const passcodelength = passcodeInput.join('');
+    
+        if (passcodelength?.length < 6) {
             setError('Enter a valid Passcode');
             setTimeout(() => {
                 setError();
             }, 2000);
             return;
         }
-
-                
+    
+        // Ensure email validation
+        if (!formData.email) {
+            setError('Enter Email');
+            setTimeout(() => {
+                setError();
+            }, 2000);
+            return;
+        }
+    
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(formData.email)) {
+            setError('Please enter a valid email');
+            setTimeout(() => {
+                setError();
+            }, 2000);
+            return;
+        }
+    
+        // Construct requestData directly
+        const requestData = { ...formData, passcode: passcodelength };
+    
         try {
-            setIsLoading(true)
-            if(!formData.email){
-                setError('Enter Email');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            if(!emailPattern.test(formData.email)){
-                setError('Please enter a valid email');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-            if(!formData.passcode){
-                setError('Enter Passcode');
-                setTimeout(() => {
-                    setError();
-                }, 2000);
-                return
-            }
-
-            const res = await adminPasscodeLogin(formData)
-            //console.log('Admin Passcode', res)
-            if(res.data.success === false){
+            setIsLoading(true);
+            const res = await adminPasscodeLogin(requestData);
+    
+            if (res.data.success === false) {
                 setError(res.data.data);
                 setTimeout(() => {
                     setError();
                 }, 2000);
+                return;
             }
-            if(res.success){
-                localStorage.setItem('subsumauthtoken', res?.token)
-                dispatch(signInSuccess(res?.data))
-                setFormData({})
-                navigate('/admin-dashboard')
+    
+            if (res.success) {
+                localStorage.setItem('subsumauthtoken', res?.token);
+                dispatch(signInSuccess(res?.data));
+                setFormData({});
+                navigate('/admin-dashboard');
             }
         } catch (error) {
-            
+            console.error(error);
         } finally {
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }
+    };
+    
 
     const handleKeyDown = (e, index) => {
         if (e.key === 'Backspace' && !e.target.value) {
