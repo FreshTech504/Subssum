@@ -96,6 +96,7 @@ export async function login(req, res) {
         }
 
         const otpExist = await OtpModel.findOne({ email })
+        console.log('otpExist', otpExist)
         if(otpExist){
             console.log('code exist', otpExist?.otp)
             return res.status(200).json({ success: true, data: 'Check email for passcode sent', email: email })
@@ -135,13 +136,14 @@ export async function login(req, res) {
 
 export async function verifyPasscode(req, res) {
     const { passcode, email } = req.body
+    console.log('object', req.body)
     try {
         if(!passcode || !email){
             return res.status(400).json({ success: false, data: 'Invalid Crendentials' })
         }
 
         const getOtp = await OtpModel.findOne({ email })
-
+        console.log('verifyPasscode otp', getOtp, getOtp.otp, passcode)
         if(!getOtp){
             return res.status(403).json({ success: false, data: 'Invalid passcode' })
         }
