@@ -18,8 +18,8 @@ function Hero() {
     });
 
   return (
-    <div className="w-full gap-12 flex items-center overflow-x-hidden medium-pc:flex-col medium-pc:gap-12">
-        <div className="flex flex-[6] medium-pc:flex-1 flex-col mr-auto">
+<div className="w-full flex items-center overflow-x-hidden medium-pc:flex-col medium-pc:gap-12">
+        <div className="flex medium-pc:flex-1 flex-col mr-auto">
             <div className='text-[32px] tablet:text-[24px] phone:text-[19px] font-bold flex flex-col'>
                 <h2>The <span className="text-second-color">BEST</span> place to subscribe / buy</h2>
                 <h2 className="text-second-color">
@@ -29,9 +29,14 @@ function Hero() {
             </div>
 
             <div className="flex flex-col mt-[2rem]">
-                <p className="w-fit text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal"> 
-                    All your subscriptions, sorted in one place! In a rush to get things done? No worries—you can make a purchase right away without creating an account. But here’s the deal, sign up or log in to unlock exclusive discounts and save big. Your choice, your convenience!
-                </p>
+                <div className="">
+                    <p className="w-fit text-gray-90 text-[16px] phone:text-[14px] mb-[1.5rem] font-normal">
+                        All your subscriptions, sorted in one place! In a rush to get things done?<br />
+                        No worries—you can make a purchase right away without creating an account.<br />
+                        But here’s the deal, sign up or log in to unlock exclusive discounts and save big.<br />
+                        Your choice, your convenience!
+                    </p>
+                </div>
 
                 <h3 className='mb-[1.5rem] font-semibold text-primary-color'>Click and Get Started Here 👇</h3>
 
@@ -80,17 +85,14 @@ function Hero() {
                 </div>
             </div>
 
-
-            <div className='mt-[2rem] w-[20%] mr-[65rem] phone:w-[50%]'>
-                    <Button link={'register'} name={'Get Started'} bg={true} />
+            <div className='mt-[2rem] w-[40%] phone:w-[65%]'>
+                <Button link={'register'} name={'Get Started'} bg={true} />
             </div>
         </div>
-        
-        <div className='flex flex-[4] mr-[50rem] mt-[6rem] medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
+
+        <div className='flex ml-auto medium-pc:flex-1 medium-pc:mr-auto medium-pc:w-[80%]'>
             <img alt='picture of dashboard' src={DashboardImg} className='w-[518px] medium-pc:w-[100%]' />
         </div>
-
-      
     </div>
   )
 }
