@@ -143,7 +143,7 @@ export async function verifyPasscode(req, res) {
         }
 
         const getOtp = await OtpModel.findOne({ email })
-        console.log('verifyPasscode otp', getOtp, getOtp.otp, passcode)
+        console.log('verifyPasscode otp', getOtp, getOtp?.otp, passcode)
         if(!getOtp){
             return res.status(403).json({ success: false, data: 'Invalid passcode' })
         }
