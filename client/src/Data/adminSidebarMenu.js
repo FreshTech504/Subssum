@@ -26,7 +26,7 @@ export const adminSidebarMenu = [
         icon: RiDashboardFill
     },
     {
-        name: 'Transactions Histroy',
+        name: 'Transactions History',
         link: 'all-transactions',
         icon: PiNotepadLight,
     },
@@ -108,8 +108,10 @@ export const adminSidebarMenu = [
      * 
      */
     {
-        name: 'My Profile',
+        name: 'Manage Account',
         link: 'admin-profile',
-        icon: CgProfile
+        // icon: CgProfile
+        icon: PiGearBold
+
     }
 ]

@@ -2,6 +2,7 @@ import { useFetchAdminNotification, useFetchSalesAnalysis, useFetchServicesStati
 import Aside from "../Components/Aside"
 import Sidebar from "../Components/Sidebar"
 import TopNav from "../Components/TopNav"
+import { FiTrendingUp } from 'react-icons/fi';
 
 function AdminDashboad() {
   const { notificationsData } = useFetchAdminNotification()
@@ -47,7 +48,8 @@ function AdminDashboad() {
               <div className="relative bg-[#E3F5FF] flex-1 flex flex-col p-[24px] rounded-[16px] gap-2 card">
                 <p className="text-[12px] font-semibold text-[#1C1C1C]">Total Users</p>
                 <p className="text-[24px] font-bold text-[#000000]">{webStats?.totalUsers}</p>
-                <p className="absolute right-[24px] bottom-[24px]">{webStats?.percentageIncrease}%</p>
+                {/* <p className="absolute right-[24px] bottom-[24px]">{webStats?.percentageIncrease}%<FiTrendingUp className="text-[#000000] ml-12 " /></p> */}
+                <p className="absolute right-[24px] bottom-[24px] flex items-center text-[14px]  text-[#000000]"> {webStats?.percentageIncrease}% <FiTrendingUp className="text-[#000000] ml-1" /> </p>
               </div>
               <div className="bg-[#E5ECF6] flex-1 flex flex-col p-[24px] rounded-[16px] gap-2 card">
                 <p className="text-[12px] font-semibold text-[#1C1C1C]">Active Users</p>
@@ -95,18 +97,18 @@ function AdminDashboad() {
                     <p className="text-[#000000] font-normal text-[14px]">Total number of airtime bought: {sales?.totalAirtimeSalesNumber}</p>
                     <p className="text-[#000000] font-normal text-[14px]">Total amount made: {sales?.totalAirtimeSales}</p>
                   </div>
-                  <div className="bg-[#DCEE0B33] card3 w-full flex flex-1 rounded-[16px] flex-col gap-6">
-                    <h2 className="text-[#000000] font-semibold text-[24px]">Data Subscription</h2>
-                    <p className="text-[#000000] font-normal text-[14px]">Total number of data bought: {sales?.totalDataSalesNumber}</p>
-                    <p className="text-[#000000] font-normal text-[14px]">Total amount made: {sales?.totalDataSales}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-col gap-8 w-full">
                   <div className="bg-[#D9D9D980] card3 w-full flex flex-1 rounded-[16px] flex-col gap-6">
                     <h2 className="text-[#000000] font-semibold text-[24px]">Electricity Subscription</h2>
                     <p className="text-[#000000] font-normal text-[14px]">Total number of electricity subscription: {sales?.totalElectricitySalesNumber}</p>
                     <p className="text-[#000000] font-normal text-[14px]">Total amount made: {sales?.totalElectricitySales}</p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-8 w-full">
+                <div className="bg-[#DCEE0B33] card3 w-full flex flex-1 rounded-[16px] flex-col gap-6">
+                    <h2 className="text-[#000000] font-semibold text-[24px]">Data Subscription</h2>
+                    <p className="text-[#000000] font-normal text-[14px]">Total number of data bought: {sales?.totalDataSalesNumber}</p>
+                    <p className="text-[#000000] font-normal text-[14px]">Total amount made: {sales?.totalDataSales}</p>
                   </div>
                   <div className="bg-[#D355FF33] card3 w-full flex flex-1 rounded-[16px] flex-col gap-6">
                     <h2 className="text-[#000000] font-semibold text-[24px]">TV Subscription</h2>
