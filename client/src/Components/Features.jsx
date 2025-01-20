@@ -20,7 +20,7 @@ function Features() {
                 </Link>
             </div> */}
 
-            <img alt='star' src={StarsImg} className="w-[400px] phone:w-[85%] phone:h-[60%] phone:bottom-[-130px] relative left-[20px] bottom-[-130px]" />
+            <img alt='star' src={StarsImg} className="w-[400px] phone:w-[85%] phone:h-[60%] phone:bottom-[-130px] relative left-[20px] bottom-[-160px]" />
         </div>
 
         <div className="flex-1 flex flex-col gap-[20.46px] h-[734.68px]">
@@ -32,7 +32,7 @@ function Features() {
                     </p>
                 </div>
 
-                <img alt="gold" src={GoldImg} className="absolute bottom-0 right-0 phone:w-[150px] h-[180px]" />
+                <img alt="gold" src={GoldImg} className="absolute bottom-0 right-0 phone:w-[150px] h-[370px]" />
             </div>
 
             <div className="flex-1 h-full bg-[#AEB7EF] relative small-pc:p-6 overflow-hidden rounded-[24.56px]">

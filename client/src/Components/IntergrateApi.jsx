@@ -33,6 +33,7 @@ function IntergrateApi() {
                     <p className='text-[20px] font-normal text-gray-70'>
                     Unlock the potential of our robust, well-documented API to create your custom payment platform and capitalize on a vast user base. Whatever your vision's scale or complexity, you can confidently bring it to life.
                     </p>
+                    <button className='text-[20px] font-bold text-white bg-blue-700 py-2 px-4 rounded mt-4'>Coming Soon</button>
                 </div>
                 
                 {/**
@@ -45,7 +46,7 @@ function IntergrateApi() {
                  */}
             </div>
 
-            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] left-[-135px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
+            <img alt='stamp' src={StampImg} className='absolute bottom-[-10px] left-[-105px] small-pc:right-[-10px] phone:left-[-90px] small-pc:w-[300px] tablet:w-[200px] phone:w-[330px]' />
         </div>
 
         <div className="flex-1 flex flex-col h-[734px] rounded-[24.56px] bg-[#F6F6F6] p-5">
